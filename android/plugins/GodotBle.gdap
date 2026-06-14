@@ -1,0 +1,11 @@
+[config]
+
+name="GodotBle"
+binary_type="local"
+binary="GodotBle.aar"
+
+[dependencies]
+
+local=[]
+remote=[]
+custom_maven_repos=[]
