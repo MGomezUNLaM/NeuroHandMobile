@@ -1,0 +1,282 @@
+[gd_scene format=3 uid="uid://duiop52qxb42j"]
+
+[ext_resource type="Script" uid="uid://wortb2ps44fk" path="res://donut_chart.gd" id="1_donut"]
+[ext_resource type="Script" uid="uid://bjb3gr5k2vvxg" path="res://tab_history.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_tab_active"]
+bg_color = Color(0.12, 0.85, 0.74, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_tab_inactive"]
+bg_color = Color(0.1, 0.2, 0.35, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.035, 0.085, 0.19, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1, 0.32, 0.48, 0.35)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_chart"]
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+bg_color = Color(0.02, 0.055, 0.13, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1, 0.28, 0.42, 0.55)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="History" type="Control" unique_id=329334580]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=618026522]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.032, 0.08, 1)
+
+[node name="MainColumn" type="VBoxContainer" parent="." unique_id=1796581023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Header" type="HBoxContainer" parent="MainColumn" unique_id=1949706496]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="MainColumn/Header" unique_id=1450369142]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "HISTORIAL"
+
+[node name="TabsFilter" type="HBoxContainer" parent="MainColumn" unique_id=1179688770]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TabResumen" type="PanelContainer" parent="MainColumn/TabsFilter" unique_id=1459080611]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_tab_active")
+
+[node name="Label" type="Label" parent="MainColumn/TabsFilter/TabResumen" unique_id=308246398]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Resumen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabSesiones" type="PanelContainer" parent="MainColumn/TabsFilter" unique_id=1802321822]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_tab_inactive")
+
+[node name="Label" type="Label" parent="MainColumn/TabsFilter/TabSesiones" unique_id=554441004]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Sesiones"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabEvolucion" type="PanelContainer" parent="MainColumn/TabsFilter" unique_id=2056576067]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_tab_inactive")
+
+[node name="Label" type="Label" parent="MainColumn/TabsFilter/TabEvolucion" unique_id=405780110]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Evolución"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ThisWeekCard" type="PanelContainer" parent="MainColumn" unique_id=1792743988]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="VBox" type="VBoxContainer" parent="MainColumn/ThisWeekCard" unique_id=1545222941]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="MainColumn/ThisWeekCard/VBox" unique_id=1167318315]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Esta semana"
+
+[node name="HBox" type="HBoxContainer" parent="MainColumn/ThisWeekCard/VBox" unique_id=1952019024]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Sessions" type="VBoxContainer" parent="MainColumn/ThisWeekCard/VBox/HBox" unique_id=1676384071]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatsSessions" type="Label" parent="MainColumn/ThisWeekCard/VBox/HBox/Sessions" unique_id=367092227]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 32
+text = "5"
+
+[node name="Label" type="Label" parent="MainColumn/ThisWeekCard/VBox/HBox/Sessions" unique_id=1547964656]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.65, 0.75, 1)
+text = "Sesiones"
+
+[node name="Time" type="VBoxContainer" parent="MainColumn/ThisWeekCard/VBox/HBox" unique_id=443546223]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatsTime" type="Label" parent="MainColumn/ThisWeekCard/VBox/HBox/Time" unique_id=701413719]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 32
+text = "2h 35m"
+
+[node name="Label" type="Label" parent="MainColumn/ThisWeekCard/VBox/HBox/Time" unique_id=1773170705]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.65, 0.75, 1)
+text = "Tiempo"
+
+[node name="Score" type="VBoxContainer" parent="MainColumn/ThisWeekCard/VBox/HBox" unique_id=1781396883]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatsScore" type="Label" parent="MainColumn/ThisWeekCard/VBox/HBox/Score" unique_id=1216843895]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 32
+text = "1,120"
+
+[node name="Label" type="Label" parent="MainColumn/ThisWeekCard/VBox/HBox/Score" unique_id=1022043358]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.65, 0.75, 1)
+text = "Puntaje prom"
+
+[node name="EvolucionCard" type="PanelContainer" parent="MainColumn" unique_id=1069765120]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_chart")
+
+[node name="VBox" type="VBoxContainer" parent="MainColumn/EvolucionCard" unique_id=628128089]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="MainColumn/EvolucionCard/VBox" unique_id=855006819]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Evolución"
+
+[node name="ChartHost" type="Control" parent="MainColumn/EvolucionCard/VBox" unique_id=385005621]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+
+[node name="AreasCard" type="PanelContainer" parent="MainColumn" unique_id=1575641097]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="VBox" type="VBoxContainer" parent="MainColumn/AreasCard" unique_id=900662775]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="MainColumn/AreasCard/VBox" unique_id=2132859428]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Áreas trabajadas"
+
+[node name="Grid" type="GridContainer" parent="MainColumn/AreasCard/VBox" unique_id=1557738741]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Item1" type="VBoxContainer" parent="MainColumn/AreasCard/VBox/Grid" unique_id=978868636]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DonutApertura" type="Control" parent="MainColumn/AreasCard/VBox/Grid/Item1" unique_id=755211962]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_donut")
+
+[node name="Item2" type="VBoxContainer" parent="MainColumn/AreasCard/VBox/Grid" unique_id=809874670]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DonutAgarre" type="Control" parent="MainColumn/AreasCard/VBox/Grid/Item2" unique_id=714445595]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_donut")
+
+[node name="Item3" type="VBoxContainer" parent="MainColumn/AreasCard/VBox/Grid" unique_id=232020047]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DonutPinza" type="Control" parent="MainColumn/AreasCard/VBox/Grid/Item3" unique_id=996783327]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_donut")
+
+[node name="Item4" type="VBoxContainer" parent="MainColumn/AreasCard/VBox/Grid" unique_id=1946326836]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DonutCoord" type="Control" parent="MainColumn/AreasCard/VBox/Grid/Item4" unique_id=2136984398]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_donut")

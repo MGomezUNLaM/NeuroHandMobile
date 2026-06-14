@@ -1,0 +1,439 @@
+[gd_scene load_steps=12 format=3 uid="uid://do2mkg6gg8xnt"]
+
+[ext_resource type="Script" uid="uid://dkpvg1svdvjq6" path="res://tab_missions.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://j5sk0yufafhd" path="res://assets/icons/icon_star.svg" id="2_star"]
+[ext_resource type="Texture2D" uid="uid://dmm4hviu8sp3b" path="res://assets/icons/icon_flex.svg" id="3_flex"]
+[ext_resource type="Texture2D" uid="uid://bt6g4mdaernk6" path="res://assets/icons/icon_open.svg" id="4_open"]
+[ext_resource type="Texture2D" uid="uid://tfbnqacftdhv" path="res://assets/icons/icon_grab.svg" id="5_grab"]
+[ext_resource type="Texture2D" uid="uid://ctlvraprfutff" path="res://assets/icons/icon_pinch.svg" id="6_pinch"]
+[ext_resource type="Texture2D" uid="uid://6cgu182u1aen" path="res://assets/icons/icon_coord.svg" id="7_coord"]
+[ext_resource type="Texture2D" uid="uid://ipxs321cbnfp" path="res://assets/icons/icon_lock.svg" id="8_lock"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_active"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.04, 0.1, 0.22, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12, 0.7, 0.65, 0.6)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0, 0.3, 0.35, 0.25)
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_xp_badge"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.04, 0.45, 0.4, 0.35)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_locked"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.025, 0.06, 0.14, 0.7)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.08, 0.2, 0.32, 0.3)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[node name="TabMissions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainVBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Misiones"
+
+[node name="PointsContainer" type="HBoxContainer" parent="MainVBox/Header"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StarIcon" type="TextureRect" parent="MainVBox/Header/PointsContainer"]
+self_modulate = Color(0.95, 0.85, 0.25, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PointsLabel" type="Label" parent="MainVBox/Header/PointsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.25, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MissionsList" type="VBoxContainer" parent="MainVBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="Mission1" type="PanelContainer" parent="MainVBox/Scroll/MissionsList"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card_active")
+
+[node name="Row" type="HBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission1"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission1/Row"]
+self_modulate = Color(0.15, 0.9, 0.8, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_flex")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission1/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Name" type="Label" parent="MainVBox/Scroll/MissionsList/Mission1/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Flexión rápida"
+
+[node name="Difficulty" type="Label" parent="MainVBox/Scroll/MissionsList/Mission1/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.8, 0.2, 1)
+theme_override_font_sizes/font_size = 16
+text = "★★ · Flexioná el dedo lo más rápido posible"
+
+[node name="Right" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission1/Row"]
+layout_mode = 2
+alignment = 1
+
+[node name="XPBadge" type="PanelContainer" parent="MainVBox/Scroll/MissionsList/Mission1/Row/Right"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_xp_badge")
+
+[node name="XPText" type="Label" parent="MainVBox/Scroll/MissionsList/Mission1/Row/Right/XPBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 18
+text = "100 XP"
+horizontal_alignment = 1
+
+[node name="PlayBtn" type="Button" parent="MainVBox/Scroll/MissionsList/Mission1/Row/Right"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+text = "›"
+flat = true
+
+[node name="Mission2" type="PanelContainer" parent="MainVBox/Scroll/MissionsList"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card_locked")
+
+[node name="Row" type="HBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission2"]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission2/Row"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_open")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission2/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Name" type="Label" parent="MainVBox/Scroll/MissionsList/Mission2/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Apertura de mano"
+
+[node name="Difficulty" type="Label" parent="MainVBox/Scroll/MissionsList/Mission2/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+text = "★★★ · Mejora la apertura y extensión"
+
+[node name="Right" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission2/Row"]
+layout_mode = 2
+alignment = 1
+
+[node name="XPBadge" type="PanelContainer" parent="MainVBox/Scroll/MissionsList/Mission2/Row/Right"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_xp_badge")
+
+[node name="XPText" type="Label" parent="MainVBox/Scroll/MissionsList/Mission2/Row/Right/XPBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 18
+text = "200 XP"
+horizontal_alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission2/Row/Right"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Mission3" type="PanelContainer" parent="MainVBox/Scroll/MissionsList"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card_locked")
+
+[node name="Row" type="HBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission3"]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission3/Row"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_grab")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission3/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Name" type="Label" parent="MainVBox/Scroll/MissionsList/Mission3/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Agarre de objetos"
+
+[node name="Difficulty" type="Label" parent="MainVBox/Scroll/MissionsList/Mission3/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+text = "★★ · Fortalece el agarre y la fuerza"
+
+[node name="Right" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission3/Row"]
+layout_mode = 2
+alignment = 1
+
+[node name="XPBadge" type="PanelContainer" parent="MainVBox/Scroll/MissionsList/Mission3/Row/Right"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_xp_badge")
+
+[node name="XPText" type="Label" parent="MainVBox/Scroll/MissionsList/Mission3/Row/Right/XPBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 18
+text = "200 XP"
+horizontal_alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission3/Row/Right"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Mission4" type="PanelContainer" parent="MainVBox/Scroll/MissionsList"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card_locked")
+
+[node name="Row" type="HBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission4"]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission4/Row"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6_pinch")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission4/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Name" type="Label" parent="MainVBox/Scroll/MissionsList/Mission4/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Pinza fina"
+
+[node name="Difficulty" type="Label" parent="MainVBox/Scroll/MissionsList/Mission4/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+text = "★★★ · Mejora la precisión de los dedos"
+
+[node name="Right" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission4/Row"]
+layout_mode = 2
+alignment = 1
+
+[node name="XPBadge" type="PanelContainer" parent="MainVBox/Scroll/MissionsList/Mission4/Row/Right"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_xp_badge")
+
+[node name="XPText" type="Label" parent="MainVBox/Scroll/MissionsList/Mission4/Row/Right/XPBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 18
+text = "350 XP"
+horizontal_alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission4/Row/Right"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Mission5" type="PanelContainer" parent="MainVBox/Scroll/MissionsList"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card_locked")
+
+[node name="Row" type="HBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission5"]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission5/Row"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_coord")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Info" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission5/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Name" type="Label" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Coordinación"
+
+[node name="Difficulty" type="Label" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Info"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+text = "★★★ · Sincroniza tus movimientos"
+
+[node name="Right" type="VBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission5/Row"]
+layout_mode = 2
+alignment = 1
+
+[node name="XPBadge" type="PanelContainer" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Right"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_xp_badge")
+
+[node name="XPText" type="Label" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Right/XPBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 18
+text = "250 XP"
+horizontal_alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Right"]
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_lock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ToastLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -80.0
+offset_right = 120.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 18
+text = "Próximamente"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MainVBox/Scroll/MissionsList/Mission1/Row/Right/PlayBtn" to="." method="_on_mission_available_pressed"]
+[connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission2" to="." method="_on_locked_gui_input"]
+[connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission3" to="." method="_on_locked_gui_input"]
+[connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission4" to="." method="_on_locked_gui_input"]
+[connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission5" to="." method="_on_locked_gui_input"]

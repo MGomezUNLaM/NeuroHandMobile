@@ -1,0 +1,231 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://tab_profile.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/avatar_boy.tres" id="2_avatar"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.035, 0.085, 0.19, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1, 0.32, 0.48, 0.35)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_glow"]
+bg_color = Color(0.06, 0.5, 0.55, 0.3)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.04, 0.4, 0.5, 0.2)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_progress_bg"]
+bg_color = Color(0.04, 0.1, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_progress_fill"]
+bg_color = Color(0.12, 0.85, 0.74, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="TabProfile" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="MainVBox" type="VBoxContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+theme_override_constants/separation = 20
+
+[node name="AvatarCenter" type="CenterContainer" parent="Scroll/MainVBox"]
+layout_mode = 2
+
+[node name="AvatarFrame" type="Control" parent="Scroll/MainVBox/AvatarCenter"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="Glow" type="Panel" parent="Scroll/MainVBox/AvatarCenter/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_glow")
+
+[node name="Avatar" type="TextureRect" parent="Scroll/MainVBox/AvatarCenter/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_avatar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="Scroll/MainVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "Matías"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Scroll/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 20
+text = "Nivel 1 · Especialista"
+horizontal_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="Scroll/MainVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBox_progress_bg")
+theme_override_styles/fill = SubResource("StyleBox_progress_fill")
+max_value = 250.0
+rounded = true
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="Scroll/MainVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 16
+text = "0 / 250 XP"
+horizontal_alignment = 1
+
+[node name="StatsCard" type="PanelContainer" parent="Scroll/MainVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="StatsRow" type="HBoxContainer" parent="Scroll/MainVBox/StatsCard"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SessionsCol" type="VBoxContainer" parent="Scroll/MainVBox/StatsCard/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SessionsCaption" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/SessionsCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
+theme_override_font_sizes/font_size = 15
+text = "Sesiones"
+horizontal_alignment = 1
+
+[node name="SessionsValue" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/SessionsCol"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="BestCol" type="VBoxContainer" parent="Scroll/MainVBox/StatsCard/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="BestCaption" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/BestCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
+theme_override_font_sizes/font_size = 15
+text = "Mejor marca"
+horizontal_alignment = 1
+
+[node name="BestValue" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/BestCol"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.88, 0.8, 1)
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="AvgCol" type="VBoxContainer" parent="Scroll/MainVBox/StatsCard/StatsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="AvgCaption" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/AvgCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
+theme_override_font_sizes/font_size = 15
+text = "Promedio"
+horizontal_alignment = 1
+
+[node name="AvgValue" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/AvgCol"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
+
+[node name="AboutCard" type="PanelContainer" parent="Scroll/MainVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="AboutVBox" type="VBoxContainer" parent="Scroll/MainVBox/AboutCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AboutTitle" type="Label" parent="Scroll/MainVBox/AboutCard/AboutVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Sobre NeuroHand"
+
+[node name="AboutDesc" type="Label" parent="Scroll/MainVBox/AboutCard/AboutVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 17
+text = "NeuroHand es un guante háptico DIY que te ayuda a ejercitar y rehabilitar los movimientos de tu mano a través de juegos interactivos."
+autowrap_mode = 3
+
+[node name="Version" type="Label" parent="Scroll/MainVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.46, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "v1.0.0 — Prueba de concepto"
+horizontal_alignment = 1

@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://tab_achievements.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_filter_active"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.04, 0.45, 0.42, 0.5)
+border_width_bottom = 2
+border_color = Color(0.15, 0.9, 0.8, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_filter"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.03, 0.07, 0.15, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="TabAchievements" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="MainVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Logros"
+
+[node name="FilterRow" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FilterAll" type="Button" parent="MainVBox/FilterRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_filter_active")
+text = "Todos"
+
+[node name="FilterBronce" type="Button" parent="MainVBox/FilterRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_filter")
+text = "Bronce"
+
+[node name="FilterPlata" type="Button" parent="MainVBox/FilterRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_filter")
+text = "Plata"
+
+[node name="FilterOro" type="Button" parent="MainVBox/FilterRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_filter")
+text = "Oro"
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="AchievementsList" type="VBoxContainer" parent="MainVBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[connection signal="pressed" from="MainVBox/FilterRow/FilterAll" to="." method="_on_filter_pressed" binds= ["Todos"]]
+[connection signal="pressed" from="MainVBox/FilterRow/FilterBronce" to="." method="_on_filter_pressed" binds= ["Bronce"]]
+[connection signal="pressed" from="MainVBox/FilterRow/FilterPlata" to="." method="_on_filter_pressed" binds= ["Plata"]]
+[connection signal="pressed" from="MainVBox/FilterRow/FilterOro" to="." method="_on_filter_pressed" binds= ["Oro"]]

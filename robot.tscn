@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://637qt1ula06c"]
+
+[ext_resource type="Texture2D" path="res://assets/robot_standing.tres" id="1_3cn6f"]
+
+[node name="Robot" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(983, 148)
+scale = Vector2(0.6301346, 0.62890625)
+texture = ExtResource("1_3cn6f")

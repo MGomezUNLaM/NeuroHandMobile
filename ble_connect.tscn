@@ -1,0 +1,249 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://ble_connect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_glove.svg" id="2_glove"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bg"]
+bg_color = Color(0.012, 0.035, 0.085, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card"]
+bg_color = Color(0.035, 0.09, 0.2, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.12, 0.35, 0.5, 0.5)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_primary"]
+bg_color = Color(0.04, 0.7, 0.66, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 24.0
+content_margin_top = 14.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_secondary"]
+bg_color = Color(0.06, 0.16, 0.3, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15, 0.45, 0.42, 0.7)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 24.0
+content_margin_top = 14.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_outline"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.42, 0.52, 0.6)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+content_margin_left = 24.0
+content_margin_top = 14.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+
+[node name="BleConnect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.035, 0.085, 1)
+
+[node name="GlowTop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 400.0
+grow_horizontal = 2
+color = Color(0.03, 0.22, 0.28, 0.2)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 40.0
+offset_right = -24.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainColumn" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="Header" type="HBoxContainer" parent="ScrollContainer/MainColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BackButton" type="Button" parent="ScrollContainer/MainColumn/Header"]
+custom_minimum_size = Vector2(100, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.82, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_outline")
+text = "← Volver"
+
+[node name="Spacer" type="Control" parent="ScrollContainer/MainColumn/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleSection" type="VBoxContainer" parent="ScrollContainer/MainColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatusIcon" type="TextureRect" parent="ScrollContainer/MainColumn/TitleSection"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_glove")
+expand_mode = 1
+stretch_mode = 5
+self_modulate = Color(0.4, 0.46, 0.56, 1)
+
+[node name="Title" type="Label" parent="ScrollContainer/MainColumn/TitleSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Conectar Guante"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="ScrollContainer/MainColumn/TitleSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 20
+text = "Guante no conectado"
+horizontal_alignment = 1
+
+[node name="ScanSpinner" type="Label" parent="ScrollContainer/MainColumn/TitleSection"]
+unique_name_in_owner = true
+layout_mode = 2
+visible = false
+theme_override_colors/font_color = Color(0.2, 0.92, 0.84, 1)
+theme_override_font_sizes/font_size = 28
+text = "⠋"
+horizontal_alignment = 1
+
+[node name="ButtonsRow" type="HBoxContainer" parent="ScrollContainer/MainColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ScanButton" type="Button" parent="ScrollContainer/MainColumn/ButtonsRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBox_btn_primary")
+text = "Buscar guante"
+
+[node name="SimButton" type="Button" parent="ScrollContainer/MainColumn/ButtonsRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.82, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_outline")
+text = "Simular guante"
+
+[node name="DeviceCard" type="PanelContainer" parent="ScrollContainer/MainColumn"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="DeviceCardVBox" type="VBoxContainer" parent="ScrollContainer/MainColumn/DeviceCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DeviceCardTitle" type="Label" parent="ScrollContainer/MainColumn/DeviceCard/DeviceCardVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.8, 0.88, 1)
+theme_override_font_sizes/font_size = 18
+text = "Dispositivos encontrados"
+
+[node name="DeviceList" type="VBoxContainer" parent="ScrollContainer/MainColumn/DeviceCard/DeviceCardVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NoDevicesLabel" type="Label" parent="ScrollContainer/MainColumn/DeviceCard/DeviceCardVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.52, 0.62, 1)
+theme_override_font_sizes/font_size = 16
+text = "Iniciá la búsqueda para encontrar tu guante"
+horizontal_alignment = 1
+
+[node name="ActionButtons" type="VBoxContainer" parent="ScrollContainer/MainColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PlayButton" type="Button" parent="ScrollContainer/MainColumn/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+visible = false
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBox_btn_primary")
+text = "¡Jugar con guante!"
+
+[node name="DisconnectButton" type="Button" parent="ScrollContainer/MainColumn/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+visible = false
+theme_override_colors/font_color = Color(0.85, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_outline")
+text = "Desconectar guante"
+
+[node name="SkipButton" type="Button" parent="ScrollContainer/MainColumn/ActionButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.55, 0.65, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_outline")
+text = "Jugar sin guante (usar pantalla)"
+
+[connection signal="pressed" from="ScrollContainer/MainColumn/Header/BackButton" to="." method="_on_back_pressed"]

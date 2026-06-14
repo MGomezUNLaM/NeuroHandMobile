@@ -1,0 +1,572 @@
+[gd_scene format=3 uid="uid://cb5xp2yuhoww0"]
+
+[ext_resource type="Script" uid="uid://hfvgta2vgy0o" path="res://dashboard.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bn32ac8jcq18x" path="res://assets/robot_standing.tres" id="2_robot"]
+[ext_resource type="Texture2D" uid="uid://c5mt0qdf4vt1r" path="res://ChatGPT Image 2 jun 2026, 03_51_27 p.m.png" id="3_logo"]
+[ext_resource type="Texture2D" uid="uid://brtkxpote4xm" path="res://assets/icons/icon_menu.svg" id="4_icon_menu"]
+[ext_resource type="Texture2D" uid="uid://4hvquql750a2" path="res://assets/icons/icon_bell.svg" id="5_icon_bell"]
+[ext_resource type="Texture2D" uid="uid://cgsxl061lypl0" path="res://ChatGPT Image 2 jun 2026, 06_30_33 p.m.png" id="5_ujytj"]
+[ext_resource type="Texture2D" uid="uid://gfeb6vgfhy0t" path="res://assets/icons/icon_streak.svg" id="6_icon_streak"]
+[ext_resource type="Texture2D" uid="uid://j5sk0yufafhd" path="res://assets/icons/icon_star.svg" id="7_icon_star"]
+[ext_resource type="Texture2D" uid="uid://c127ffrkbl56j" path="res://assets/icons/icon_trophy.svg" id="8_icon_trophy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_icon_btn"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.035, 0.085, 0.19, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.1, 0.32, 0.48, 0.35)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0, 0.15, 0.25, 0.18)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_progress_bg"]
+bg_color = Color(0.04, 0.1, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_progress_fill"]
+bg_color = Color(0.12, 0.85, 0.74, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_badge"]
+bg_color = Color(0.04, 0.12, 0.26, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.15, 0.82, 0.72, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_stat"]
+content_margin_left = 12.0
+content_margin_top = 18.0
+content_margin_right = 12.0
+content_margin_bottom = 18.0
+bg_color = Color(0.028, 0.075, 0.17, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.08, 0.28, 0.42, 0.4)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0.1, 0.2, 0.15)
+shadow_size = 3
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn"]
+content_margin_top = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0.02, 0.65, 0.6, 1)
+border_width_top = 2
+border_color = Color(0.2, 0.9, 0.85, 0.4)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+shadow_color = Color(0, 0.5, 0.5, 0.45)
+shadow_size = 12
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_pressed"]
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.03, 0.55, 0.52, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_hover"]
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.07, 0.78, 0.72, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+shadow_color = Color(0, 0.6, 0.55, 0.45)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_objective_fill"]
+bg_color = Color(0.18, 0.8, 0.48, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_glow"]
+bg_color = Color(0.06, 0.5, 0.55, 0.3)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+shadow_color = Color(0.04, 0.4, 0.5, 0.2)
+shadow_size = 20
+
+[node name="Dashboard" type="Control" unique_id=2126678754]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1313946232]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.032, 0.08, 1)
+
+[node name="TopGlow" type="ColorRect" parent="." unique_id=1927405389]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 520.0
+grow_horizontal = 2
+color = Color(0.04, 0.2, 0.32, 0.18)
+
+[node name="MainColumn" type="VBoxContainer" parent="." unique_id=180142753]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="MainColumn" unique_id=950615628]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="MenuButton" type="Button" parent="MainColumn/Header" unique_id=1614107934]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_max_width = 32
+theme_override_styles/normal = SubResource("StyleBox_icon_btn")
+theme_override_styles/pressed = SubResource("StyleBox_icon_btn")
+theme_override_styles/hover = SubResource("StyleBox_icon_btn")
+theme_override_styles/focus = SubResource("StyleBox_icon_btn")
+icon = ExtResource("4_icon_menu")
+flat = true
+expand_icon = true
+
+[node name="LogoCenter" type="CenterContainer" parent="MainColumn/Header" unique_id=782466706]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Logo" type="TextureRect" parent="MainColumn/Header/LogoCenter" unique_id=1233695758]
+custom_minimum_size = Vector2(240, 58)
+layout_mode = 2
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BellButton" type="Button" parent="MainColumn/Header" unique_id=2025705183]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/icon_max_width = 32
+theme_override_styles/normal = SubResource("StyleBox_icon_btn")
+theme_override_styles/pressed = SubResource("StyleBox_icon_btn")
+theme_override_styles/hover = SubResource("StyleBox_icon_btn")
+theme_override_styles/focus = SubResource("StyleBox_icon_btn")
+icon = ExtResource("5_icon_bell")
+flat = true
+expand_icon = true
+
+[node name="UserCard" type="PanelContainer" parent="MainColumn" unique_id=1903506811]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="UserRow" type="HBoxContainer" parent="MainColumn/UserCard" unique_id=1210035115]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Avatar" type="TextureRect" parent="MainColumn/UserCard/UserRow" unique_id=708807728]
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 2
+texture = ExtResource("5_ujytj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UserInfo" type="VBoxContainer" parent="MainColumn/UserCard/UserRow" unique_id=580307620]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="MainColumn/UserCard/UserRow/UserInfo" unique_id=2007738797]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Matías"
+
+[node name="LevelLabel" type="Label" parent="MainColumn/UserCard/UserRow/UserInfo" unique_id=690795583]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.67, 0.76, 1)
+theme_override_font_sizes/font_size = 19
+text = "Nivel 12 · Especialista"
+
+[node name="ProgressRow" type="HBoxContainer" parent="MainColumn/UserCard/UserRow/UserInfo" unique_id=1776791484]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="XPBar" type="ProgressBar" parent="MainColumn/UserCard/UserRow/UserInfo/ProgressRow" unique_id=1995297256]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBox_progress_bg")
+theme_override_styles/fill = SubResource("StyleBox_progress_fill")
+max_value = 3000.0
+value = 2350.0
+rounded = true
+show_percentage = false
+
+[node name="LevelBadge" type="PanelContainer" parent="MainColumn/UserCard/UserRow/UserInfo/ProgressRow" unique_id=186827568]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_badge")
+
+[node name="LevelNum" type="Label" parent="MainColumn/UserCard/UserRow/UserInfo/ProgressRow/LevelBadge" unique_id=1904505995]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.92, 0.84, 1)
+theme_override_font_sizes/font_size = 21
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XPLabel" type="Label" parent="MainColumn/UserCard/UserRow/UserInfo" unique_id=490500349]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 16
+text = "2,350 / 3,000 XP"
+
+[node name="StatsRow" type="HBoxContainer" parent="MainColumn" unique_id=1144797266]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StreakCard" type="PanelContainer" parent="MainColumn/StatsRow" unique_id=2109306800]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_stat")
+
+[node name="StreakVBox" type="VBoxContainer" parent="MainColumn/StatsRow/StreakCard" unique_id=751580673]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="StreakHeader" type="HBoxContainer" parent="MainColumn/StatsRow/StreakCard/StreakVBox" unique_id=122139588]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="StreakIcon" type="TextureRect" parent="MainColumn/StatsRow/StreakCard/StreakVBox/StreakHeader" unique_id=1777556354]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_icon_streak")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StreakTitle" type="Label" parent="MainColumn/StatsRow/StreakCard/StreakVBox/StreakHeader" unique_id=171239844]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 20
+text = "Racha"
+vertical_alignment = 1
+
+[node name="StreakValue" type="Label" parent="MainColumn/StatsRow/StreakCard/StreakVBox" unique_id=190844051]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.75, 0.3, 1)
+theme_override_font_sizes/font_size = 34
+text = "15"
+horizontal_alignment = 1
+
+[node name="StreakUnit" type="Label" parent="MainColumn/StatsRow/StreakCard/StreakVBox" unique_id=1268260702]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 16
+text = "días"
+horizontal_alignment = 1
+
+[node name="PointsCard" type="PanelContainer" parent="MainColumn/StatsRow" unique_id=1511143558]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_stat")
+
+[node name="PointsVBox" type="VBoxContainer" parent="MainColumn/StatsRow/PointsCard" unique_id=1417077561]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="PointsHeader" type="HBoxContainer" parent="MainColumn/StatsRow/PointsCard/PointsVBox" unique_id=244420793]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="PointsIcon" type="TextureRect" parent="MainColumn/StatsRow/PointsCard/PointsVBox/PointsHeader" unique_id=5863885]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("7_icon_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PointsTitle" type="Label" parent="MainColumn/StatsRow/PointsCard/PointsVBox/PointsHeader" unique_id=793792818]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 20
+text = "Puntos"
+vertical_alignment = 1
+
+[node name="PointsValue" type="Label" parent="MainColumn/StatsRow/PointsCard/PointsVBox" unique_id=427831364]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.25, 1)
+theme_override_font_sizes/font_size = 30
+text = "12,450"
+horizontal_alignment = 1
+
+[node name="AchievementsCard" type="PanelContainer" parent="MainColumn/StatsRow" unique_id=1917659528]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_stat")
+
+[node name="AchievementsVBox" type="VBoxContainer" parent="MainColumn/StatsRow/AchievementsCard" unique_id=821898310]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="AchievementsHeader" type="HBoxContainer" parent="MainColumn/StatsRow/AchievementsCard/AchievementsVBox" unique_id=152768432]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="AchievementsIcon" type="TextureRect" parent="MainColumn/StatsRow/AchievementsCard/AchievementsVBox/AchievementsHeader" unique_id=1875428863]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_icon_trophy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AchievementsTitle" type="Label" parent="MainColumn/StatsRow/AchievementsCard/AchievementsVBox/AchievementsHeader" unique_id=1698841618]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.78, 0.85, 1)
+theme_override_font_sizes/font_size = 20
+text = "Logros"
+vertical_alignment = 1
+
+[node name="AchievementsValue" type="Label" parent="MainColumn/StatsRow/AchievementsCard/AchievementsVBox" unique_id=1622035106]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "24"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="MainColumn" unique_id=1996174038]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBox_btn")
+theme_override_styles/pressed = SubResource("StyleBox_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBox_btn_hover")
+text = "COMENZAR SESIÓN"
+
+[node name="ObjectiveCard" type="PanelContainer" parent="MainColumn" unique_id=399436653]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="ObjectiveVBox" type="VBoxContainer" parent="MainColumn/ObjectiveCard" unique_id=605426463]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ObjectiveHeader" type="HBoxContainer" parent="MainColumn/ObjectiveCard/ObjectiveVBox" unique_id=1550315410]
+layout_mode = 2
+
+[node name="ObjectiveTitle" type="Label" parent="MainColumn/ObjectiveCard/ObjectiveVBox/ObjectiveHeader" unique_id=755716825]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 21
+text = "Próximo objetivo"
+
+[node name="ObjectiveReward" type="HBoxContainer" parent="MainColumn/ObjectiveCard/ObjectiveVBox/ObjectiveHeader" unique_id=1749602998]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="RewardLabel" type="Label" parent="MainColumn/ObjectiveCard/ObjectiveVBox/ObjectiveHeader/ObjectiveReward" unique_id=536082070]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 15
+text = "XP"
+vertical_alignment = 1
+
+[node name="RewardValue" type="Label" parent="MainColumn/ObjectiveCard/ObjectiveVBox/ObjectiveHeader/ObjectiveReward" unique_id=2143379665]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.88, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+text = "200"
+vertical_alignment = 1
+
+[node name="ObjectiveDesc" type="Label" parent="MainColumn/ObjectiveCard/ObjectiveVBox" unique_id=657588845]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.63, 0.72, 1)
+theme_override_font_sizes/font_size = 17
+text = "Completa 3 sesiones esta semana"
+
+[node name="ObjectiveProgressRow" type="HBoxContainer" parent="MainColumn/ObjectiveCard/ObjectiveVBox" unique_id=2092538862]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ObjectiveBar" type="ProgressBar" parent="MainColumn/ObjectiveCard/ObjectiveVBox/ObjectiveProgressRow" unique_id=408198409]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBox_progress_bg")
+theme_override_styles/fill = SubResource("StyleBox_objective_fill")
+max_value = 3.0
+value = 2.0
+rounded = true
+show_percentage = false
+
+[node name="ObjectiveCount" type="Label" parent="MainColumn/ObjectiveCard/ObjectiveVBox/ObjectiveProgressRow" unique_id=1681614408]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
+theme_override_font_sizes/font_size = 17
+text = "2 / 3"
+
+[node name="LastSessionCard" type="PanelContainer" parent="MainColumn" unique_id=2119671242]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="LastSessionVBox" type="VBoxContainer" parent="MainColumn/LastSessionCard" unique_id=435089510]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="LastSessionTitle" type="Label" parent="MainColumn/LastSessionCard/LastSessionVBox" unique_id=567993428]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Tu compañero"
+
+[node name="LastSessionBody" type="HBoxContainer" parent="MainColumn/LastSessionCard/LastSessionVBox" unique_id=1386195261]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="MascotZone" type="VBoxContainer" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody" unique_id=972609178]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MascotFrame" type="Control" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone" unique_id=1463696934]
+custom_minimum_size = Vector2(360, 360)
+layout_mode = 2
+
+[node name="MascotGlow" type="Panel" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone/MascotFrame" unique_id=1533109706]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -160.0
+offset_right = 160.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_glow")
+
+[node name="MiniMascotPivot" type="Control" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone/MascotFrame" unique_id=1784986408]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -170.0
+offset_right = 170.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MiniRobot" type="TextureRect" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone/MascotFrame/MiniMascotPivot" unique_id=1500237967]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_robot")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MiniMascotName" type="Label" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone" unique_id=1880832626]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.9, 0.82, 1)
+theme_override_font_sizes/font_size = 28
+text = "Neuro"
+horizontal_alignment = 1
+
+[node name="SpeechBubble" type="PanelContainer" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone" unique_id=587554045]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="SpeechText" type="Label" parent="MainColumn/LastSessionCard/LastSessionVBox/LastSessionBody/MascotZone/SpeechBubble" unique_id=416547408]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "¡Sigue así! Estás mejorando cada día"
+horizontal_alignment = 1
+autowrap_mode = 3
