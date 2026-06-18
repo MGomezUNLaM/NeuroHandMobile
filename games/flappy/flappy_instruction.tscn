@@ -1,0 +1,250 @@
+[gd_scene load_steps=14 format=3 uid="uid://bqrsbt26f5i2s"]
+
+[ext_resource type="Texture2D" uid="uid://bcmdlmpabljdo" path="res://assets/AnimacionInstru.png" id="2_et46t"]
+[ext_resource type="Script" uid="uid://bm54d04448r0u" path="res://games/flappy/flappy_instruction.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://ba55p0fhrnrl2" path="res://games/flappy/flappy_instruction_bird.gd" id="3_bird"]
+[ext_resource type="PackedScene" uid="uid://b388gwokkyiqe" path="res://assets/coca_cola_bottle.glb" id="4_bottle"]
+[ext_resource type="Script" path="res://games/flappy/flappy_instruction_bottle.gd" id="5_bottle_script"]
+[ext_resource type="Texture2D" uid="uid://dek2ag5s6fnnk" path="res://assets/functional/wood_albedo.png" id="6_wood"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0.043, 0.102, 0.216, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.149, 0.851, 0.749, 0.5)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 20
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_et46t"]
+atlas = ExtResource("2_et46t")
+region = Rect2(332, 0, 207, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iqha"]
+atlas = ExtResource("2_et46t")
+region = Rect2(539, 0, 207, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ld21"]
+atlas = ExtResource("2_et46t")
+region = Rect2(746, 0, 207, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqa4b"]
+atlas = ExtResource("2_et46t")
+region = Rect2(953, 0, 207, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddtod"]
+atlas = ExtResource("2_et46t")
+region = Rect2(1160, 0, 207, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x7x26"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et46t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iqha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ld21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqa4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddtod")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
+albedo_texture = ExtResource("6_wood")
+roughness = 0.3
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_table"]
+material = SubResource("StandardMaterial3D_table")
+size = Vector3(30, 1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_target"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0, 0.8, 1, 0.2)
+emission_enabled = true
+emission = Color(0, 0.6, 1, 1)
+emission_energy_multiplier = 4.0
+rim_enabled = true
+
+[sub_resource type="TorusMesh" id="TorusMesh_target"]
+material = SubResource("StandardMaterial3D_target")
+inner_radius = 1.2
+outer_radius = 1.4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.149, 0.851, 0.749, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.1, 0.65, 0.55, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.18, 0.95, 0.85, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="InstructionOverlay" type="ColorRect" unique_id=1645955701]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.05, 0.1, 0.85)
+script = ExtResource("2_script")
+
+[node name="Timer" type="Timer" parent="." unique_id=1695857965]
+wait_time = 0.9
+autostart = true
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=806007703]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=1757486782]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1822501305]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="CenterContainer/Panel/VBox" unique_id=898492484]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.149, 0.851, 0.749, 1)
+theme_override_font_sizes/font_size = 32
+text = "¿Cómo jugar?"
+horizontal_alignment = 1
+
+[node name="InstructionText" type="Label" parent="CenterContainer/Panel/VBox" unique_id=987654321]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Instrucciones de juego"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBox" type="HBoxContainer" parent="CenterContainer/Panel/VBox" unique_id=61660064]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HandContainer" type="Control" parent="CenterContainer/Panel/VBox/HBox" unique_id=1879582522]
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 2
+
+[node name="HandSprite" type="AnimatedSprite2D" parent="CenterContainer/Panel/VBox/HBox/HandContainer" unique_id=1404868982]
+position = Vector2(101, 5)
+sprite_frames = SubResource("SpriteFrames_x7x26")
+frame_progress = 0.5081071
+
+[node name="Arrow" type="Label" parent="CenterContainer/Panel/VBox/HBox" unique_id=266809080]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.149, 0.851, 0.749, 1)
+theme_override_font_sizes/font_size = 48
+text = "→"
+vertical_alignment = 1
+
+[node name="BirdCanvas" type="Control" parent="CenterContainer/Panel/VBox/HBox" unique_id=493300684]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(200, 250)
+layout_mode = 2
+script = ExtResource("3_bird")
+
+[node name="BottleViewportContainer" type="SubViewportContainer" parent="CenterContainer/Panel/VBox/HBox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(400, 250)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 10)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+light_energy = 1.5
+
+[node name="Table" type="MeshInstance3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+mesh = SubResource("BoxMesh_table")
+
+[node name="Target" type="MeshInstance3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -1.9, 0)
+mesh = SubResource("TorusMesh_target")
+
+[node name="BottlePivot" type="Node3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+script = ExtResource("5_bottle_script")
+
+[node name="coca_cola_bottle" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport/BottlePivot" instance=ExtResource("4_bottle")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -2, 0)
+
+[node name="StartBtn" type="Button" parent="CenterContainer/Panel/VBox" unique_id=822584632]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.043, 0.102, 0.216, 1)
+theme_override_colors/font_pressed_color = Color(0.043, 0.102, 0.216, 1)
+theme_override_colors/font_hover_color = Color(0.043, 0.102, 0.216, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+text = "¡Comenzar!"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/StartBtn" to="." method="_on_start_pressed"]

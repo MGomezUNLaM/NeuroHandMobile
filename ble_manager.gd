@@ -37,10 +37,15 @@ const SIM_FLEX_MAX := 80.0     # Valor máximo al "flexionar" simulado
 
 func _ready() -> void:
 	_is_android = OS.has_feature("android")
+	
+	# TEMP FOR TESTING: Forzar simulador en Android temporalmente (pedido por el usuario)
+	# TODO: Remover esta línea antes de la build final.
+	_is_android = false 
+	
 	if _is_android:
 		_init_android_plugin()
 	else:
-		print("[BleManager] No estamos en Android — modo simulación disponible")
+		print("[BleManager] No estamos en Android (o forzamos simulador) — modo simulación disponible")
 		print("[BleManager] En simulación: mantené ESPACIO o click izquierdo para flexionar")
 
 

@@ -24,6 +24,8 @@ config/icon="res://icon.svg"
 SessionStore="*res://session_store.gd"
 BleManager="*res://ble_manager.gd"
 SupabaseClient="*res://supabase_client.gd"
+XRToolsUserSettings="*uid://bqgb8i74tm0t"
+XRToolsRumbleManager="*uid://by853dk86g1qw"
 
 [display]
 
@@ -33,6 +35,10 @@ window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [rendering]
 
