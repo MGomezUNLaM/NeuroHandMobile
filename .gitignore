@@ -5,3 +5,5 @@ android/build/
 *.aab
 android/NeuroHand.apk
 android/.build_version
+android/.build_version
+android/NeuroHand.apk
