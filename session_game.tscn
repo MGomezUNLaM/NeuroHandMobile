@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://h87xy1doqgha" path="res://flex_tap_detector.gd" id="3_flex"]
 [ext_resource type="Texture2D" uid="uid://u0g0q8bxx1rn" path="res://assets/FlappyBirdPortada.png" id="4_gmmxo"]
 [ext_resource type="Texture2D" uid="uid://pnr7mfbhmbqs" path="res://assets/icons/CocaColaPortada.png" id="5_gmmxo"]
+[ext_resource type="Texture2D" path="res://assets/hand_flex_instruction.png" id="6_pinch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_btn"]
 content_margin_top = 14.0

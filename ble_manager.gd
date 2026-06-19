@@ -9,6 +9,7 @@ signal device_found(device_name: String, address: String)
 signal connected(device_name: String)
 signal disconnected()
 signal flex_updated(flex_percent: float)
+signal flex_fingers_updated(fingers: Array[float])
 signal fsr_updated(fsr_percent: float)
 signal scan_started()
 signal scan_stopped()
@@ -20,6 +21,7 @@ enum State { IDLE, SCANNING, CONNECTING, CONNECTED }
 var state: State = State.IDLE
 var connected_device_name: String = ""
 var last_flex_value: float = 0.0
+var last_fingers_value: Array[float] = [0.0, 0.0, 0.0, 0.0]
 var last_fsr_value: float = 0.0
 
 # ── Internos ─────────────────────────────────────────────────────────────────
@@ -27,13 +29,13 @@ var _plugin: Object = null  # Referencia al plugin Android (GodotBle)
 var _is_android: bool = false
 var _sim_enabled: bool = false
 var _sim_flex: float = 0.0
+var _sim_fingers: Array[float] = [0.0, 0.0, 0.0, 0.0]
 var _sim_fsr: float = 0.0
 var _sim_timer: float = 0.0
 
 const SIM_UPDATE_RATE := 0.05  # 20Hz como el Arduino real
 const SIM_FLEX_SPEED := 300.0  # Velocidad de subida/bajada del flex simulado (%/seg)
 const SIM_FLEX_MAX := 80.0     # Valor máximo al "flexionar" simulado
-
 
 func _ready() -> void:
 	_is_android = OS.has_feature("android")
@@ -46,24 +48,30 @@ func _ready() -> void:
 		_init_android_plugin()
 	else:
 		print("[BleManager] No estamos en Android (o forzamos simulador) — modo simulación disponible")
-		print("[BleManager] En simulación: mantené ESPACIO o click izquierdo para flexionar")
-
+		print("[BleManager] Simulación: Mantené SPACE para flex general, A/S/D/F para dedos individuales, MOUSE_RIGHT para FSR.")
 
 func _process(delta: float) -> void:
 	if not _sim_enabled:
 		return
 
-	# Detectar input para simulación: ESPACIO o click izquierdo
-	var flexing := Input.is_key_pressed(KEY_SPACE) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-
-	if flexing:
+	# Detectar input flex general: ESPACIO o click izquierdo
+	if Input.is_key_pressed(KEY_SPACE) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		_sim_flex = minf(_sim_flex + SIM_FLEX_SPEED * delta, SIM_FLEX_MAX)
 	else:
 		_sim_flex = maxf(_sim_flex - SIM_FLEX_SPEED * delta, 0.0)
 
-	# Detectar input para simulación de FSR: F o click derecho
-	var pressing_fsr := Input.is_key_pressed(KEY_F) or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
+	# Simular dedos individuales (A, S, D, F)
+	var keys = [KEY_A, KEY_S, KEY_D, KEY_F]
+	var any_finger_pressed = false
+	for i in range(4):
+		if Input.is_key_pressed(keys[i]):
+			_sim_fingers[i] = minf(_sim_fingers[i] + SIM_FLEX_SPEED * delta, SIM_FLEX_MAX)
+			any_finger_pressed = true
+		else:
+			_sim_fingers[i] = maxf(_sim_fingers[i] - SIM_FLEX_SPEED * delta, 0.0)
 
+	# FSR: Puede activarse manual (Click derecho) o si se aprieta algún dedo simulando pinza
+	var pressing_fsr := Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) or any_finger_pressed
 	if pressing_fsr:
 		_sim_fsr = minf(_sim_fsr + SIM_FLEX_SPEED * delta, SIM_FLEX_MAX)
 	else:
@@ -73,6 +81,7 @@ func _process(delta: float) -> void:
 	if _sim_timer >= SIM_UPDATE_RATE:
 		_sim_timer = 0.0
 		_emit_flex(_sim_flex)
+		_emit_fingers(_sim_fingers)
 		_emit_fsr(_sim_fsr)
 
 
@@ -225,6 +234,10 @@ func _on_scan_stopped() -> void:
 func _emit_flex(value: float) -> void:
 	last_flex_value = value
 	flex_updated.emit(value)
+
+func _emit_fingers(fingers: Array[float]) -> void:
+	last_fingers_value = fingers.duplicate()
+	flex_fingers_updated.emit(fingers)
 
 
 func _emit_fsr(value: float) -> void:

@@ -14,12 +14,14 @@ var data: Dictionary = {
 	"sessions": [],
 }
 
+var preselected_exercise: String = ""
+
 
 func _ready() -> void:
 	_load()
 
 
-func save_session(taps: int, duration_sec: int) -> Dictionary:
+func save_session(taps: int, duration_sec: int, exercise_type: String = "flexion") -> Dictionary:
 	var xp_earned := taps * 2
 	var session := {
 		"timestamp": Time.get_unix_time_from_system(),
@@ -27,6 +29,7 @@ func save_session(taps: int, duration_sec: int) -> Dictionary:
 		"duration_sec": duration_sec,
 		"xp_earned": xp_earned,
 		"score": taps,
+		"exercise_type": exercise_type,
 	}
 	data["sessions"].append(session)
 	data["total_points"] = int(data["total_points"]) + xp_earned
@@ -38,7 +41,7 @@ func save_session(taps: int, duration_sec: int) -> Dictionary:
 	
 	# Guardar online en Supabase
 	if Engine.has_singleton("SupabaseClient") or has_node("/root/SupabaseClient"):
-		get_node("/root/SupabaseClient").insert_sesion_juego(taps)
+		get_node("/root/SupabaseClient").insert_sesion_juego(taps, exercise_type)
 	
 	return session
 

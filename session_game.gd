@@ -1,19 +1,20 @@
 extends Control
 
-const SESSION_DURATION := 30.0
+var session_duration := 30.0
 const GAME_SCENE := "res://session_game.tscn"
 const DASHBOARD_SCENE := "res://main_shell.tscn"
 
 enum Phase { READY, INSTRUCTION, PLAYING, FINISHED }
 
 var _phase := Phase.READY
-var _time_left := SESSION_DURATION
+var _time_left := 30.0
 var _taps := 0
 var _glove_connected := false
 
 var _minigame_instance: Node = null
 var _selected_game_scene: String = ""
 var _instruction_overlay: Node = null
+var _current_exercise_type: String = "flexion"
 
 @onready var _tap_zone: ColorRect = %TapZone
 @onready var _timer_label: Label = %TimerLabel
@@ -52,6 +53,11 @@ func _ready() -> void:
 
 	_reset_hud()
 	_start_mascot_idle()
+	
+	var store := get_node_or_null("/root/SessionStore") as PlayerSessionStore
+	if store and store.preselected_exercise == "pinza":
+		store.preselected_exercise = ""
+		_on_pinch_selected()
 
 
 func _process(delta: float) -> void:
@@ -172,7 +178,7 @@ func _start_minigame() -> void:
 func _finish_session() -> void:
 	_phase = Phase.FINISHED
 	var store := get_node("/root/SessionStore") as PlayerSessionStore
-	var session: Dictionary = store.save_session(_taps, int(SESSION_DURATION))
+	var session: Dictionary = store.save_session(_taps, int(session_duration), _current_exercise_type)
 	_tap_zone.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_show_results(session)
 
@@ -209,7 +215,7 @@ func _show_results(session: Dictionary) -> void:
 
 func _reset_hud() -> void:
 	_phase = Phase.READY
-	_time_left = SESSION_DURATION
+	_time_left = session_duration
 	_taps = 0
 	_tap_zone.mouse_filter = Control.MOUSE_FILTER_STOP
 	_tap_zone.color = Color(0.02, 0.05, 0.1, 1.0) # Restaurar color oscuro de fondo
@@ -334,18 +340,31 @@ var _instruction_text: String = ""
 func _on_arcade_selected() -> void:
 	_selected_game_scene = "res://games/flappy/space_game.tscn"
 	_is_functional_selected = false
+	_current_exercise_type = "flexion"
+	session_duration = 30.0
 	_instruction_text = "Hacé flexiones de mano para hacer saltar al pájaro y esquivar los obstáculos."
 	_show_instructions_screen()
 
 func _on_functional_selected() -> void:
 	_selected_game_scene = "res://games/functional/glass_game.tscn"
 	_is_functional_selected = true
+	_current_exercise_type = "flexion_constante"
+	session_duration = 30.0
 	_instruction_text = "Mantené la mano flexionada constantemente para empujar la botella hacia el objetivo."
+	_show_instructions_screen()
+
+func _on_pinch_selected() -> void:
+	_selected_game_scene = "res://games/pinch/pinch_game.tscn"
+	_is_functional_selected = false
+	_current_exercise_type = "pinza"
+	session_duration = 83.0
+	_instruction_text = "Juntá la yema del pulgar con la de cualquier otro dedo al ritmo de las teclas."
 	_show_instructions_screen()
 
 func _show_instructions_screen() -> void:
 	%GameSelectionMenu.hide()
 	_phase = Phase.INSTRUCTION
+	_time_left = session_duration # Aplicar la duración real al timer
 	
 	if is_instance_valid(_instruction_overlay):
 		_instruction_overlay.queue_free()
@@ -353,7 +372,7 @@ func _show_instructions_screen() -> void:
 	var instr_scene := load("res://games/flappy/flappy_instruction.tscn")
 	_instruction_overlay = instr_scene.instantiate()
 	if _instruction_overlay.has_method("setup"):
-		_instruction_overlay.setup(_instruction_text, _is_functional_selected)
+		_instruction_overlay.setup(_instruction_text, _is_functional_selected, _current_exercise_type)
 	_instruction_overlay.start_requested.connect(_start_minigame)
 	add_child(_instruction_overlay)
 	

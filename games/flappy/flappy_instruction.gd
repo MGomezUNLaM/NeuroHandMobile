@@ -10,26 +10,32 @@ var _is_closed := false
 func _ready() -> void:
 	$Timer.start()
 
-func setup(text: String, is_functional: bool = false) -> void:
+func setup(text: String, is_functional: bool = false, exercise_type: String = "flexion") -> void:
 	if has_node("%InstructionText"):
 		%InstructionText.text = text
 	
-	if is_functional:
-		if has_node("%BirdCanvas"):
-			%BirdCanvas.hide()
-		var arrow = get_node_or_null("CenterContainer/Panel/VBox/HBox/Arrow")
-		if arrow:
-			arrow.hide()
+	if has_node("%BirdCanvas"):
+		%BirdCanvas.hide()
+	if has_node("%BottleViewportContainer"):
+		%BottleViewportContainer.hide()
+	if has_node("%PinchCanvas"):
+		%PinchCanvas.hide()
+		
+	var arrow = get_node_or_null("CenterContainer/Panel/VBox/HBox/Arrow")
+	if arrow:
+		arrow.hide()
+	
+	if exercise_type == "pinza":
+		if has_node("%PinchCanvas"):
+			%PinchCanvas.show()
+	elif is_functional:
 		if has_node("%BottleViewportContainer"):
 			%BottleViewportContainer.show()
 	else:
 		if has_node("%BirdCanvas"):
 			%BirdCanvas.show()
-		var arrow = get_node_or_null("CenterContainer/Panel/VBox/HBox/Arrow")
 		if arrow:
 			arrow.show()
-		if has_node("%BottleViewportContainer"):
-			%BottleViewportContainer.hide()
 
 func _on_timer_timeout() -> void:
 	_is_closed = not _is_closed
@@ -53,6 +59,8 @@ func _on_timer_timeout() -> void:
 		var bottle_script = %BottleViewportContainer.get_node_or_null("SubViewport/BottlePivot")
 		if bottle_script and bottle_script.has_method("animate_to"):
 			bottle_script.animate_to(_is_closed)
+	else:
+				_hand_sprite.play("pinza")
 
 func _on_start_pressed() -> void:
 	start_requested.emit()

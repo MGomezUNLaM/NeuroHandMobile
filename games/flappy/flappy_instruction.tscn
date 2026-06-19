@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqrsbt26f5i2s"]
+[gd_scene load_steps=24 format=3 uid="uid://bqrsbt26f5i2s"]
 
 [ext_resource type="Texture2D" uid="uid://bcmdlmpabljdo" path="res://assets/AnimacionInstru.png" id="2_et46t"]
 [ext_resource type="Script" uid="uid://bm54d04448r0u" path="res://games/flappy/flappy_instruction.gd" id="2_script"]
 [ext_resource type="Script" uid="uid://ba55p0fhrnrl2" path="res://games/flappy/flappy_instruction_bird.gd" id="3_bird"]
+[ext_resource type="Texture2D" uid="uid://c6nd32npkqcuu" path="res://assets/pinzaAnimation.png" id="3_ddtod"]
 [ext_resource type="PackedScene" uid="uid://b388gwokkyiqe" path="res://assets/coca_cola_bottle.glb" id="4_bottle"]
-[ext_resource type="Script" path="res://games/flappy/flappy_instruction_bottle.gd" id="5_bottle_script"]
+[ext_resource type="Script" uid="uid://42g7irp03v7r" path="res://games/flappy/flappy_instruction_bottle.gd" id="5_bottle_script"]
 [ext_resource type="Texture2D" uid="uid://dek2ag5s6fnnk" path="res://assets/functional/wood_albedo.png" id="6_wood"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
@@ -45,6 +46,14 @@ region = Rect2(953, 0, 207, 512)
 atlas = ExtResource("2_et46t")
 region = Rect2(1160, 0, 207, 512)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ir60"]
+atlas = ExtResource("3_ddtod")
+region = Rect2(0, 0, 192, 597)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7x26"]
+atlas = ExtResource("3_ddtod")
+region = Rect2(1344, 0, 192, 597)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_x7x26"]
 animations = [{
 "frames": [{
@@ -66,6 +75,17 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ir60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7x26")
+}],
+"loop": true,
+"name": &"pinza",
+"speed": 3.0
 }]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_table"]
@@ -167,7 +187,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
-text = "Instrucciones de juego"
+text = "\"Cada columna representa un dedo. Juntá el pulgar con el dedo correspondiente para tocar la nota antes de que desaparezca.\""
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -183,7 +203,8 @@ layout_mode = 2
 [node name="HandSprite" type="AnimatedSprite2D" parent="CenterContainer/Panel/VBox/HBox/HandContainer" unique_id=1404868982]
 position = Vector2(101, 5)
 sprite_frames = SubResource("SpriteFrames_x7x26")
-frame_progress = 0.5081071
+animation = &"pinza"
+frame_progress = 0.98414105
 
 [node name="Arrow" type="Label" parent="CenterContainer/Panel/VBox/HBox" unique_id=266809080]
 layout_mode = 2
@@ -192,46 +213,91 @@ theme_override_font_sizes/font_size = 48
 text = "→"
 vertical_alignment = 1
 
-[node name="BirdCanvas" type="Control" parent="CenterContainer/Panel/VBox/HBox" unique_id=493300684]
+[node name="BirdCanvas" type="Control" parent="CenterContainer/Panel/VBox/HBox" unique_id=148972560]
 unique_name_in_owner = true
 clip_contents = true
-custom_minimum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 script = ExtResource("3_bird")
 
-[node name="BottleViewportContainer" type="SubViewportContainer" parent="CenterContainer/Panel/VBox/HBox"]
+[node name="PinchCanvas" type="ColorRect" parent="CenterContainer/Panel/VBox/HBox" unique_id=54321]
+unique_name_in_owner = true
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+color = Color(0.95, 0.95, 0.95, 1)
+
+[node name="Col1" type="ColorRect" parent="CenterContainer/Panel/VBox/HBox/PinchCanvas" unique_id=848928312]
+layout_mode = 1
+offset_left = 100.0
+offset_right = 160.0
+offset_bottom = 250.0
+color = Color(0, 0, 0, 0.05)
+
+[node name="Col2" type="ColorRect" parent="CenterContainer/Panel/VBox/HBox/PinchCanvas" unique_id=176342129]
+layout_mode = 1
+offset_left = 220.0
+offset_right = 280.0
+offset_bottom = 250.0
+color = Color(0, 0, 0, 0.05)
+
+[node name="Tile1" type="ColorRect" parent="CenterContainer/Panel/VBox/HBox/PinchCanvas" unique_id=718199041]
+layout_mode = 1
+offset_left = 105.0
+offset_top = 40.0
+offset_right = 155.0
+offset_bottom = 120.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Tile2" type="ColorRect" parent="CenterContainer/Panel/VBox/HBox/PinchCanvas" unique_id=1262887519]
+layout_mode = 1
+offset_left = 225.0
+offset_top = 150.0
+offset_right = 275.0
+offset_bottom = 230.0
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="HitLine" type="ColorRect" parent="CenterContainer/Panel/VBox/HBox/PinchCanvas" unique_id=1067345518]
+layout_mode = 1
+offset_top = 230.0
+offset_right = 400.0
+offset_bottom = 235.0
+color = Color(1, 0, 0, 0.5)
+
+[node name="BottleViewportContainer" type="SubViewportContainer" parent="CenterContainer/Panel/VBox/HBox" unique_id=148972561]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer" unique_id=1960010425]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(400, 250)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport" unique_id=1691997826]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 10)
 current = true
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport" unique_id=345441151]
 transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
 light_energy = 1.5
 
-[node name="Table" type="MeshInstance3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+[node name="Table" type="MeshInstance3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport" unique_id=1986457953]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 mesh = SubResource("BoxMesh_table")
 
-[node name="Target" type="MeshInstance3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+[node name="Target" type="MeshInstance3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport" unique_id=1793653037]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -1.9, 0)
 mesh = SubResource("TorusMesh_target")
 
-[node name="BottlePivot" type="Node3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport"]
+[node name="BottlePivot" type="Node3D" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport" unique_id=1902317036]
 script = ExtResource("5_bottle_script")
 
-[node name="coca_cola_bottle" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport/BottlePivot" instance=ExtResource("4_bottle")]
+[node name="coca_cola_bottle" parent="CenterContainer/Panel/VBox/HBox/BottleViewportContainer/SubViewport/BottlePivot" unique_id=2116672810 instance=ExtResource("4_bottle")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, -2, 0)
 
 [node name="StartBtn" type="Button" parent="CenterContainer/Panel/VBox" unique_id=822584632]
