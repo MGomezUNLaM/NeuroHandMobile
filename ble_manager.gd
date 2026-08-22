@@ -11,6 +11,7 @@ signal disconnected()
 signal flex_updated(flex_percent: float)
 signal flex_fingers_updated(fingers: Array[float])
 signal fsr_updated(fsr_percent: float)
+signal imu_updated(pitch: float, roll: float, yaw: float)
 signal scan_started()
 signal scan_stopped()
 signal error(message: String)
@@ -23,6 +24,7 @@ var connected_device_name: String = ""
 var last_flex_value: float = 0.0
 var last_fingers_value: Array[float] = [0.0, 0.0, 0.0, 0.0]
 var last_fsr_value: float = 0.0
+var last_imu_value: Vector3 = Vector3.ZERO # x=pitch, y=roll, z=yaw
 
 # ── Internos ─────────────────────────────────────────────────────────────────
 var _plugin: Object = null  # Referencia al plugin Android (GodotBle)
@@ -31,10 +33,12 @@ var _sim_enabled: bool = false
 var _sim_flex: float = 0.0
 var _sim_fingers: Array[float] = [0.0, 0.0, 0.0, 0.0]
 var _sim_fsr: float = 0.0
+var _sim_pitch: float = 0.0
 var _sim_timer: float = 0.0
 
 const SIM_UPDATE_RATE := 0.05  # 20Hz como el Arduino real
 const SIM_FLEX_SPEED := 300.0  # Velocidad de subida/bajada del flex simulado (%/seg)
+const SIM_PITCH_SPEED := 180.0 # Velocidad de rotación simulada (deg/seg)
 const SIM_FLEX_MAX := 80.0     # Valor máximo al "flexionar" simulado
 
 func _ready() -> void:
@@ -48,7 +52,7 @@ func _ready() -> void:
 		_init_android_plugin()
 	else:
 		print("[BleManager] No estamos en Android (o forzamos simulador) — modo simulación disponible")
-		print("[BleManager] Simulación: Mantené SPACE para flex general, A/S/D/F para dedos individuales, MOUSE_RIGHT para FSR.")
+		print("[BleManager] Simulación: Mantené SPACE para flex, A/S/D/F dedos, CLICK DER para FSR, UP/DOWN para Pitch.")
 
 func _process(delta: float) -> void:
 	if not _sim_enabled:
@@ -77,12 +81,23 @@ func _process(delta: float) -> void:
 	else:
 		_sim_fsr = maxf(_sim_fsr - SIM_FLEX_SPEED * delta, 0.0)
 
+	# Simular IMU Pitch (Arriba/Abajo)
+	if Input.is_action_pressed("ui_up"):
+		_sim_pitch = minf(_sim_pitch + SIM_PITCH_SPEED * delta, 90.0)
+	elif Input.is_action_pressed("ui_down"):
+		_sim_pitch = maxf(_sim_pitch - SIM_PITCH_SPEED * delta, -90.0)
+	else:
+		_sim_pitch = lerpf(_sim_pitch, 0.0, delta * 5.0) # Vuelve al centro
+
 	_sim_timer += delta
 	if _sim_timer >= SIM_UPDATE_RATE:
 		_sim_timer = 0.0
 		_emit_flex(_sim_flex)
 		_emit_fingers(_sim_fingers)
 		_emit_fsr(_sim_fsr)
+		
+		last_imu_value = Vector3(_sim_pitch, 0, 0)
+		imu_updated.emit(_sim_pitch, 0.0, 0.0)
 
 
 # ── API Pública ──────────────────────────────────────────────────────────────

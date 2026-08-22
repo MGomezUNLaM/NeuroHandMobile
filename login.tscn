@@ -1,0 +1,205 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy8b3d6j5wq7e"]
+
+[ext_resource type="Script" uid="uid://dex4hngabrset" path="res://login.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0.361, 0.369, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0.28, 0.29, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input_focus"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.361, 0.369, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_input"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.85, 0.85, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="Theme" id="Theme_login"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 20
+Button/styles/hover = SubResource("StyleBoxFlat_btn")
+Button/styles/normal = SubResource("StyleBoxFlat_btn")
+Button/styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+LineEdit/colors/font_color = Color(0.1, 0.2, 0.2, 1)
+LineEdit/colors/font_placeholder_color = Color(0.4, 0.45, 0.45, 1)
+LineEdit/font_sizes/font_size = 20
+LineEdit/styles/focus = SubResource("StyleBoxFlat_input_focus")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_input")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.976, 0.976, 0.965, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cau7c"]
+load_path = "res://.godot/imported/logo_kinesis_transparent_full.png-f5f5cc8370c98c18eb5e543302fe17ab.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_link"]
+
+[node name="Login" type="Control" unique_id=1078473241]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_login")
+script = ExtResource("1_script")
+
+[node name="Background" type="Panel" parent="." unique_id=1193452892]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1742510369]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 64.0
+offset_right = -32.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Header" type="VBoxContainer" parent="VBoxContainer" unique_id=1944024776]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LogoRect" type="TextureRect" parent="VBoxContainer/Header" unique_id=1868453976]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_cau7c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Space" type="Control" parent="VBoxContainer" unique_id=1096168551]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Form" type="VBoxContainer" parent="VBoxContainer" unique_id=2120110210]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="UserField" type="VBoxContainer" parent="VBoxContainer/Form" unique_id=242862041]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/Form/UserField" unique_id=1905597136]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.17, 0.17, 1)
+theme_override_font_sizes/font_size = 18
+text = "Usuario"
+
+[node name="InputUser" type="LineEdit" parent="VBoxContainer/Form/UserField" unique_id=737953459]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "ana.perez"
+
+[node name="PassField" type="VBoxContainer" parent="VBoxContainer/Form" unique_id=740589442]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/Form/PassField" unique_id=221975772]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.17, 0.17, 1)
+theme_override_font_sizes/font_size = 18
+text = "Contraseña"
+
+[node name="InputPass" type="LineEdit" parent="VBoxContainer/Form/PassField" unique_id=6121703]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "••••••"
+secret = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Form" unique_id=1944799224]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Check" type="CheckBox" parent="VBoxContainer/Form/HBoxContainer" unique_id=1524340553]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_link")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_link")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_link")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_link")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_link")
+button_pressed = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Form/HBoxContainer" unique_id=1048074290]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.17, 0.17, 1)
+theme_override_font_sizes/font_size = 18
+text = "Mantener sesión"
+
+[node name="Space2" type="Control" parent="VBoxContainer" unique_id=68648433]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="BtnIngresar" type="Button" parent="VBoxContainer" unique_id=679163109]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ingresar"
+
+[node name="Space3" type="Control" parent="VBoxContainer" unique_id=611352731]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=234563553]
+layout_mode = 2
+
+[node name="BtnOlvide" type="Button" parent="VBoxContainer/CenterContainer" unique_id=1387643029]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.361, 0.369, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.28, 0.29, 1)
+theme_override_colors/font_hover_color = Color(0, 0.45, 0.46, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_link")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_link")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_link")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_link")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_link")
+text = "Olvidé mi contraseña"
+flat = true

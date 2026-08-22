@@ -353,10 +353,9 @@ flat = true
 
 [node name="Mission5" type="PanelContainer" parent="MainVBox/Scroll/MissionsList"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_locked")
+theme_override_styles/panel = SubResource("StyleBox_card_active")
 
 [node name="Row" type="HBoxContainer" parent="MainVBox/Scroll/MissionsList/Mission5"]
-modulate = Color(1, 1, 1, 0.5)
 layout_mode = 2
 theme_override_constants/separation = 16
 
@@ -401,14 +400,13 @@ theme_override_font_sizes/font_size = 18
 text = "250 XP"
 horizontal_alignment = 1
 
-[node name="LockIcon" type="TextureRect" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Right"]
-self_modulate = Color(0.4, 0.46, 0.56, 1)
-custom_minimum_size = Vector2(24, 24)
+[node name="PlayBtn" type="Button" parent="MainVBox/Scroll/MissionsList/Mission5/Row/Right"]
+custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
-size_flags_horizontal = 4
-texture = ExtResource("8_lock")
-expand_mode = 1
-stretch_mode = 5
+theme_override_colors/font_color = Color(0.15, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+text = "▶"
+flat = true
 
 [node name="ToastLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -432,6 +430,6 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="MainVBox/Scroll/MissionsList/Mission1/Row/Right/PlayBtn" to="." method="_on_mission_available_pressed"]
 [connection signal="pressed" from="MainVBox/Scroll/MissionsList/Mission4/Row/Right/PlayBtn" to="." method="_on_pinch_mission_pressed"]
+[connection signal="pressed" from="MainVBox/Scroll/MissionsList/Mission5/Row/Right/PlayBtn" to="." method="_on_coordination_pressed"]
 [connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission2" to="." method="_on_locked_gui_input"]
 [connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission3" to="." method="_on_locked_gui_input"]
-[connection signal="gui_input" from="MainVBox/Scroll/MissionsList/Mission5" to="." method="_on_locked_gui_input"]

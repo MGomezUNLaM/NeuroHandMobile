@@ -1,0 +1,138 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvbf4m0rsrncv"]
+
+[ext_resource type="Script" uid="uid://bai8bnds1dhhh" path="res://games/basket/basket_game_3d.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://btvc2odvx5y40" path="res://assets/basket/arcade_basketball_machine__prop.glb" id="2_arcade"]
+[ext_resource type="PackedScene" uid="uid://cmx4ujychwba1" path="res://assets/basket/basketball.glb" id="3_ball"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_board"]
+albedo_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_board"]
+material = SubResource("StandardMaterial3D_board")
+size = Vector3(1.8, 1.2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hoop"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_hoop"]
+material = SubResource("StandardMaterial3D_hoop")
+inner_radius = 0.45
+outer_radius = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hoop"]
+height = 0.1
+radius = 0.45
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ball"]
+radius = 0.3
+
+[node name="BasketGame3D6" type="Node3D" unique_id=2038659181]
+script = ExtResource("1_script")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1292305330]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1938182496]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+shadow_enabled = true
+
+[node name="Board" type="StaticBody3D" parent="." unique_id=1196478550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3016233, -8.854195)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Board" unique_id=821058394]
+mesh = SubResource("BoxMesh_board")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Board" unique_id=1591922488]
+
+[node name="Hoop" type="StaticBody3D" parent="." unique_id=1563728448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24, -7.048522)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hoop" unique_id=389778067]
+mesh = SubResource("TorusMesh_hoop")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop" unique_id=345460816]
+shape = SubResource("CylinderShape3D_hoop")
+
+[node name="ScoreArea" type="Area3D" parent="Hoop" unique_id=1988167414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24, -7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hoop/ScoreArea" unique_id=1650146201]
+shape = SubResource("CylinderShape3D_hoop")
+
+[node name="Ball" type="RigidBody3D" parent="." unique_id=1792927108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
+freeze = true
+contact_monitor = true
+max_contacts_reported = 2
+
+[node name="BallModel" parent="Ball" unique_id=1730065287 instance=ExtResource("3_ball")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=751463466]
+shape = SubResource("SphereShape3D_ball")
+
+[node name="ArcadeModel" parent="." unique_id=854941552 instance=ExtResource("2_arcade")]
+transform = Transform3D(-6.5, 0, 0, 0, 6.5, 0, 0, 0, -6.5, 0, -3.5, -3.5)
+
+[node name="TimeLabel3D" type="Label3D" parent="ArcadeModel" unique_id=1899494591]
+transform = Transform3D(-0.9999998, 0, -8.742277e-08, 0, 0.9999998, 0, 8.742277e-08, 0, -0.9999998, 0.33363816, 0.72874624, 2.1846535)
+modulate = Color(1, 0.2, 0.2, 1)
+text = "030"
+font_size = 40
+outline_size = 0
+
+[node name="ScoreLabel3D" type="Label3D" parent="ArcadeModel" unique_id=929403880]
+transform = Transform3D(-0.9999998, 0, -8.742277e-08, 0, 0.9999998, 0, 8.742277e-08, 0, -0.9999998, 0.7899956, 0.022269964, 5.4530177)
+modulate = Color(1, 0.2, 0.2, 1)
+text = "000"
+font_size = 40
+outline_size = 0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=343199257]
+
+[node name="ScoreLabel" type="Label" parent="UI" unique_id=1587779243]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="StateLabel" type="Label" parent="UI" unique_id=1975455186]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.0
+offset_right = 150.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Agarra la pelota (Flexiona)"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UI" unique_id=1140465992]
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 120.0
+offset_bottom = 150.0
+text = "Volver"
+
+[node name="TimerLabel" type="Label" parent="UI" unique_id=221823782]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 87.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "30"
+horizontal_alignment = 2
+
+[connection signal="body_entered" from="Hoop/ScoreArea" to="." method="_on_score_area_body_entered"]
+[connection signal="pressed" from="UI/BackButton" to="." method="_on_back_pressed"]

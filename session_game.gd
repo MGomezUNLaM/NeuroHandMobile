@@ -58,6 +58,9 @@ func _ready() -> void:
 	if store and store.preselected_exercise == "pinza":
 		store.preselected_exercise = ""
 		_on_pinch_selected()
+	elif store and store.preselected_exercise == "coordinacion_3d":
+		store.preselected_exercise = ""
+		_on_basket_selected()
 
 
 func _process(delta: float) -> void:
@@ -78,12 +81,12 @@ func _process(delta: float) -> void:
 
 		# Cambiar color de la barra según el umbral
 		if flex_val >= _flex_detector.flex_threshold:
-			_flex_bar.modulate = Color(0.2, 1.0, 0.8, 1.0)  # Verde brillante
+			_flex_bar.modulate = Color(0, 0.5, 0.5, 1.0)  # Verde
 			is_thrusting = true
 		elif flex_val >= _flex_detector.release_threshold:
-			_flex_bar.modulate = Color(1.0, 0.85, 0.3, 1.0)  # Amarillo
+			_flex_bar.modulate = Color(0.8, 0.6, 0.2, 1.0)  # Amarillo/Naranja
 		else:
-			_flex_bar.modulate = Color(0.5, 0.6, 0.7, 1.0)  # Gris
+			_flex_bar.modulate = Color(0.6, 0.6, 0.6, 1.0)  # Gris
 
 	# Pasar valor al minijuego
 	if is_instance_valid(_minigame_instance):
@@ -166,8 +169,9 @@ func _start_minigame() -> void:
 	# Configurar el fondo transparente para que se vea el juego
 	_tap_zone.color = Color(0, 0, 0, 0)
 	_tap_zone.add_child(_minigame_instance)
-	_minigame_instance.set_anchors_preset(Control.PRESET_FULL_RECT)
-	_minigame_instance.size = _tap_zone.size
+	if _minigame_instance is Control:
+		_minigame_instance.set_anchors_preset(Control.PRESET_FULL_RECT)
+		_minigame_instance.size = _tap_zone.size
 	_tap_zone.move_child(_minigame_instance, 0)
 	
 	if _minigame_instance.has_method("start_game"):
@@ -218,7 +222,7 @@ func _reset_hud() -> void:
 	_time_left = session_duration
 	_taps = 0
 	_tap_zone.mouse_filter = Control.MOUSE_FILTER_STOP
-	_tap_zone.color = Color(0.02, 0.05, 0.1, 1.0) # Restaurar color oscuro de fondo
+	_tap_zone.color = Color(0.976, 0.976, 0.965, 1.0) # Restaurar color claro de fondo
 
 	if is_instance_valid(_minigame_instance):
 		_minigame_instance.queue_free()
@@ -325,10 +329,10 @@ func _update_ble_ui() -> void:
 
 	if _glove_connected:
 		_ble_status_label.text = "🧤 %s" % _ble_manager.connected_device_name
-		_ble_status_label.add_theme_color_override(&"font_color", Color(0.2, 0.92, 0.84))
+		_ble_status_label.add_theme_color_override(&"font_color", Color(0, 0.36, 0.37))
 	else:
 		_ble_status_label.text = "🧤 Sin guante"
-		_ble_status_label.add_theme_color_override(&"font_color", Color(0.5, 0.55, 0.65))
+		_ble_status_label.add_theme_color_override(&"font_color", Color(0.4, 0.5, 0.5))
 
 
 func _on_back_pressed() -> void:
@@ -359,6 +363,14 @@ func _on_pinch_selected() -> void:
 	_current_exercise_type = "pinza"
 	session_duration = 83.0
 	_instruction_text = "Juntá la yema del pulgar con la de cualquier otro dedo al ritmo de las teclas."
+	_show_instructions_screen()
+
+func _on_basket_selected() -> void:
+	_selected_game_scene = "res://games/basket/basket_game_3d.tscn"
+	_is_functional_selected = true
+	_current_exercise_type = "coordinacion_3d"
+	session_duration = 30.0
+	_instruction_text = "Agarra la pelota (flexión), levanta la mano (giroscopio) y soltala para encestar."
 	_show_instructions_screen()
 
 func _show_instructions_screen() -> void:
