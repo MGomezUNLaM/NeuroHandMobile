@@ -22,6 +22,13 @@ func _refresh_points() -> void:
 
 
 func _on_mission_available_pressed() -> void:
+	var store := get_node("/root/SessionStore") as PlayerSessionStore
+	store.preselected_exercise = "flexion"
+	get_tree().change_scene_to_file(GAME_SCENE)
+
+func _on_functional_pressed() -> void:
+	var store := get_node("/root/SessionStore") as PlayerSessionStore
+	store.preselected_exercise = "flexion_constante"
 	get_tree().change_scene_to_file(GAME_SCENE)
 
 func _on_pinch_mission_pressed() -> void:

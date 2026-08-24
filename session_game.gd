@@ -55,12 +55,18 @@ func _ready() -> void:
 	_start_mascot_idle()
 	
 	var store := get_node_or_null("/root/SessionStore") as PlayerSessionStore
-	if store and store.preselected_exercise == "pinza":
+	if store and store.preselected_exercise != "":
+		var pre := store.preselected_exercise
 		store.preselected_exercise = ""
-		_on_pinch_selected()
-	elif store and store.preselected_exercise == "coordinacion_3d":
-		store.preselected_exercise = ""
-		_on_basket_selected()
+		match pre:
+			"pinza":
+				_on_pinch_selected()
+			"coordinacion_3d", "basket":
+				_on_basket_selected()
+			"flexion_constante", "botella":
+				_on_functional_selected()
+			"flexion", "flappy":
+				_on_arcade_selected()
 
 
 func _process(delta: float) -> void:

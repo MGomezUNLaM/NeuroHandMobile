@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://duiop52qxb42j"]
+[gd_scene format=3 uid="uid://duiop52qxb42j"]
 
 [ext_resource type="Script" uid="uid://bjb3gr5k2vvxg" path="res://tab_history.gd" id="1_script"]
 
@@ -40,21 +40,7 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_bar_bg"]
-bg_color = Color(0.886, 0.957, 0.93, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_bar_fg"]
-bg_color = Color(0, 0.36, 0.37, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[node name="History" type="Control"]
+[node name="History" type="Control" unique_id=2146896159]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="MainColumn" type="VBoxContainer" parent="."]
+[node name="MainColumn" type="VBoxContainer" parent="." unique_id=1974106342]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,111 +62,111 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 24
 
-[node name="Header" type="HBoxContainer" parent="MainColumn"]
+[node name="Header" type="HBoxContainer" parent="MainColumn" unique_id=1332133290]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainColumn/Header"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainColumn/Header" unique_id=1264313395]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Greeting" type="Label" parent="MainColumn/Header/VBoxContainer"]
+[node name="Greeting" type="Label" parent="MainColumn/Header/VBoxContainer" unique_id=1834535862]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 16
 text = "ÚLTIMOS 7 DÍAS"
 
-[node name="Title" type="Label" parent="MainColumn/Header/VBoxContainer"]
+[node name="Title" type="Label" parent="MainColumn/Header/VBoxContainer" unique_id=1631936425]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 32
 text = "Tu evolución"
 
-[node name="Badge" type="PanelContainer" parent="MainColumn/Header"]
+[node name="Badge" type="PanelContainer" parent="MainColumn/Header" unique_id=1311339009]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBox_badge")
 
-[node name="Label" type="Label" parent="MainColumn/Header/Badge"]
+[node name="Label" type="Label" parent="MainColumn/Header/Badge" unique_id=1483182314]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.6, 0.5, 1)
 theme_override_font_sizes/font_size = 14
 text = "Vas mejorando"
 
-[node name="ChartPlaceholder" type="PanelContainer" parent="MainColumn"]
+[node name="ChartPlaceholder" type="PanelContainer" parent="MainColumn" unique_id=1136333234]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_card_secondary")
 
-[node name="Label" type="Label" parent="MainColumn/ChartPlaceholder"]
+[node name="Label" type="Label" parent="MainColumn/ChartPlaceholder" unique_id=762665972]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 18
 text = "[Gráfico de barras]"
 horizontal_alignment = 1
 
-[node name="HBoxStats" type="HBoxContainer" parent="MainColumn"]
+[node name="HBoxStats" type="HBoxContainer" parent="MainColumn" unique_id=612396913]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Stat1" type="PanelContainer" parent="MainColumn/HBoxStats"]
+[node name="Stat1" type="PanelContainer" parent="MainColumn/HBoxStats" unique_id=1302828224]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBox_card_secondary")
 
-[node name="VBox" type="VBoxContainer" parent="MainColumn/HBoxStats/Stat1"]
+[node name="VBox" type="VBoxContainer" parent="MainColumn/HBoxStats/Stat1" unique_id=1864630039]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="MainColumn/HBoxStats/Stat1/VBox"]
+[node name="Value" type="Label" parent="MainColumn/HBoxStats/Stat1/VBox" unique_id=972636748]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 32
 text = "7"
 horizontal_alignment = 1
 
-[node name="Desc" type="Label" parent="MainColumn/HBoxStats/Stat1/VBox"]
+[node name="Desc" type="Label" parent="MainColumn/HBoxStats/Stat1/VBox" unique_id=1084020972]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 14
 text = "días seguidos"
 horizontal_alignment = 1
 
-[node name="Stat2" type="PanelContainer" parent="MainColumn/HBoxStats"]
+[node name="Stat2" type="PanelContainer" parent="MainColumn/HBoxStats" unique_id=927881960]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBox_card_secondary")
 
-[node name="VBox" type="VBoxContainer" parent="MainColumn/HBoxStats/Stat2"]
+[node name="VBox" type="VBoxContainer" parent="MainColumn/HBoxStats/Stat2" unique_id=286907160]
 layout_mode = 2
 
-[node name="Value" type="Label" parent="MainColumn/HBoxStats/Stat2/VBox"]
+[node name="Value" type="Label" parent="MainColumn/HBoxStats/Stat2/VBox" unique_id=862798017]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 32
 text = "88%"
 horizontal_alignment = 1
 
-[node name="Desc" type="Label" parent="MainColumn/HBoxStats/Stat2/VBox"]
+[node name="Desc" type="Label" parent="MainColumn/HBoxStats/Stat2/VBox" unique_id=737971170]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 14
 text = "precisión"
 horizontal_alignment = 1
 
-[node name="NoteCard" type="PanelContainer" parent="MainColumn"]
+[node name="NoteCard" type="PanelContainer" parent="MainColumn" unique_id=281984731]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_card_note")
 
-[node name="VBox" type="VBoxContainer" parent="MainColumn/NoteCard"]
+[node name="VBox" type="VBoxContainer" parent="MainColumn/NoteCard" unique_id=1817047590]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="MainColumn/NoteCard/VBox"]
+[node name="Title" type="Label" parent="MainColumn/NoteCard/VBox" unique_id=804709131]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.4, 0.1, 1)
 theme_override_font_sizes/font_size = 14
 text = "NOTA DEL KINESIÓLOGO"
 
-[node name="Note" type="Label" parent="MainColumn/NoteCard/VBox"]
+[node name="Note" type="Label" parent="MainColumn/NoteCard/VBox" unique_id=1123724894]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.2, 0.05, 1)
 theme_override_font_sizes/font_size = 18
