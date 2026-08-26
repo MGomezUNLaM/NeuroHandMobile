@@ -11,7 +11,7 @@ func _ready() -> void:
 	_http_request.request_completed.connect(_on_request_completed)
 
 
-func insert_sesion_juego(taps: int) -> void:
+func insert_sesion_juego(taps: int, exercise_type: String = "flexion") -> void:
 	var endpoint = SUPABASE_URL + "/rest/v1/sesion_juego"
 	var headers = [
 		"apikey: " + SUPABASE_ANON_KEY,
@@ -22,7 +22,8 @@ func insert_sesion_juego(taps: int) -> void:
 	
 	# La columna 'created_at' e 'id' se generarán automáticamente en Supabase.
 	var data = {
-		"cantidad_toques": taps
+		"cantidad_toques": taps,
+		"tipo_ejercicio": exercise_type
 	}
 	
 	var body = JSON.stringify(data)

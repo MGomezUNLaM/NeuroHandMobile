@@ -74,6 +74,7 @@ public class GodotBle extends GodotPlugin {
         signals.add(new SignalInfo("ble_disconnected"));
         signals.add(new SignalInfo("ble_flex_updated", Integer.class));
         signals.add(new SignalInfo("ble_fsr_updated", Integer.class));
+        signals.add(new SignalInfo("ble_data_received", String.class));
         signals.add(new SignalInfo("ble_error", String.class));
         signals.add(new SignalInfo("ble_scan_started"));
         signals.add(new SignalInfo("ble_scan_stopped"));
@@ -85,48 +86,69 @@ public class GodotBle extends GodotPlugin {
         Activity activity = getActivity();
         if (activity == null) return;
 
+        java.util.List<String> permissions = new java.util.ArrayList<>();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(activity, new String[]{
-                        Manifest.permission.BLUETOOTH_SCAN,
-                        Manifest.permission.BLUETOOTH_CONNECT
-                }, 101);
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.BLUETOOTH_SCAN);
+            }
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.BLUETOOTH_CONNECT);
+            }
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
         } else {
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(activity, new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                }, 101);
+                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
             }
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            }
+        }
+
+        if (!permissions.isEmpty()) {
+            ActivityCompat.requestPermissions(activity, permissions.toArray(new String[0]), 101);
         }
     }
 
     @UsedByGodot
     public void startScan() {
+        Activity activity = getActivity();
+        if (activity == null) return;
+
+        if (bluetoothAdapter == null) {
+            BluetoothManager bluetoothManager = (BluetoothManager) activity.getSystemService(Context.BLUETOOTH_SERVICE);
+            if (bluetoothManager != null) {
+                bluetoothAdapter = bluetoothManager.getAdapter();
+            }
+        }
+
         if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
-            emitSignal("ble_error", "Bluetooth apagado");
+            emitSignal("ble_error", "Por favor activa el Bluetooth");
             return;
+        }
+
+        // Comprobación y solicitud automática de permisos si faltan
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions();
+                emitSignal("ble_error", "Permiso Bluetooth requerido");
+                return;
+            }
+        } else {
+            if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions();
+                emitSignal("ble_error", "Permiso de Ubicación requerido");
+                return;
+            }
         }
 
         if (isScanning) return;
 
-        // Comprobación de permisos antes de escanear
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                emitSignal("ble_error", "Permiso SCAN denegado");
-                return;
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                emitSignal("ble_error", "Permiso LOCATION denegado");
-                return;
-            }
-        }
-
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
         if (bluetoothLeScanner == null) {
-            emitSignal("ble_error", "Scanner no disponible");
+            emitSignal("ble_error", "Scanner Bluetooth no disponible");
             return;
         }
 
@@ -286,6 +308,10 @@ public class GodotBle extends GodotPlugin {
                     while ((newlineIdx = incomingDataBuffer.indexOf("\n")) != -1) {
                         String line = incomingDataBuffer.substring(0, newlineIdx).trim();
                         incomingDataBuffer.delete(0, newlineIdx + 1);
+                        
+                        if (!line.isEmpty()) {
+                            emitSignal("ble_data_received", line);
+                        }
                         
                         if (line.startsWith("FLEX:")) {
                             try {

@@ -1,3 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 android/build/
+*.apk
+*.aab
+android/NeuroHand.apk
+android/.build_version
+android/.build_version
+android/NeuroHand.apk
+*.apk

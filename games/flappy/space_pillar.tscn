@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpsa284v1x0"]
+
+[ext_resource type="Script" uid="uid://c8yvltjmjftx" path="res://games/flappy/space_pillar.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cc020jfiqtog2" path="res://assets/flappy_assets/textures/pipe.png" id="2_pipe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
+size = Vector2(60, 200)
+
+[node name="SpacePillar" type="Area2D" unique_id=1067891660]
+script = ExtResource("1_script")
+
+[node name="TopPipe" type="NinePatchRect" parent="." unique_id=2135985545]
+offset_right = 60.0
+offset_bottom = 200.0
+texture = ExtResource("2_pipe")
+patch_margin_top = 50
+axis_stretch_vertical = 1
+
+[node name="BottomPipe" type="NinePatchRect" parent="." unique_id=1017347428]
+offset_right = 60.0
+offset_bottom = 200.0
+texture = ExtResource("2_pipe")
+patch_margin_top = 50
+axis_stretch_vertical = 1
+
+[node name="TopCollision" type="CollisionShape2D" parent="." unique_id=316826923]
+shape = SubResource("RectangleShape2D_top")
+
+[node name="BottomCollision" type="CollisionShape2D" parent="." unique_id=868018895]
+
+[node name="ScoreArea" type="Area2D" parent="." unique_id=1012434024]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea" unique_id=1596822240]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

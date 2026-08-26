@@ -5,32 +5,27 @@ extends Control
 
 const TAB_SCENES: Array[String] = [
 	"res://tab_home.tscn",
-	"res://tab_missions.tscn",
 	"res://tab_history.tscn",
 	"res://ble_connect.tscn",
-	"res://tab_achievements.tscn",
 ]
 
-const TAB_LABELS: Array[String] = ["Inicio", "Ejercicios", "Historial", "Guante", "Logros"]
+const TAB_LABELS: Array[String] = ["Inicio", "Progreso", "Guante"]
 const TAB_ICONS_PATHS: Array[String] = [
 	"res://assets/icons/icon_home.svg",
-	"res://assets/icons/icon_dumbbell.svg",
 	"res://assets/icons/icon_history.svg",
 	"res://assets/icons/icon_glove.svg",
-	"res://assets/icons/icon_trophy_white.svg",
 ]
 
 var _current_tab: int = -1
-var _tab_cache: Array[Node] = [null, null, null, null, null]
+var _tab_cache: Array[Node] = [null, null, null]
 var _tab_buttons: Array[Button] = []
 
 @onready var _content: Control = %ContentContainer
 @onready var _nav_bar: HBoxContainer = %NavBar
 @onready var _nav_panel: PanelContainer = %NavPanel
 
-const COLOR_ACTIVE := Color(0.15, 0.9, 0.8, 1.0)
-const COLOR_INACTIVE := Color(0.4, 0.46, 0.56, 1.0)
-
+const COLOR_ACTIVE := Color(0.0, 0.36, 0.37, 1.0) # #005C5E
+const COLOR_INACTIVE := Color(0.63, 0.63, 0.63, 1.0) # #A0A0A0
 
 func _ready() -> void:
 	_build_nav_buttons()

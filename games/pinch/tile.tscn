@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://df7h1mklp432x"]
+
+[ext_resource type="Script" path="res://games/pinch/tile.gd" id="1_script"]
+
+[node name="Tile" type="ColorRect"]
+custom_minimum_size = Vector2(80, 140)
+offset_right = 80.0
+offset_bottom = 140.0
+color = Color(0, 0.898039, 1, 1)
+script = ExtResource("1_script")

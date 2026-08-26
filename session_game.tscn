@@ -1,21 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://0imqathw1tb5"]
+[gd_scene load_steps=13 format=3 uid="uid://0imqathw1tb5"]
 
 [ext_resource type="Script" uid="uid://dhar1eb58i3vn" path="res://session_game.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bn32ac8jcq18x" path="res://assets/robot_standing.tres" id="2_robot"]
 [ext_resource type="Script" uid="uid://h87xy1doqgha" path="res://flex_tap_detector.gd" id="3_flex"]
-[ext_resource type="Texture2D" uid="uid://dden20iq0wmcc" path="res://assets/hand_flex_instruction.png" id="4_hand"]
+[ext_resource type="Texture2D" uid="uid://u0g0q8bxx1rn" path="res://assets/FlappyBirdPortada.png" id="4_gmmxo"]
+[ext_resource type="Texture2D" uid="uid://pnr7mfbhmbqs" path="res://assets/icons/CocaColaPortada.png" id="5_gmmxo"]
+[ext_resource type="Texture2D" path="res://assets/hand_flex_instruction.png" id="6_pinch"]
+[ext_resource type="Texture2D" uid="uid://doc5ry0dax4pc" path="res://assets/PinzaFina.png" id="7_pinza"]
+[ext_resource type="Texture2D" uid="uid://beg0h0ic7neyx" path="res://assets/basket/arcade_real_bg.jpg" id="8_basket"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn"]
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(0, 0.36, 0.37, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_hud"]
 content_margin_left = 20.0
 content_margin_top = 16.0
 content_margin_right = 20.0
 content_margin_bottom = 16.0
-bg_color = Color(0.04, 0.1, 0.22, 0.88)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.15, 0.45, 0.42, 0.55)
+bg_color = Color(1, 1, 1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.95, 0.92, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -26,26 +39,26 @@ content_margin_left = 16.0
 content_margin_top = 12.0
 content_margin_right = 16.0
 content_margin_bottom = 12.0
-bg_color = Color(0.03, 0.08, 0.18, 0.92)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.12, 0.45, 0.4, 0.6)
+bg_color = Color(1, 1, 1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.95, 0.92, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_flex_bar_bg"]
-bg_color = Color(0.04, 0.1, 0.2, 0.9)
+bg_color = Color(0.95, 0.95, 0.95, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_flex_bar_fill"]
-bg_color = Color(0.15, 0.85, 0.75, 1)
+bg_color = Color(0, 0.36, 0.37, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -56,12 +69,12 @@ content_margin_left = 24.0
 content_margin_top = 20.0
 content_margin_right = 24.0
 content_margin_bottom = 20.0
-bg_color = Color(0.045, 0.102, 0.216, 0.94)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.12, 0.35, 0.5, 0.5)
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.95, 0.92, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
@@ -70,27 +83,18 @@ corner_radius_bottom_left = 24
 [sub_resource type="StyleBoxFlat" id="StyleBox_btn_sec"]
 content_margin_top = 14.0
 content_margin_bottom = 14.0
-bg_color = Color(0.06, 0.16, 0.3, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.15, 0.45, 0.42, 0.7)
-corner_radius_top_left = 22
-corner_radius_top_right = 22
-corner_radius_bottom_right = 22
-corner_radius_bottom_left = 22
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.88, 0.95, 0.92, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn"]
-content_margin_top = 14.0
-content_margin_bottom = 14.0
-bg_color = Color(0.04, 0.7, 0.66, 1)
-corner_radius_top_left = 22
-corner_radius_top_right = 22
-corner_radius_bottom_right = 22
-corner_radius_bottom_left = 22
-
-[node name="SessionGame" type="Control"]
+[node name="SessionGame" type="Control" unique_id=314780258]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,16 +103,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=894221329]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.012, 0.035, 0.085, 1)
+color = Color(0.976, 0.976, 0.965, 1)
 
-[node name="GlowTop" type="ColorRect" parent="."]
+[node name="GlowTop" type="ColorRect" parent="." unique_id=1198929512]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -116,7 +120,7 @@ offset_bottom = 500.0
 grow_horizontal = 2
 color = Color(0.05, 0.28, 0.32, 0.18)
 
-[node name="MascotBackdrop" type="TextureRect" parent="."]
+[node name="MascotBackdrop" type="TextureRect" parent="." unique_id=1977789286]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.18)
 layout_mode = 1
@@ -135,7 +139,7 @@ texture = ExtResource("2_robot")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TapZone" type="ColorRect" parent="."]
+[node name="TapZone" type="ColorRect" parent="." unique_id=1156779984]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -145,7 +149,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="TapFlash" type="ColorRect" parent="."]
+[node name="TapFlash" type="ColorRect" parent="." unique_id=1017709263]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -157,7 +161,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.15, 0.85, 0.78, 1)
 
-[node name="MainUI" type="VBoxContainer" parent="."]
+[node name="MainUI" type="VBoxContainer" parent="." unique_id=1924993096]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,7 +175,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="BleStatusLabel" type="Label" parent="MainUI"]
+[node name="BleStatusLabel" type="Label" parent="MainUI" unique_id=1081082474]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.55, 0.65, 1)
@@ -179,20 +183,19 @@ theme_override_font_sizes/font_size = 18
 text = "🧤 Sin guante"
 horizontal_alignment = 1
 
-[node name="TopSpacer" type="Control" parent="MainUI"]
+[node name="TopSpacer" type="Control" parent="MainUI" unique_id=1281460075]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InstructionImage" type="TextureRect" parent="MainUI"]
+[node name="InstructionImage" type="TextureRect" parent="MainUI" unique_id=40672433]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-texture = ExtResource("4_hand")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="InstructionLabel" type="Label" parent="MainUI"]
+[node name="InstructionLabel" type="Label" parent="MainUI" unique_id=2067895516]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -201,91 +204,103 @@ text = "Tocá la pantalla la mayor cantidad de veces que puedas en 30 segundos"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="SubtitleLabel" type="Label" parent="MainUI"]
+[node name="SubtitleLabel" type="Label" parent="MainUI" unique_id=280241024]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
 theme_override_font_sizes/font_size = 20
-text = "Tocá en cualquier lugar para comenzar"
+text = "Preparate para comenzar la sesión de 30 segundos."
 horizontal_alignment = 1
 
-[node name="HudRow" type="HBoxContainer" parent="MainUI"]
+[node name="StartGameButton" type="Button" parent="MainUI" unique_id=2123951270]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBox_btn")
+text = "COMENZAR"
+
+[node name="HudRow" type="HBoxContainer" parent="MainUI" unique_id=1928293302]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="TimerCard" type="PanelContainer" parent="MainUI/HudRow"]
+[node name="TimerCard" type="PanelContainer" parent="MainUI/HudRow" unique_id=1911925516]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_hud")
 
-[node name="TimerVBox" type="VBoxContainer" parent="MainUI/HudRow/TimerCard"]
+[node name="TimerVBox" type="VBoxContainer" parent="MainUI/HudRow/TimerCard" unique_id=1033747987]
 layout_mode = 2
 alignment = 1
 
-[node name="TimerCaption" type="Label" parent="MainUI/HudRow/TimerCard/TimerVBox"]
+[node name="TimerCaption" type="Label" parent="MainUI/HudRow/TimerCard/TimerVBox" unique_id=158318173]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 18
 text = "Tiempo"
 horizontal_alignment = 1
 
-[node name="TimerLabel" type="Label" parent="MainUI/HudRow/TimerCard/TimerVBox"]
+[node name="TimerLabelOld" type="Label" parent="MainUI/HudRow/TimerCard/TimerVBox" unique_id=2072132711]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.92, 0.84, 1)
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 56
 text = "30"
 horizontal_alignment = 1
 
-[node name="TapsCard" type="PanelContainer" parent="MainUI/HudRow"]
+[node name="TapsCard" type="PanelContainer" parent="MainUI/HudRow" unique_id=2090277720]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_hud")
 
-[node name="TapsVBox" type="VBoxContainer" parent="MainUI/HudRow/TapsCard"]
+[node name="TapsVBox" type="VBoxContainer" parent="MainUI/HudRow/TapsCard" unique_id=133515505]
 layout_mode = 2
 alignment = 1
 
-[node name="TapsCaption" type="Label" parent="MainUI/HudRow/TapsCard/TapsVBox"]
+[node name="TapsCaption" type="Label" parent="MainUI/HudRow/TapsCard/TapsVBox" unique_id=2120452259]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 18
 text = "Toques"
 horizontal_alignment = 1
 
-[node name="TapsLabel" type="Label" parent="MainUI/HudRow/TapsCard/TapsVBox"]
+[node name="TapsLabelOld" type="Label" parent="MainUI/HudRow/TapsCard/TapsVBox" unique_id=1725223847]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 56
 text = "0"
 horizontal_alignment = 1
 
-[node name="FlexPanel" type="PanelContainer" parent="MainUI"]
+[node name="FlexPanel" type="PanelContainer" parent="MainUI" unique_id=1545273590]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_flex_panel")
 
-[node name="FlexVBox" type="VBoxContainer" parent="MainUI/FlexPanel"]
+[node name="FlexVBox" type="VBoxContainer" parent="MainUI/FlexPanel" unique_id=399281837]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="FlexCaption" type="Label" parent="MainUI/FlexPanel/FlexVBox"]
+[node name="FlexCaption" type="Label" parent="MainUI/FlexPanel/FlexVBox" unique_id=2013437775]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 18
 text = "Flexión del dedo"
 horizontal_alignment = 1
 
-[node name="FlexBarRow" type="HBoxContainer" parent="MainUI/FlexPanel/FlexVBox"]
+[node name="FlexBarRow" type="HBoxContainer" parent="MainUI/FlexPanel/FlexVBox" unique_id=917701044]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="FlexBar" type="ProgressBar" parent="MainUI/FlexPanel/FlexVBox/FlexBarRow"]
+[node name="FlexBar" type="ProgressBar" parent="MainUI/FlexPanel/FlexVBox/FlexBarRow" unique_id=1519929683]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 28)
 layout_mode = 2
@@ -294,27 +309,27 @@ theme_override_styles/background = SubResource("StyleBox_flex_bar_bg")
 theme_override_styles/fill = SubResource("StyleBox_flex_bar_fill")
 show_percentage = false
 
-[node name="FlexLabel" type="Label" parent="MainUI/FlexPanel/FlexVBox/FlexBarRow"]
+[node name="FlexLabel" type="Label" parent="MainUI/FlexPanel/FlexVBox/FlexBarRow" unique_id=908117910]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.92, 0.84, 1)
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 24
 text = "0%"
 horizontal_alignment = 2
 
-[node name="ThresholdHint" type="Label" parent="MainUI/FlexPanel/FlexVBox"]
+[node name="ThresholdHint" type="Label" parent="MainUI/FlexPanel/FlexVBox" unique_id=1975969062]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.48, 0.58, 1)
 theme_override_font_sizes/font_size = 14
 text = "Umbral: 40% para contar como tap"
 horizontal_alignment = 1
 
-[node name="BottomSpacer" type="Control" parent="MainUI"]
+[node name="BottomSpacer" type="Control" parent="MainUI" unique_id=1428500025]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ResultsPanel" type="PanelContainer" parent="."]
+[node name="ResultsPanel" type="PanelContainer" parent="." unique_id=603125357]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -331,41 +346,41 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_card")
 
-[node name="ResultsVBox" type="VBoxContainer" parent="ResultsPanel"]
+[node name="ResultsVBox" type="VBoxContainer" parent="ResultsPanel" unique_id=615850671]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="ResultsTitle" type="Label" parent="ResultsPanel/ResultsVBox"]
+[node name="ResultsTitle" type="Label" parent="ResultsPanel/ResultsVBox" unique_id=2062936620]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 30
 text = "¡Sesión completada!"
 horizontal_alignment = 1
 
-[node name="ResultsDetail" type="Label" parent="ResultsPanel/ResultsVBox"]
+[node name="ResultsDetail" type="Label" parent="ResultsPanel/ResultsVBox" unique_id=506286214]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.8, 0.88, 1)
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
 theme_override_font_sizes/font_size = 22
 text = "Toques: 0"
 horizontal_alignment = 1
 
-[node name="ResultsButtons" type="HBoxContainer" parent="ResultsPanel/ResultsVBox"]
+[node name="ResultsButtons" type="HBoxContainer" parent="ResultsPanel/ResultsVBox" unique_id=229486165]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="RetryButton" type="Button" parent="ResultsPanel/ResultsVBox/ResultsButtons"]
+[node name="RetryButton" type="Button" parent="ResultsPanel/ResultsVBox/ResultsButtons" unique_id=1605231995]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBox_btn_sec")
 text = "Repetir"
 
-[node name="BackButton" type="Button" parent="ResultsPanel/ResultsVBox/ResultsButtons"]
+[node name="BackButton" type="Button" parent="ResultsPanel/ResultsVBox/ResultsButtons" unique_id=1568851187]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -373,9 +388,253 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBox_btn")
 text = "Volver al inicio"
 
-[node name="FlexTapDetector" type="Node" parent="."]
+[node name="FlexTapDetector" type="Node" parent="." unique_id=870144851]
 unique_name_in_owner = true
 script = ExtResource("3_flex")
 
+[node name="TopRightHUD" type="MarginContainer" parent="." unique_id=1202504629]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_bottom = 60.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="TimerLabel" type="Label" parent="TopRightHUD" unique_id=2129428220]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 0.8)
+theme_override_font_sizes/font_size = 28
+text = "30s"
+horizontal_alignment = 2
+
+[node name="GameSelectionMenu" type="ColorRect" parent="." unique_id=1211024215]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.976, 0.976, 0.965, 0.98)
+
+[node name="MarginContainer" type="MarginContainer" parent="GameSelectionMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 40
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GameSelectionMenu/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer" unique_id=1965392851]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Label" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer" unique_id=582867507]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
+theme_override_font_sizes/font_size = 28
+text = "Selecciona un Modo de Juego"
+horizontal_alignment = 1
+
+[node name="ArcadeButton" type="Button" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1634747918]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_btn_sec")
+
+[node name="HBox" type="HBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/ArcadeButton" unique_id=1061722223]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Thumb" type="TextureRect" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/ArcadeButton/HBox" unique_id=692253754]
+custom_minimum_size = Vector2(180, 130)
+layout_mode = 2
+texture = ExtResource("4_gmmxo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/ArcadeButton/HBox" unique_id=866147129]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/ArcadeButton/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
+theme_override_font_sizes/font_size = 20
+text = "Flappy Bird"
+
+[node name="DescLabel" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/ArcadeButton/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Guiá al pájaro esquivando obstáculos con flexiones rápidas de tu mano."
+autowrap_mode = 3
+
+[node name="FunctionalButton" type="Button" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1975001460]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_btn_sec")
+
+[node name="HBox" type="HBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/FunctionalButton" unique_id=418787801]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Thumb" type="TextureRect" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/FunctionalButton/HBox" unique_id=172346132]
+custom_minimum_size = Vector2(180, 130)
+layout_mode = 2
+texture = ExtResource("5_gmmxo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/FunctionalButton/HBox" unique_id=2008776266]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/FunctionalButton/HBox/TextVBox" unique_id=1409589206]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
+theme_override_font_sizes/font_size = 20
+text = "Alcanza la Botella (3D)"
+
+[node name="Desc" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/FunctionalButton/HBox/TextVBox" unique_id=697124404]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Controlá el avance de la botella hasta el objetivo con flexión sostenida."
+autowrap_mode = 3
+
+[node name="PinchButton" type="Button" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_btn_sec")
+
+[node name="HBox" type="HBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/PinchButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Thumb" type="TextureRect" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/PinchButton/HBox"]
+custom_minimum_size = Vector2(180, 130)
+layout_mode = 2
+texture = ExtResource("7_pinza")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/PinchButton/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/PinchButton/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
+theme_override_font_sizes/font_size = 20
+text = "Pinza Fina (Piano)"
+
+[node name="Desc" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/PinchButton/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Juntá la yema del pulgar con cada dedo para golpear las notas al compás."
+autowrap_mode = 3
+
+[node name="BasketButton" type="Button" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_btn_sec")
+
+[node name="HBox" type="HBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/BasketButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Thumb" type="TextureRect" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/BasketButton/HBox"]
+custom_minimum_size = Vector2(180, 130)
+layout_mode = 2
+texture = ExtResource("8_basket")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/BasketButton/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/BasketButton/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
+theme_override_font_sizes/font_size = 20
+text = "Básquetbol 3D"
+
+[node name="Desc" type="Label" parent="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/BasketButton/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Flexioná para agarrar, levantá la mano para apuntar y soltá para encestar."
+autowrap_mode = 3
+
 [connection signal="pressed" from="ResultsPanel/ResultsVBox/ResultsButtons/RetryButton" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="ResultsPanel/ResultsVBox/ResultsButtons/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/ArcadeButton" to="." method="_on_arcade_selected"]
+[connection signal="pressed" from="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/FunctionalButton" to="." method="_on_functional_selected"]
+[connection signal="pressed" from="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/PinchButton" to="." method="_on_pinch_selected"]
+[connection signal="pressed" from="GameSelectionMenu/MarginContainer/ScrollContainer/VBoxContainer/BasketButton" to="." method="_on_basket_selected"]
+
