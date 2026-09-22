@@ -14,16 +14,16 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="PruebasDeConcepto"
+config/name="Kinesis"
 run/main_scene="res://login.tscn"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://assets/logo_kinesis.png"
 
 [autoload]
 
 SessionStore="*res://session_store.gd"
 BleManager="*res://ble_manager.gd"
-SupabaseClient="*res://supabase_client.gd"
+ApiClient="*res://api_client.gd"
 XRToolsUserSettings="*uid://bqgb8i74tm0t"
 XRToolsRumbleManager="*uid://by853dk86g1qw"
 

@@ -72,7 +72,7 @@ load_path = "res://.godot/imported/logo_kinesis_transparent_full.png-f5f5cc8370c
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_link"]
 
-[node name="Login" type="Control" unique_id=1078473241]
+[node name="Login2" type="Control" unique_id=1078473241]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,12 +132,12 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.17, 0.17, 1)
 theme_override_font_sizes/font_size = 18
-text = "Usuario"
+text = "Correo electrónico"
 
 [node name="InputUser" type="LineEdit" parent="VBoxContainer/Form/UserField" unique_id=737953459]
 unique_name_in_owner = true
 layout_mode = 2
-placeholder_text = "ana.perez"
+placeholder_text = "correo@ejemplo.com"
 
 [node name="PassField" type="VBoxContainer" parent="VBoxContainer/Form" unique_id=740589442]
 layout_mode = 2
@@ -160,6 +160,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Check" type="CheckBox" parent="VBoxContainer/Form/HBoxContainer" unique_id=1524340553]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_link")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_link")
@@ -174,8 +175,18 @@ theme_override_colors/font_color = Color(0, 0.17, 0.17, 1)
 theme_override_font_sizes/font_size = 18
 text = "Mantener sesión"
 
+[node name="ErrorLabel" type="Label" parent="VBoxContainer" unique_id=1849201932]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.22, 0.22, 1)
+theme_override_font_sizes/font_size = 16
+text = "Correo o contraseña incorrectos"
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="Space2" type="Control" parent="VBoxContainer" unique_id=68648433]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="BtnIngresar" type="Button" parent="VBoxContainer" unique_id=679163109]

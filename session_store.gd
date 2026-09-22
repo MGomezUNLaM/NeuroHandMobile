@@ -38,11 +38,6 @@ func save_session(taps: int, duration_sec: int, exercise_type: String = "flexion
 		data["xp"] = int(data["xp"]) - MAX_XP_PER_LEVEL
 		data["level"] = int(data["level"]) + 1
 	_persist()
-	
-	# Guardar online en Supabase
-	if Engine.has_singleton("SupabaseClient") or has_node("/root/SupabaseClient"):
-		get_node("/root/SupabaseClient").insert_sesion_juego(taps, exercise_type)
-	
 	return session
 
 
