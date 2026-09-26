@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Stairs -->
+  <path d="M15 85 H32 V68 H50 V50 H68 V32 H85 V85 H15 Z" fill="none" stroke="#FFFFFF" stroke-width="4.5" />
+  <!-- Flag on top step -->
+  <line x1="68" y1="32" x2="68" y2="14" stroke="#FFFFFF" stroke-width="4.5" />
+  <polygon points="68,14 84,20 68,26" fill="#FFFFFF" stroke="none" />
+  <!-- Person climbing -->
+  <circle cx="32" cy="20" r="7" fill="none" stroke="#FFFFFF" stroke-width="4.5" />
+  <!-- Body & Limbs -->
+  <path d="M22 36 L32 30 L42 36" />
+  <path d="M32 30 V50" />
+  <path d="M32 50 L20 60 L24 68" />
+  <path d="M32 46 L44 42 L48 52" />
+</svg>

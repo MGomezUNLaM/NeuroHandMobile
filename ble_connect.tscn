@@ -1,79 +1,67 @@
-[gd_scene load_steps=10 format=3 uid="uid://df66m7t77n55p"]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Script" uid="uid://cx6g3f5s3n55p" path="res://ble_connect.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://5t42qbr6t56x" path="res://assets/icons/icon_glove.svg" id="2_icon_glove"]
+[ext_resource type="Script" path="res://ble_connect.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_cable.svg" id="2_cable"]
+[ext_resource type="Texture2D" path="res://assets/glove_hardware.png" id="3_glove"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_battery_teal.svg" id="4_battery"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_check_circle.svg" id="5_check"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_circle"]
-bg_color = Color(0.886, 0.957, 0.93, 1)
-corner_radius_top_left = 200
-corner_radius_top_right = 200
-corner_radius_bottom_right = 200
-corner_radius_bottom_left = 200
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_secondary"]
+[sub_resource type="StyleBoxFlat" id="StyleBox_connected_badge"]
 content_margin_left = 20.0
-content_margin_top = 20.0
+content_margin_top = 6.0
 content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.88, 0.95, 0.92, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+content_margin_bottom = 6.0
+bg_color = Color(0.698, 0.922, 0.698, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_completed"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.886, 0.957, 0.93, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_gray"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 28.0
+content_margin_bottom = 18.0
+bg_color = Color(0.965, 0.969, 0.976, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_badge"]
-bg_color = Color(0.6, 0.6, 0.6, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_green"]
+content_margin_left = 24.0
+content_margin_top = 18.0
+content_margin_right = 28.0
+content_margin_bottom = 18.0
+bg_color = Color(0.698, 0.941, 0.725, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_start"]
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0, 0.36, 0.37, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_link"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_start_pressed"]
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0, 0.28, 0.29, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_teal"]
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_btn_sim"]
-content_margin_top = 16.0
-content_margin_bottom = 16.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
 bg_color = Color(0.95, 0.95, 0.95, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 border_color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="BleConnect" type="Control"]
@@ -85,183 +73,209 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="MainColumn" type="VBoxContainer" parent="."]
+[node name="RootVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 48.0
-offset_right = -24.0
-offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 24
-alignment = 1
+theme_override_constants/separation = 0
 
-[node name="Header" type="HBoxContainer" parent="MainColumn"]
+[node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
 layout_mode = 2
-alignment = 1
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 14
 
-[node name="Title" type="Label" parent="MainColumn/Header"]
+[node name="HeaderVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 32
-text = "Guante"
-horizontal_alignment = 1
+theme_override_constants/separation = 4
 
-[node name="CircleCenter" type="CenterContainer" parent="MainColumn"]
+[node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 14
+text = "SOLO UNA VEZ"
 
-[node name="Circle" type="Panel" parent="MainColumn/CircleCenter"]
-custom_minimum_size = Vector2(240, 240)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_circle")
-
-[node name="Icon" type="TextureRect" parent="MainColumn/CircleCenter/Circle"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_icon_glove")
-expand_mode = 1
-stretch_mode = 5
-modulate = Color(0, 0.36, 0.37, 1)
-
-[node name="StatusRow" type="HBoxContainer" parent="MainColumn"]
+[node name="TitleHBox" type="HBoxContainer" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
 theme_override_constants/separation = 12
+
+[node name="CableIcon" type="TextureRect" parent="RootVBox/HeaderContainer/HeaderVBox/TitleHBox"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_cable")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox/TitleHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "Conectar guante"
+
+[node name="HeaderDivider" type="ColorRect" parent="RootVBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.88, 0.88, 0.88, 1)
+
+[node name="ContentScroll" type="ScrollContainer" parent="RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ContentPadding" type="MarginContainer" parent="RootVBox/ContentScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Column" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
 alignment = 1
 
-[node name="StatusIcon" type="Panel" parent="MainColumn/StatusRow"]
+[node name="GloveCenter" type="CenterContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+
+[node name="GloveTexture" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/GloveCenter"]
+custom_minimum_size = Vector2(220, 240)
+layout_mode = 2
+texture = ExtResource("3_glove")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeCenter" type="CenterContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+
+[node name="StatusBadge" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgeCenter"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_connected_badge")
+
+[node name="BadgeHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgeCenter/StatusBadge"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="DotColor" type="ColorRect" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgeCenter/StatusBadge/BadgeHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_badge")
+color = Color(0.18, 0.8, 0.25, 1)
 
-[node name="StatusLabel" type="Label" parent="MainColumn/StatusRow"]
+[node name="StatusText" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgeCenter/StatusBadge/BadgeHBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 20
-text = "Guante desconectado"
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 16
+text = "Conectado"
 
-[node name="ScanSpinner" type="Label" parent="MainColumn/StatusRow"]
-unique_name_in_owner = true
-visible = false
+[node name="Space1" type="Control" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 24
-text = "⠋"
 
-[node name="InfoRow" type="HBoxContainer" parent="MainColumn"]
+[node name="BatteryCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card_gray")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BatteryCard"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="BatteryCard" type="PanelContainer" parent="MainColumn/InfoRow"]
+[node name="Icon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/BatteryCard/HBox"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_battery")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BatteryCard/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBox_card_secondary")
-
-[node name="VBox" type="VBoxContainer" parent="MainColumn/InfoRow/BatteryCard"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="MainColumn/InfoRow/BatteryCard/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 22
 text = "Batería"
 
-[node name="BatteryLabel" type="Label" parent="MainColumn/InfoRow/BatteryCard/VBox"]
+[node name="BatteryLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BatteryCard/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 24
-text = "--%"
-
-[node name="CalibCard" type="PanelContainer" parent="MainColumn/InfoRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBox_card_completed")
-
-[node name="VBox" type="VBoxContainer" parent="MainColumn/InfoRow/CalibCard"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="MainColumn/InfoRow/CalibCard/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 18
-text = "Calibración"
-
-[node name="CalibLabel" type="Label" parent="MainColumn/InfoRow/CalibCard/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.6, 0.5, 1)
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 20
-text = "No calibrado"
+text = "80%"
 
-[node name="ListScroll" type="ScrollContainer" parent="MainColumn"]
+[node name="CalibCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBox_card_green")
 
-[node name="VBox" type="VBoxContainer" parent="MainColumn/ListScroll"]
+[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/CalibCard"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_constants/separation = 16
 
-[node name="NoDevicesLabel" type="Label" parent="MainColumn/ListScroll/VBox"]
+[node name="CheckIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/CalibCard/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CalibLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/CalibCard/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
-text = "Busca guantes para conectarte"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "Calibrado"
 
-[node name="DeviceList" type="VBoxContainer" parent="MainColumn/ListScroll/VBox"]
+[node name="BtnCalibrarNuevamente" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_colors/font_hover_color = Color(0.09, 0.48, 0.52, 1)
+theme_override_colors/font_pressed_color = Color(0.06, 0.38, 0.42, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxEmpty_link")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_link")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_link")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_link")
+text = "Para calibrarlo nuevamente, presione aquí"
+
+[node name="ConnectionControls" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ScanButton" type="Button" parent="MainColumn"]
+[node name="DeviceList" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ScanButton" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBox_btn_start")
-theme_override_styles/hover = SubResource("StyleBox_btn_start")
-theme_override_styles/pressed = SubResource("StyleBox_btn_start_pressed")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_teal")
+theme_override_styles/hover = SubResource("StyleBox_btn_teal")
+theme_override_styles/pressed = SubResource("StyleBox_btn_teal")
 text = "Buscar Guante"
 
-[node name="DisconnectButton" type="Button" parent="MainColumn"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBox_btn_start")
-theme_override_styles/hover = SubResource("StyleBox_btn_start")
-theme_override_styles/pressed = SubResource("StyleBox_btn_start_pressed")
-text = "Desconectar"
-
-[node name="SimButton" type="Button" parent="MainColumn"]
+[node name="SimButton" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_colors/font_pressed_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_colors/font_hover_color = Color(0.3, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBox_btn_sim")
 theme_override_styles/hover = SubResource("StyleBox_btn_sim")
 theme_override_styles/pressed = SubResource("StyleBox_btn_sim")
-text = "Simular Conexión"
+text = "Simular Conexión (PC)"

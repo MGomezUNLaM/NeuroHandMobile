@@ -1,129 +1,105 @@
 extends Control
 
-## Shell principal de la app. Contiene la barra de navegación inferior
-## y un container donde se cargan las pestañas (escenas hijas).
+## Shell principal de KINESIS.
+## Orquesta la navegación tipo "Hub & Spoke":
+## - Vista 0 (Home / Hub): 3 grandes tarjetas. Botón inferior = Cerrar sesión.
+## - Vistas 1 a 4 (Secundarias): Desafíos, Logros, Guante, Calibración. Botón inferior = Home.
 
-const TAB_SCENES: Array[String] = [
-	"res://tab_home.tscn",
-	"res://tab_history.tscn",
-	"res://ble_connect.tscn",
-]
+enum View {
+	HOME = 0,
+	CHALLENGES = 1,
+	ACHIEVEMENTS = 2,
+	GLOVE = 3,
+	CALIBRATION = 4,
+	PROFILE = 5
+}
 
-const TAB_LABELS: Array[String] = ["Inicio", "Progreso", "Guante"]
-const TAB_ICONS_PATHS: Array[String] = [
-	"res://assets/icons/icon_home.svg",
-	"res://assets/icons/icon_history.svg",
-	"res://assets/icons/icon_glove.svg",
-]
+const VIEW_SCENES: Dictionary = {
+	View.HOME: "res://tab_home.tscn",
+	View.CHALLENGES: "res://session_game.tscn",
+	View.ACHIEVEMENTS: "res://tab_history.tscn",
+	View.GLOVE: "res://ble_connect.tscn",
+	View.CALIBRATION: "res://calibration.tscn",
+	View.PROFILE: "res://tab_profile.tscn"
+}
 
-var _current_tab: int = -1
-var _tab_cache: Array[Node] = [null, null, null]
-var _tab_buttons: Array[Button] = []
+const ICON_LOGOUT := preload("res://assets/icons/icon_logout.svg")
+const ICON_HOME := preload("res://assets/icons/icon_home_nav.svg")
+
+var _current_view: int = -1
+var _view_cache: Dictionary = {}
 
 @onready var _content: Control = %ContentContainer
-@onready var _nav_bar: HBoxContainer = %NavBar
-@onready var _nav_panel: PanelContainer = %NavPanel
+@onready var _btn_nav_action: Button = %BtnNavAction
+@onready var _nav_icon: TextureRect = %NavIcon
 
-const COLOR_ACTIVE := Color(0.0, 0.36, 0.37, 1.0) # #005C5E
-const COLOR_INACTIVE := Color(0.63, 0.63, 0.63, 1.0) # #A0A0A0
 
 func _ready() -> void:
-	_build_nav_buttons()
-	switch_to_tab(0)
+	_btn_nav_action.pressed.connect(_on_nav_action_pressed)
+	switch_to_view(View.HOME)
 
 
-## Cambia a la pestaña indicada por índice (0-4).
-func switch_to_tab(index: int) -> void:
-	if index == _current_tab:
-		return
-	if index < 0 or index >= TAB_SCENES.size():
+func switch_to_view(view_index: int) -> void:
+	if not is_inside_tree() or get_tree() == null:
 		return
 
-	# Ocultar pestaña actual
-	if _current_tab >= 0 and _tab_cache[_current_tab] != null:
-		_tab_cache[_current_tab].hide()
+	if view_index == View.CHALLENGES:
+		get_tree().change_scene_to_file.call_deferred("res://session_game.tscn")
+		return
 
-	# Cargar pestaña si no está en cache
-	if _tab_cache[index] == null:
-		var scene := load(TAB_SCENES[index]) as PackedScene
-		if scene == null:
-			push_warning("[MainShell] No se pudo cargar: %s" % TAB_SCENES[index])
+	if view_index == _current_view:
+		return
+	if not VIEW_SCENES.has(view_index):
+		push_warning("[MainShell] Vista desconocida: %d" % view_index)
+		return
+
+	# Ocultar vista actual si existe
+	if _current_view >= 0 and _view_cache.has(_current_view) and _view_cache[_current_view] != null:
+		_view_cache[_current_view].hide()
+
+	# Cargar o mostrar la nueva vista
+	if not _view_cache.has(view_index) or _view_cache[view_index] == null:
+		var scene_path: String = VIEW_SCENES[view_index]
+		var packed := load(scene_path) as PackedScene
+		if packed == null:
+			push_error("[MainShell] No se pudo cargar: %s" % scene_path)
 			return
-		var instance := scene.instantiate()
+		var instance := packed.instantiate()
 		instance.set_anchors_preset(Control.PRESET_FULL_RECT)
 		_content.add_child(instance)
-		_tab_cache[index] = instance
+		_view_cache[view_index] = instance
 
-		# Conectar señales especiales de las pestañas
-		if instance.has_signal("request_tab_change"):
-			instance.request_tab_change.connect(switch_to_tab)
+		# Conectar una sola señal de navegación para evitar dobles llamadas
+		if instance.has_signal("navigate_to"):
+			instance.connect("navigate_to", Callable(self, "switch_to_view"))
+		elif instance.has_signal("request_tab_change"):
+			instance.connect("request_tab_change", Callable(self, "switch_to_view"))
 	else:
-		_tab_cache[index].show()
+		_view_cache[view_index].show()
+		# Si la vista tiene método _on_activated o refresh, invocarlo
+		if _view_cache[view_index].has_method("on_view_activated"):
+			_view_cache[view_index].on_view_activated()
 
-	_current_tab = index
-	_update_nav_visuals()
-
-
-func _build_nav_buttons() -> void:
-	for i in TAB_LABELS.size():
-		var btn := Button.new()
-		btn.custom_minimum_size = Vector2(0, 110)
-		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-		# Estilo transparente
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color(0, 0, 0, 0)
-		btn.add_theme_stylebox_override(&"normal", style)
-		btn.add_theme_stylebox_override(&"hover", style)
-		btn.add_theme_stylebox_override(&"pressed", style)
-		btn.add_theme_stylebox_override(&"focus", style)
-
-		# Contenedor para alinear icono y texto verticalmente
-		var vbox := VBoxContainer.new()
-		vbox.mouse_filter = Control.MOUSE_FILTER_PASS
-		vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-		vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
-		vbox.add_theme_constant_override(&"separation", 6)
-		btn.add_child(vbox)
-
-		# Icono vectorial
-		var rect := TextureRect.new()
-		rect.name = "Icon"
-		rect.texture = load(TAB_ICONS_PATHS[i]) as Texture2D
-		rect.custom_minimum_size = Vector2(28, 28)
-		rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		rect.self_modulate = COLOR_INACTIVE
-		vbox.add_child(rect)
-
-		# Texto
-		var lbl := Label.new()
-		lbl.name = "Label"
-		lbl.text = TAB_LABELS[i]
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.add_theme_font_size_override(&"font_size", 13)
-		lbl.add_theme_color_override(&"font_color", COLOR_INACTIVE)
-		vbox.add_child(lbl)
-
-		btn.pressed.connect(_on_tab_pressed.bind(i))
-		_nav_bar.add_child(btn)
-		_tab_buttons.append(btn)
+	_current_view = view_index
+	_update_nav_bar()
 
 
-func _on_tab_pressed(index: int) -> void:
-	switch_to_tab(index)
+func _update_nav_bar() -> void:
+	if _current_view == View.HOME:
+		_nav_icon.texture = ICON_LOGOUT
+		_nav_icon.modulate = Color(0.4, 0.45, 0.5, 1.0)
+	else:
+		_nav_icon.texture = ICON_HOME
+		_nav_icon.modulate = Color(0.4, 0.45, 0.5, 1.0)
 
 
-func _update_nav_visuals() -> void:
-	for i in _tab_buttons.size():
-		var btn := _tab_buttons[i]
-		var vbox := btn.get_child(0) as VBoxContainer
-		if vbox != null:
-			var rect := vbox.get_node(^"Icon") as TextureRect
-			var lbl := vbox.get_node(^"Label") as Label
-			if i == _current_tab:
-				if rect != null: rect.self_modulate = COLOR_ACTIVE
-				if lbl != null: lbl.add_theme_color_override(&"font_color", COLOR_ACTIVE)
-			else:
-				if rect != null: rect.self_modulate = COLOR_INACTIVE
-				if lbl != null: lbl.add_theme_color_override(&"font_color", COLOR_INACTIVE)
+func _on_nav_action_pressed() -> void:
+	if _current_view == View.HOME:
+		# Cerrar sesión
+		if has_node("/root/ApiClient"):
+			get_node("/root/ApiClient").logout()
+		if is_inside_tree() and get_tree() != null:
+			get_tree().change_scene_to_file.call_deferred("res://login.tscn")
+	else:
+		# Regresar al Home
+		switch_to_view(View.HOME)

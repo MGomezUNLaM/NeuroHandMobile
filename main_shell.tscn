@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://lc2ybdv1ry8m"]
+[gd_scene load_steps=5 format=3 uid="uid://lc2ybdv1ry8m"]
 
 [ext_resource type="Script" uid="uid://dc65d5umsrlr5" path="res://main_shell.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c5mt0qdf4vt1r" path="res://assets/icons/icon_logout.svg" id="2_logout"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_nav"]
 content_margin_top = 8.0
-content_margin_bottom = 16.0
+content_margin_bottom = 8.0
 bg_color = Color(1, 1, 1, 1)
 border_width_top = 1
-border_color = Color(0.9, 0.9, 0.9, 1)
+border_color = Color(0.88, 0.88, 0.88, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
 
 [node name="MainShell" type="Control" unique_id=811940484]
 layout_mode = 3
@@ -25,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.976, 0.976, 0.965, 1)
+color = Color(1, 1, 1, 1)
 
 [node name="ContentContainer" type="Control" parent="." unique_id=485929346]
 unique_name_in_owner = true
@@ -33,7 +36,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -120.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -44,12 +47,38 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -120.0
+offset_top = -72.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBox_nav")
 
-[node name="NavBar" type="HBoxContainer" parent="NavPanel" unique_id=2003367859]
-unique_name_in_owner = true
+[node name="CenterContainer" type="CenterContainer" parent="NavPanel" unique_id=1482910482]
 layout_mode = 2
-theme_override_constants/separation = 0
+
+[node name="BtnNavAction" type="Button" parent="NavPanel/CenterContainer" unique_id=2003367859]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 52)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+
+[node name="NavIcon" type="TextureRect" parent="NavPanel/CenterContainer/BtnNavAction" unique_id=1948201948]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_logout")
+expand_mode = 1
+stretch_mode = 5

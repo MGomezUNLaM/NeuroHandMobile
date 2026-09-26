@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#6B7280" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Door frame -->
+  <path d="M45 20 H75 C78 20 80 22 80 25 V75 C80 78 78 80 75 80 H45" />
+  <!-- Exit arrow pointing left -->
+  <line x1="60" y1="50" x2="20" y2="50" />
+  <polyline points="32,38 20,50 32,62" />
+</svg>

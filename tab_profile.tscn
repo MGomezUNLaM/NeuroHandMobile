@@ -1,46 +1,131 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=15 format=3 uid="uid://c8k7p3m6q2w1v"]
 
-[ext_resource type="Script" path="res://tab_profile.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/avatar_boy.tres" id="2_avatar"]
+[ext_resource type="Script" uid="uid://bdg09km21k8sl" path="res://tab_profile.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bg"]
+bg_color = Color(0.976, 0.976, 0.965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_avatar_large"]
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_status_pill"]
+content_margin_left = 12.0
+content_margin_top = 4.0
+content_margin_right = 12.0
+content_margin_bottom = 4.0
+bg_color = Color(0.88, 0.96, 0.92, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_card"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.04)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_input"]
 content_margin_left = 18.0
-content_margin_top = 16.0
+content_margin_top = 14.0
 content_margin_right = 18.0
-content_margin_bottom = 16.0
-bg_color = Color(0.035, 0.085, 0.19, 0.95)
+content_margin_bottom = 14.0
+bg_color = Color(0.975, 0.98, 0.985, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.1, 0.32, 0.48, 0.35)
-corner_radius_top_left = 22
-corner_radius_top_right = 22
-corner_radius_bottom_right = 22
-corner_radius_bottom_left = 22
+border_color = Color(0.82, 0.87, 0.88, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_glow"]
-bg_color = Color(0.06, 0.5, 0.55, 0.3)
-corner_radius_top_left = 999
-corner_radius_top_right = 999
-corner_radius_bottom_right = 999
-corner_radius_bottom_left = 999
-shadow_color = Color(0.04, 0.4, 0.5, 0.2)
-shadow_size = 20
+[sub_resource type="StyleBoxFlat" id="StyleBox_input_focus"]
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_progress_bg"]
-bg_color = Color(0.04, 0.1, 0.2, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_primary"]
+content_margin_top = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_progress_fill"]
-bg_color = Color(0.12, 0.85, 0.74, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_primary_pressed"]
+content_margin_top = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0.09, 0.48, 0.52, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_secondary"]
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.83, 0.86, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_btn_secondary_pressed"]
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.92, 0.94, 0.95, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.68, 0.73, 0.76, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxLine" id="StyleBox_divider"]
+color = Color(0.91, 0.93, 0.94, 1)
+thickness = 1
+
+[sub_resource type="SystemFont" id="SystemFont_bold"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 700
+
+[sub_resource type="SystemFont" id="SystemFont_semibold"]
+font_names = PackedStringArray("Sans-Serif")
+font_weight = 600
 
 [node name="TabProfile" type="Control"]
 layout_mode = 3
@@ -51,6 +136,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_bg")
+
 [node name="Scroll" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -60,172 +154,499 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="MainVBox" type="VBoxContainer" parent="Scroll"]
+[node name="Margin" type="MarginContainer" parent="Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-offset_left = 24.0
-offset_top = 24.0
-offset_right = -24.0
-theme_override_constants/separation = 20
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 48
 
-[node name="AvatarCenter" type="CenterContainer" parent="Scroll/MainVBox"]
+[node name="VBox" type="VBoxContainer" parent="Scroll/Margin"]
 layout_mode = 2
+theme_override_constants/separation = 22
 
-[node name="AvatarFrame" type="Control" parent="Scroll/MainVBox/AvatarCenter"]
-custom_minimum_size = Vector2(200, 200)
+[node name="TopNav" type="HBoxContainer" parent="Scroll/Margin/VBox"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="Glow" type="Panel" parent="Scroll/MainVBox/AvatarCenter/AvatarFrame"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -90.0
-offset_right = 90.0
-offset_bottom = 90.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBox_glow")
+[node name="BtnBack" type="Button" parent="Scroll/Margin/VBox/TopNav"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "← Volver"
+flat = true
 
-[node name="Avatar" type="TextureRect" parent="Scroll/MainVBox/AvatarCenter/AvatarFrame"]
+[node name="TitleBox" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Scroll/Margin/VBox/TitleBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 28
+text = "Mi Perfil"
+
+[node name="Subtitle" type="Label" parent="Scroll/Margin/VBox/TitleBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.45, 0.48, 1)
+theme_override_font_sizes/font_size = 14
+text = "Consultá y actualizá tus datos personales de paciente"
+
+[node name="HeaderCard" type="PanelContainer" parent="Scroll/Margin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="HeaderContent" type="HBoxContainer" parent="Scroll/Margin/VBox/HeaderCard"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="AvatarCircle" type="Panel" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_avatar_large")
+
+[node name="AvatarInitial" type="Label" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent/AvatarCircle"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_avatar")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="NameLabel" type="Label" parent="Scroll/MainVBox"]
-layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 34
-text = "Matías"
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 32
+text = "P"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LevelLabel" type="Label" parent="Scroll/MainVBox"]
+[node name="InfoBox" type="VBoxContainer" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="HeaderName" type="Label" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent/InfoBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.62, 0.67, 0.76, 1)
-theme_override_font_sizes/font_size = 20
-text = "Nivel 1 · Especialista"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.04, 0.06, 0.08, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 22
+text = "Cargando paciente..."
 
-[node name="XPBar" type="ProgressBar" parent="Scroll/MainVBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 18)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBox_progress_bg")
-theme_override_styles/fill = SubResource("StyleBox_progress_fill")
-max_value = 250.0
-rounded = true
-show_percentage = false
-
-[node name="XPLabel" type="Label" parent="Scroll/MainVBox"]
+[node name="HeaderEmail" type="Label" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent/InfoBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.5, 0.56, 0.65, 1)
-theme_override_font_sizes/font_size = 16
-text = "0 / 250 XP"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_font_sizes/font_size = 14
+text = "paciente@ejemplo.com"
 
-[node name="StatsCard" type="PanelContainer" parent="Scroll/MainVBox"]
+[node name="StatusPill" type="PanelContainer" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent/InfoBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBox_status_pill")
+
+[node name="StatusBadge" type="Label" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent/InfoBox/StatusPill"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06, 0.5, 0.32, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "Estado: ACTIVO"
+
+[node name="ViewContainer" type="VBoxContainer" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ViewCard" type="PanelContainer" parent="Scroll/Margin/VBox/ViewContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_card")
 
-[node name="StatsRow" type="HBoxContainer" parent="Scroll/MainVBox/StatsCard"]
+[node name="ViewVBox" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ViewCardHeader" type="HBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+
+[node name="SectionTitle" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/ViewCardHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "INFORMACIÓN DEL PACIENTE"
+
+[node name="Sep0" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
 layout_mode = 2
 theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBox_divider")
 
-[node name="SessionsCol" type="VBoxContainer" parent="Scroll/MainVBox/StatsCard/StatsRow"]
+[node name="BlockFirstName" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
 layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
+theme_override_constants/separation = 2
 
-[node name="SessionsCaption" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/SessionsCol"]
+[node name="LblFirstName" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockFirstName"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
-theme_override_font_sizes/font_size = 15
-text = "Sesiones"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "NOMBRE"
 
-[node name="SessionsValue" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/SessionsCol"]
+[node name="ViewFirstName" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockFirstName"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "-"
+autowrap_mode = 3
+
+[node name="Sep1" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBox_divider")
+
+[node name="BlockLastName" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LblLastName" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockLastName"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "APELLIDO"
+
+[node name="ViewLastName" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockLastName"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "-"
+autowrap_mode = 3
+
+[node name="Sep2" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBox_divider")
+
+[node name="BlockEmail" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LblEmail" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockEmail"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "CORREO ELECTRÓNICO"
+
+[node name="ViewEmail" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockEmail"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "-"
+autowrap_mode = 3
+
+[node name="Sep3" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBox_divider")
+
+[node name="BlockDoc" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LblDoc" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockDoc"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "DOCUMENTO DE IDENTIDAD"
+
+[node name="ViewDoc" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockDoc"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "-"
+autowrap_mode = 3
+
+[node name="Sep4" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBox_divider")
+
+[node name="BlockPhone" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LblPhone" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockPhone"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "TELÉFONO DE CONTACTO"
+
+[node name="ViewPhone" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockPhone"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "-"
+autowrap_mode = 3
+
+[node name="Sep5" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBox_divider")
+
+[node name="BlockBirthDate" type="VBoxContainer" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="LblBirthDate" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockBirthDate"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 12
+text = "FECHA DE NACIMIENTO"
+
+[node name="ViewBirthDate" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockBirthDate"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+text = "-"
+autowrap_mode = 3
+
+[node name="BtnEditProfile" type="Button" parent="Scroll/Margin/VBox/ViewContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
-text = "0"
-horizontal_alignment = 1
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_primary")
+theme_override_styles/hover = SubResource("StyleBox_btn_primary")
+theme_override_styles/pressed = SubResource("StyleBox_btn_primary_pressed")
+text = "Editar perfil"
 
-[node name="BestCol" type="VBoxContainer" parent="Scroll/MainVBox/StatsCard/StatsRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="BestCaption" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/BestCol"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
-theme_override_font_sizes/font_size = 15
-text = "Mejor marca"
-horizontal_alignment = 1
-
-[node name="BestValue" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/BestCol"]
+[node name="EditContainer" type="VBoxContainer" parent="Scroll/Margin/VBox"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.88, 0.8, 1)
-theme_override_font_sizes/font_size = 28
-text = "0"
-horizontal_alignment = 1
+theme_override_constants/separation = 20
 
-[node name="AvgCol" type="VBoxContainer" parent="Scroll/MainVBox/StatsCard/StatsRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="AvgCaption" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/AvgCol"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.62, 0.72, 1)
-theme_override_font_sizes/font_size = 15
-text = "Promedio"
-horizontal_alignment = 1
-
-[node name="AvgValue" type="Label" parent="Scroll/MainVBox/StatsCard/StatsRow/AvgCol"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
-text = "0"
-horizontal_alignment = 1
-
-[node name="AboutCard" type="PanelContainer" parent="Scroll/MainVBox"]
+[node name="FormCard" type="PanelContainer" parent="Scroll/Margin/VBox/EditContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_card")
 
-[node name="AboutVBox" type="VBoxContainer" parent="Scroll/MainVBox/AboutCard"]
+[node name="FormVBox" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 16
 
-[node name="AboutTitle" type="Label" parent="Scroll/MainVBox/AboutCard/AboutVBox"]
+[node name="EditCardHeader" type="HBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+
+[node name="EditSectionTitle" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/EditCardHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "MODIFICAR DATOS"
+
+[node name="RowFirstName" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelFirstName" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowFirstName"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Nombre"
+
+[node name="InputFirstName" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowFirstName"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+placeholder_text = "Ingresá tu nombre"
+
+[node name="RowLastName" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelLastName" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowLastName"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Apellido"
+
+[node name="InputLastName" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowLastName"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+placeholder_text = "Ingresá tu apellido"
+
+[node name="RowEmail" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelEmail" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowEmail"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Correo electrónico"
+
+[node name="InputEmail" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowEmail"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+placeholder_text = "correo@ejemplo.com"
+
+[node name="RowDocType" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelDocType" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowDocType"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Tipo de documento"
+
+[node name="OptionDocType" type="OptionButton" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowDocType"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+
+[node name="RowDocNumber" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelDocNumber" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowDocNumber"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Número de documento"
+
+[node name="InputDocNumber" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowDocNumber"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+placeholder_text = "Ej: 12345678"
+
+[node name="RowPhone" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelPhone" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowPhone"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Teléfono de contacto"
+
+[node name="InputPhone" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowPhone"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+placeholder_text = "+54 11 1234-5678"
+
+[node name="RowBirthDate" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LabelBirthDate" type="Label" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowBirthDate"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 14
+text = "Fecha de nacimiento (AAAA-MM-DD)"
+
+[node name="InputBirthDate" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowBirthDate"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
+theme_override_fonts/font = SubResource("SystemFont_semibold")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBox_input")
+theme_override_styles/focus = SubResource("StyleBox_input_focus")
+placeholder_text = "1990-05-20"
+
+[node name="EditButtonsBox" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BtnSave" type="Button" parent="Scroll/Margin/VBox/EditContainer/EditButtonsBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 22
-text = "Sobre NeuroHand"
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_btn_primary")
+theme_override_styles/hover = SubResource("StyleBox_btn_primary")
+theme_override_styles/pressed = SubResource("StyleBox_btn_primary_pressed")
+text = "Guardar cambios"
 
-[node name="AboutDesc" type="Label" parent="Scroll/MainVBox/AboutCard/AboutVBox"]
+[node name="BtnCancel" type="Button" parent="Scroll/Margin/VBox/EditContainer/EditButtonsBox"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
+theme_override_colors/font_color = Color(0.2, 0.26, 0.3, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
 theme_override_font_sizes/font_size = 17
-text = "NeuroHand es un guante háptico DIY que te ayuda a ejercitar y rehabilitar los movimientos de tu mano a través de juegos interactivos."
-autowrap_mode = 3
+theme_override_styles/normal = SubResource("StyleBox_btn_secondary")
+theme_override_styles/hover = SubResource("StyleBox_btn_secondary_pressed")
+theme_override_styles/pressed = SubResource("StyleBox_btn_secondary_pressed")
+text = "Cancelar"
 
-[node name="Version" type="Label" parent="Scroll/MainVBox"]
+[node name="StatusLabel" type="Label" parent="Scroll/Margin/VBox"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.46, 0.55, 1)
-theme_override_font_sizes/font_size = 14
-text = "v1.0.0 — Prueba de concepto"
+theme_override_colors/font_color = Color(0.85, 0.22, 0.22, 1)
+theme_override_fonts/font = SubResource("SystemFont_bold")
+theme_override_font_sizes/font_size = 15
+text = "Estado"
 horizontal_alignment = 1
+autowrap_mode = 3

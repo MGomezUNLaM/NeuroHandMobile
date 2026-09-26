@@ -1,76 +1,86 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb5xp2yuhoww0"]
+[gd_scene load_steps=13 format=3 uid="uid://cb5xp2yuhoww0"]
 
 [ext_resource type="Script" uid="uid://hfvgta2vgy0o" path="res://dashboard.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://brtkxpote4xm" path="res://assets/icons/icon_menu.svg" id="2_icon_menu"]
-[ext_resource type="Texture2D" path="res://assets/logo_kinesis_transparent.png" id="3_avatar"]
+[ext_resource type="Texture2D" uid="uid://ck839s8d3m8y1" path="res://assets/icons/icon_challenges.svg" id="2_challenges"]
+[ext_resource type="Texture2D" uid="uid://dk940f8s2j1w2" path="res://assets/icons/icon_medal.svg" id="3_medal"]
+[ext_resource type="Texture2D" uid="uid://ek918f7s3m4q3" path="res://assets/icons/icon_cable.svg" id="4_cable"]
+[ext_resource type="Texture2D" uid="uid://ca5du5khlbux8" path="res://assets/icons/icon_profile.svg" id="5_profile_icon"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg"]
+[sub_resource type="StyleBoxFlat" id="StyleBox_avatar_circle"]
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_color = Color(0.118, 0.596, 0.647, 0.25)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_main"]
-content_margin_left = 24.0
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_hero"]
+content_margin_left = 28.0
+content_margin_top = 26.0
+content_margin_right = 28.0
+content_margin_bottom = 26.0
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_hero_pressed"]
+content_margin_left = 28.0
+content_margin_top = 26.0
+content_margin_right = 28.0
+content_margin_bottom = 26.0
+bg_color = Color(0.09, 0.48, 0.52, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_gray"]
+content_margin_left = 28.0
 content_margin_top = 24.0
-content_margin_right = 24.0
+content_margin_right = 28.0
 content_margin_bottom = 24.0
-bg_color = Color(0, 0.36, 0.37, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-shadow_color = Color(0, 0.36, 0.37, 0.2)
-shadow_size = 8
-shadow_offset = Vector2(0, 4)
+bg_color = Color(0.965, 0.969, 0.976, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_secondary"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.88, 0.95, 0.92, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_gray_pressed"]
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+bg_color = Color(0.91, 0.92, 0.94, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_completed"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.886, 0.957, 0.93, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_cream"]
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+bg_color = Color(0.984, 0.957, 0.957, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_start"]
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_btn_start_pressed"]
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.9, 0.9, 0.9, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_avatar"]
-bg_color = Color(1, 1, 1, 0)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[sub_resource type="StyleBoxFlat" id="StyleBox_card_cream_pressed"]
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+bg_color = Color(0.94, 0.90, 0.90, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -81,168 +91,237 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="MainColumn" type="VBoxContainer" parent="."]
+[node name="RootVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="HeaderHBox" type="HBoxContainer" parent="RootVBox/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="AvatarCircle" type="Panel" parent="RootVBox/HeaderContainer/HeaderHBox"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_avatar_circle")
+
+[node name="AvatarIcon" type="TextureRect" parent="RootVBox/HeaderContainer/HeaderHBox/AvatarCircle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_profile_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WelcomeVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer/HeaderHBox"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="GreetingLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/WelcomeVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 20
+text = "¡Bienvenido, Victor!"
+
+[node name="SubtitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/WelcomeVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.45, 0.48, 1)
+theme_override_font_sizes/font_size = 13
+text = "¿Estás listo para tu sesión de hoy?"
+
+[node name="BtnProfile" type="Button" parent="RootVBox/HeaderContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="HeaderDivider" type="ColorRect" parent="RootVBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.88, 0.88, 0.88, 1)
+
+[node name="CardsScroll" type="ScrollContainer" parent="RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CenterPadding" type="MarginContainer" parent="RootVBox/CardsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 40
+
+[node name="CardsColumn" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="BtnDesafios" type="Button" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_card_hero")
+theme_override_styles/hover = SubResource("StyleBox_card_hero")
+theme_override_styles/pressed = SubResource("StyleBox_card_hero_pressed")
+theme_override_styles/focus = SubResource("StyleBox_card_hero")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = 48.0
 offset_right = -24.0
-offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 24
-
-[node name="Header" type="HBoxContainer" parent="MainColumn"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainColumn/Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Greeting" type="Label" parent="MainColumn/Header/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 32
-text = "HOLA, ANA"
-
-[node name="Subtitle" type="Label" parent="MainColumn/Header/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 18
-text = "Hoy tenés 2 actividades"
-
-[node name="AvatarPanel" type="PanelContainer" parent="MainColumn/Header"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_avatar")
-clip_children = 1
-
-[node name="Avatar" type="TextureRect" parent="MainColumn/Header/AvatarPanel"]
-layout_mode = 2
-texture = ExtResource("3_avatar")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="NextActivityCard" type="PanelContainer" parent="MainColumn"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_main")
-
-[node name="VBox" type="VBoxContainer" parent="MainColumn/NextActivityCard"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="LabelSiguiente" type="Label" parent="MainColumn/NextActivityCard/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.95, 0.92, 1)
-theme_override_font_sizes/font_size = 16
-text = "SIGUIENTE"
-
-[node name="Title" type="Label" parent="MainColumn/NextActivityCard/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
-text = "Abrir y cerrar la mano"
-
-[node name="Details" type="Label" parent="MainColumn/NextActivityCard/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.95, 0.92, 1)
-theme_override_font_sizes/font_size = 18
-text = "10 min • 3 series"
-
-[node name="Space" type="Control" parent="MainColumn/NextActivityCard/VBox"]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-
-[node name="BtnComenzar" type="Button" parent="MainColumn/NextActivityCard/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_colors/font_pressed_color = Color(0, 0.36, 0.37, 1)
-theme_override_colors/font_hover_color = Color(0, 0.45, 0.46, 1)
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("StyleBox_btn_start")
-theme_override_styles/hover = SubResource("StyleBox_btn_start")
-theme_override_styles/pressed = SubResource("StyleBox_btn_start_pressed")
-text = "Comenzar"
-
-[node name="Activity2" type="PanelContainer" parent="MainColumn"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_secondary")
-
-[node name="HBox" type="HBoxContainer" parent="MainColumn/Activity2"]
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="MainColumn/Activity2/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Title" type="Label" parent="MainColumn/Activity2/HBox/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 22
-text = "Pinza fina"
-
-[node name="Details" type="Label" parent="MainColumn/Activity2/HBox/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 16
-text = "8 min"
-
-[node name="Arrow" type="Label" parent="MainColumn/Activity2/HBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 28
-text = ">"
-horizontal_alignment = 2
-
-[node name="Activity3" type="PanelContainer" parent="MainColumn"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_completed")
-
-[node name="HBox" type="HBoxContainer" parent="MainColumn/Activity3"]
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="MainColumn/Activity3/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Title" type="Label" parent="MainColumn/Activity3/HBox/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 22
-text = "Rotación de muñeca"
-
-[node name="Details" type="Label" parent="MainColumn/Activity3/HBox/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.6, 0.5, 1)
-theme_override_font_sizes/font_size = 16
-text = "Completada"
-
-[node name="Check" type="Label" parent="MainColumn/Activity3/HBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.6, 0.5, 1)
-theme_override_font_sizes/font_size = 28
-text = "✓"
-horizontal_alignment = 2
-
-[node name="Spacer" type="Control" parent="MainColumn"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HistoryWidget" type="PanelContainer" parent="MainColumn"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_secondary")
-
-[node name="HBox" type="HBoxContainer" parent="MainColumn/HistoryWidget"]
-layout_mode = 2
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Label" type="Label" parent="MainColumn/HistoryWidget/HBox"]
+[node name="Icon" type="TextureRect" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 18
-text = "Ver historial de progreso  >"
-horizontal_alignment = 1
+size_flags_vertical = 4
+texture = ExtResource("2_challenges")
+expand_mode = 1
+stretch_mode = 5
 
+[node name="TextVBox" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Realizar desafíos"
+
+[node name="Desc" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.97, 0.98, 1)
+theme_override_font_sizes/font_size = 15
+text = "Tus ejercicios de hoy"
+
+[node name="BtnLogros" type="Button" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 115)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_card_gray")
+theme_override_styles/hover = SubResource("StyleBox_card_gray")
+theme_override_styles/pressed = SubResource("StyleBox_card_gray_pressed")
+theme_override_styles/focus = SubResource("StyleBox_card_gray")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_medal")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 23
+text = "Ver mis logros"
+
+[node name="Desc" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16, 0.62, 0.67, 0.85)
+theme_override_font_sizes/font_size = 15
+text = "Tu progreso día a día"
+
+[node name="BtnGuante" type="Button" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 115)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_card_cream")
+theme_override_styles/hover = SubResource("StyleBox_card_cream")
+theme_override_styles/pressed = SubResource("StyleBox_card_cream_pressed")
+theme_override_styles/focus = SubResource("StyleBox_card_cream")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_cable")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 21
+text = "Conectar y calibrar guante"
+
+[node name="Desc" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16, 0.62, 0.67, 0.85)
+theme_override_font_sizes/font_size = 15
+text = "Solo lo hacés una vez"

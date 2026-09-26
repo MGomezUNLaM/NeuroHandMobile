@@ -1,21 +1,14 @@
-[gd_scene format=3 uid="uid://duiop52qxb42j"]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Script" uid="uid://bjb3gr5k2vvxg" path="res://tab_history.gd" id="1_script"]
+[ext_resource type="Script" path="res://tab_history.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_fire.svg" id="2_fire"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_clock.svg" id="3_clock"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_speech.svg" id="4_speech"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_check_circle.svg" id="5_check"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_badge"]
-content_margin_left = 12.0
-content_margin_top = 4.0
-content_margin_right = 12.0
-content_margin_bottom = 4.0
-bg_color = Color(0.886, 0.957, 0.93, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_secondary"]
+[sub_resource type="StyleBoxFlat" id="StyleBox_chart_card"]
 content_margin_left = 20.0
-content_margin_top = 20.0
+content_margin_top = 24.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 1, 1, 1)
@@ -23,24 +16,67 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.88, 0.95, 0.92, 1)
+border_color = Color(0.88, 0.94, 0.94, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_pill_pink"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.984, 0.957, 0.957, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_pill_gray"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0.84, 0.85, 0.86, 1)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_therapist_avatar"]
+bg_color = Color(0.118, 0.596, 0.647, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_note"]
+[sub_resource type="StyleBoxFlat" id="StyleBox_speech_card"]
 content_margin_left = 20.0
-content_margin_top = 20.0
+content_margin_top = 18.0
 content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.99, 0.92, 0.8, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+content_margin_bottom = 18.0
+bg_color = Color(0.984, 0.957, 0.957, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
-[node name="History" type="Control" unique_id=2146896159]
+[sub_resource type="StyleBoxFlat" id="StyleBox_bar_light"]
+bg_color = Color(0.81, 0.94, 0.93, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bar_dark"]
+bg_color = Color(0.04, 0.42, 0.46, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="History" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,126 +85,380 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="MainColumn" type="VBoxContainer" parent="." unique_id=1974106342]
+[node name="RootVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 48.0
-offset_right = -24.0
-offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 0
 
-[node name="Header" type="HBoxContainer" parent="MainColumn" unique_id=1332133290]
+[node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
 layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainColumn/Header" unique_id=1264313395]
+[node name="HeaderVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 14
+text = "VER MIS LOGROS"
+
+[node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 24
+text = "Tu progreso"
+
+[node name="ContentScroll" type="ScrollContainer" parent="RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ContentPadding" type="MarginContainer" parent="RootVBox/ContentScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
-[node name="Greeting" type="Label" parent="MainColumn/Header/VBoxContainer" unique_id=1834535862]
+[node name="Column" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 16
-text = "ÚLTIMOS 7 DÍAS"
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
 
-[node name="Title" type="Label" parent="MainColumn/Header/VBoxContainer" unique_id=1631936425]
+[node name="ChartCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 32
-text = "Tu evolución"
+theme_override_styles/panel = SubResource("StyleBox_chart_card")
 
-[node name="Badge" type="PanelContainer" parent="MainColumn/Header" unique_id=1311339009]
+[node name="ChartVBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard"]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_badge")
+theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="MainColumn/Header/Badge" unique_id=1483182314]
+[node name="BarsHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox"]
+custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.6, 0.5, 1)
+alignment = 1
+
+[node name="ColL" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColL"]
+custom_minimum_size = Vector2(28, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_light")
+
+[node name="ColM" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColM"]
+custom_minimum_size = Vector2(28, 85)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_light")
+
+[node name="ColX" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColX"]
+custom_minimum_size = Vector2(28, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_light")
+
+[node name="ColJ" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColJ"]
+custom_minimum_size = Vector2(28, 105)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_light")
+
+[node name="ColV" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColV"]
+custom_minimum_size = Vector2(28, 95)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_light")
+
+[node name="ColS" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColS"]
+custom_minimum_size = Vector2(28, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_light")
+
+[node name="ColD" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColD"]
+custom_minimum_size = Vector2(28, 135)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBox_bar_dark")
+
+[node name="DaysHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="LblL" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
 theme_override_font_sizes/font_size = 14
-text = "Vas mejorando"
-
-[node name="ChartPlaceholder" type="PanelContainer" parent="MainColumn" unique_id=1136333234]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_secondary")
-
-[node name="Label" type="Label" parent="MainColumn/ChartPlaceholder" unique_id=762665972]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 18
-text = "[Gráfico de barras]"
+text = "L"
 horizontal_alignment = 1
 
-[node name="HBoxStats" type="HBoxContainer" parent="MainColumn" unique_id=612396913]
+[node name="LblM" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "M"
+horizontal_alignment = 1
+
+[node name="LblX" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "X"
+horizontal_alignment = 1
+
+[node name="LblJ" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "J"
+horizontal_alignment = 1
+
+[node name="LblV" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "V"
+horizontal_alignment = 1
+
+[node name="LblS" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "S"
+horizontal_alignment = 1
+
+[node name="LblD" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "D"
+horizontal_alignment = 1
+
+[node name="ChecksHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Chk1" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Chk2" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Chk3" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Chk4" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Chk5" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Chk6" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Chk7" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("5_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CongratsLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "¡Felicitaciones!"
+
+[node name="StreakCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_pill_pink")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/StreakCard"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Stat1" type="PanelContainer" parent="MainColumn/HBoxStats" unique_id=1302828224]
+[node name="FireIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/StreakCard/HBox"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBox_card_secondary")
+size_flags_vertical = 4
+texture = ExtResource("2_fire")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="VBox" type="VBoxContainer" parent="MainColumn/HBoxStats/Stat1" unique_id=1864630039]
+[node name="StreakLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/StreakCard/HBox"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 20
+text = "7 días seguidos"
 
-[node name="Value" type="Label" parent="MainColumn/HBoxStats/Stat1/VBox" unique_id=972636748]
+[node name="TimeCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 32
-text = "7"
-horizontal_alignment = 1
+theme_override_styles/panel = SubResource("StyleBox_pill_gray")
 
-[node name="Desc" type="Label" parent="MainColumn/HBoxStats/Stat1/VBox" unique_id=1084020972]
+[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
+theme_override_constants/separation = 16
+
+[node name="ClockIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_clock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TimeLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 20
+text = "3 horas y 35 minutos"
+
+[node name="TimeDesc" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.4, 0.45, 1)
 theme_override_font_sizes/font_size = 14
-text = "días seguidos"
-horizontal_alignment = 1
+text = "en sesiones"
 
-[node name="Stat2" type="PanelContainer" parent="MainColumn/HBoxStats" unique_id=927881960]
+[node name="SectionDivider" type="ColorRect" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBox_card_secondary")
+color = Color(0.88, 0.88, 0.88, 1)
 
-[node name="VBox" type="VBoxContainer" parent="MainColumn/HBoxStats/Stat2" unique_id=286907160]
+[node name="TherapistHeaderHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="Value" type="Label" parent="MainColumn/HBoxStats/Stat2/VBox" unique_id=862798017]
+[node name="TherapistAvatar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 32
-text = "88%"
-horizontal_alignment = 1
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_therapist_avatar")
 
-[node name="Desc" type="Label" parent="MainColumn/HBoxStats/Stat2/VBox" unique_id=737971170]
+[node name="TherapistVBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 14
-text = "precisión"
-horizontal_alignment = 1
+theme_override_constants/separation = 2
 
-[node name="NoteCard" type="PanelContainer" parent="MainColumn" unique_id=281984731]
+[node name="TherapistName" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox/TherapistVBox"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_card_note")
-
-[node name="VBox" type="VBoxContainer" parent="MainColumn/NoteCard" unique_id=1817047590]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Title" type="Label" parent="MainColumn/NoteCard/VBox" unique_id=804709131]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.4, 0.1, 1)
-theme_override_font_sizes/font_size = 14
-text = "NOTA DEL KINESIÓLOGO"
-
-[node name="Note" type="Label" parent="MainColumn/NoteCard/VBox" unique_id=1123724894]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.2, 0.05, 1)
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 18
-text = "Buena apertura. Seguimos con 3 series para afianzar."
+text = "Juan Pedro"
+
+[node name="TherapistRole" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox/TherapistVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.45, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "Terapeuta"
+
+[node name="SpeechCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_speech_card")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SpeechCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SpeechIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/SpeechCard/HBox"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("4_speech")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpeechText" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SpeechCard/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+theme_override_font_sizes/font_size = 15
+text = "Observo una clara mejoría en la capacidad de flexión de cada dedo."
 autowrap_mode = 3

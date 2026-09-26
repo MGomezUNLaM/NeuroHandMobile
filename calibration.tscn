@@ -1,0 +1,152 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://calibration.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/icons/hand_open_calib.png" id="2_hand_open"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_progress_bg"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.125, 0.314, 0.345, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_progress_fill"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.455, 0.761, 0.745, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="Calibration" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="RootVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 14
+
+[node name="HeaderVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 14
+text = "SOLO UNA VEZ"
+
+[node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "Calibrar el guante"
+
+[node name="HeaderDivider" type="ColorRect" parent="RootVBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.88, 0.88, 0.88, 1)
+
+[node name="ContentContainer" type="MarginContainer" parent="RootVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Column" type="VBoxContainer" parent="RootVBox/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="HandCenter" type="CenterContainer" parent="RootVBox/ContentContainer/Column"]
+layout_mode = 2
+
+[node name="HandGraphic" type="TextureRect" parent="RootVBox/ContentContainer/Column/HandCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 240)
+layout_mode = 2
+texture = ExtResource("2_hand_open")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InstructionsVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Column"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="InstructionTitle" type="Label" parent="RootVBox/ContentContainer/Column/InstructionsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 18
+text = "Mantené la mano completamente abierta"
+horizontal_alignment = 1
+
+[node name="InstructionDuration" type="Label" parent="RootVBox/ContentContainer/Column/InstructionsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 16
+text = "durante 5 segundos"
+horizontal_alignment = 1
+
+[node name="ProgressVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Column"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ProgressCenter" type="CenterContainer" parent="RootVBox/ContentContainer/Column/ProgressVBox"]
+layout_mode = 2
+
+[node name="CalibProgress" type="ProgressBar" parent="RootVBox/ContentContainer/Column/ProgressVBox/ProgressCenter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 28)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBox_progress_bg")
+theme_override_styles/fill = SubResource("StyleBox_progress_fill")
+max_value = 5.0
+step = 0.05
+value = 2.0
+show_percentage = false
+
+[node name="CountdownLabel" type="Label" parent="RootVBox/ContentContainer/Column/ProgressVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 22
+text = "5..."
+horizontal_alignment = 1
+
+[node name="FooterNote" type="Label" parent="RootVBox/ContentContainer/Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16, 0.62, 0.67, 1)
+theme_override_font_sizes/font_size = 15
+text = "No hace falta repetirlo cada sesión"
+horizontal_alignment = 1

@@ -1,50 +1,61 @@
 extends Control
 
-signal request_tab_change(index: int)
+## Controlador del Dashboard principal (Mockup 1).
+## Dispara la navegación hacia los desafíos, los logros o la gestión del guante.
 
-const DESIGN_SIZE := Vector2(1080.0, 2340.0)
+signal navigate_to(view_index: int)
 
-@onready var _main_column: VBoxContainer = $MainColumn
-@onready var btn_comenzar: Button = %BtnComenzar
-@onready var activity_2: PanelContainer = $MainColumn/Activity2
-@onready var activity_3: PanelContainer = $MainColumn/Activity3
-@onready var history_widget: PanelContainer = $MainColumn/HistoryWidget
+@onready var greeting_label: Label = %GreetingLabel
+@onready var btn_desafios: Button = %BtnDesafios
+@onready var btn_logros: Button = %BtnLogros
+@onready var btn_guante: Button = %BtnGuante
+@onready var btn_profile: Button = %BtnProfile
+
 
 func _ready() -> void:
-	if btn_comenzar:
-		btn_comenzar.pressed.connect(_on_start_pressed)
-	if activity_2:
-		activity_2.gui_input.connect(_on_activity_2_input)
-	if activity_3:
-		activity_3.gui_input.connect(_on_activity_3_input)
-	if history_widget:
-		history_widget.gui_input.connect(_on_history_input)
+	btn_desafios.pressed.connect(_on_desafios_pressed)
+	btn_logros.pressed.connect(_on_logros_pressed)
+	btn_guante.pressed.connect(_on_guante_pressed)
+	if btn_profile != null:
+		btn_profile.pressed.connect(_on_profile_pressed)
+	_update_greeting()
 
-func _on_start_pressed() -> void:
-	var session_game = load("res://session_game.tscn")
-	if session_game:
-		get_tree().change_scene_to_packed(session_game)
 
-func _on_activity_2_input(event: InputEvent) -> void:
-	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):
-		var store := get_node_or_null("/root/SessionStore") as PlayerSessionStore
-		if store:
-			store.preselected_exercise = "pinza"
-		var session_game = load("res://session_game.tscn")
-		if session_game:
-			get_tree().change_scene_to_packed(session_game)
+func on_view_activated() -> void:
+	_update_greeting()
 
-func _on_activity_3_input(event: InputEvent) -> void:
-	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):
-		var store := get_node_or_null("/root/SessionStore") as PlayerSessionStore
-		if store:
-			store.preselected_exercise = "coordinacion_3d"
-		var session_game = load("res://session_game.tscn")
-		if session_game:
-			get_tree().change_scene_to_packed(session_game)
 
-func _on_history_input(event: InputEvent) -> void:
-	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):
-		request_tab_change.emit(1)
+func _update_greeting() -> void:
+	var name_to_show := "Paciente"
+	if has_node("/root/ApiClient"):
+		var api := get_node("/root/ApiClient")
+		if api.first_name != "":
+			name_to_show = api.first_name.capitalize()
+		elif api.full_name != "":
+			name_to_show = api.full_name.capitalize()
+		elif api.user_email != "":
+			var username: String = api.user_email.split("@")[0]
+			name_to_show = username.replace(".", " ").capitalize()
+		elif not api.current_user.is_empty():
+			var prof: Variant = api.current_user.get("profile", {})
+			if prof is Dictionary and prof.has("firstName") and str(prof.get("firstName", "")) != "":
+				name_to_show = str(prof.get("firstName", "")).capitalize()
+	
+	greeting_label.text = "¡Bienvenido, %s!" % name_to_show
 
+
+func _on_desafios_pressed() -> void:
+	navigate_to.emit(1)
+
+
+func _on_logros_pressed() -> void:
+	navigate_to.emit(2)
+
+
+func _on_guante_pressed() -> void:
+	navigate_to.emit(3)
+
+
+func _on_profile_pressed() -> void:
+	navigate_to.emit(5)
 
