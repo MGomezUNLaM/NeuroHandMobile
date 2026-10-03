@@ -17,9 +17,15 @@ var _time_left := 30.0
 @onready var _score_label_3d := $ArcadeModel/ScoreLabel3D as Label3D
 
 # Umbrales
-const FLEX_GRAB_THRESHOLD := 60.0
-const FLEX_RELEASE_THRESHOLD := 30.0
-const PITCH_AIM_THRESHOLD := 40.0
+var flex_grab_threshold: float = 60.0
+var flex_release_threshold: float = 30.0
+var pitch_aim_threshold: float = 40.0
+
+## Ajusta los umbrales de agarre y puntería según el factor X de dificultad
+func set_difficulty_factor(factor: float) -> void:
+	flex_grab_threshold = clampf(60.0 * factor, 25.0, 95.0)
+	flex_release_threshold = clampf(30.0 * factor, 15.0, flex_grab_threshold - 10.0)
+	pitch_aim_threshold = clampf(40.0 * factor, 15.0, 75.0)
 
 var _initial_ball_transform: Transform3D
 var _net_material: ShaderMaterial = null
@@ -128,13 +134,13 @@ func _inject_net_shader(node: Node) -> void:
 		_inject_net_shader(child)
 
 func _on_flex_updated(flex: float) -> void:
-	if _state == State.IDLE and flex >= FLEX_GRAB_THRESHOLD:
+	if _state == State.IDLE and flex >= flex_grab_threshold:
 		_change_state(State.GRABBED)
-	elif _state == State.AIMING and flex <= FLEX_RELEASE_THRESHOLD:
+	elif _state == State.AIMING and flex <= flex_release_threshold:
 		_throw_ball()
 
 func _on_imu_updated(pitch: float, roll: float, yaw: float) -> void:
-	if _state == State.GRABBED and pitch >= PITCH_AIM_THRESHOLD:
+	if _state == State.GRABBED and pitch >= pitch_aim_threshold:
 		_change_state(State.AIMING)
 
 func _change_state(new_state: State) -> void:

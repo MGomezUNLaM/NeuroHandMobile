@@ -26,6 +26,14 @@ signal tap_detected()
 ## Tiempo mínimo entre taps en segundos (debounce adicional).
 @export var min_tap_interval: float = 0.15
 
+## Ajusta los umbrales multiplicándolos por el factor X de dificultad
+func set_difficulty_factor(factor: float) -> void:
+	flex_threshold = clampf(40.0 * factor, 15.0, 95.0)
+	release_threshold = clampf(30.0 * factor, 10.0, flex_threshold - 5.0)
+	fsr_threshold = clampf(40.0 * factor, 15.0, 95.0)
+	fsr_release_threshold = clampf(30.0 * factor, 10.0, fsr_threshold - 5.0)
+
+
 # ── Estado interno ───────────────────────────────────────────────────────────
 var _is_flexed: bool = false
 var _is_force_pressed: bool = false

@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.neuroapp.godotble.GodotBle-mergeReleaseResources-4:/values-ca/values-ca.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\MatiasGomez\\.gradle\\caches\\8.11.1\\transforms\\2ecb0bff8beaa64afec4b666d7c2cc07\\transformed\\core-1.10.1\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,352,449,555,660,786",
+                        "endColumns": "95,101,98,96,105,104,125,100",
+                        "endOffsets": "146,248,347,444,550,655,781,882"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.neuroapp.godotble.GodotBle-release-6:/values-ca/values-ca.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\MatiasGomez\\.gradle\\caches\\8.11.1\\transforms\\2ecb0bff8beaa64afec4b666d7c2cc07\\transformed\\core-1.10.1\\res\\values-ca\\values-ca.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,151,253,352,449,555,660,786",
+                        "endColumns": "95,101,98,96,105,104,125,100",
+                        "endOffsets": "146,248,347,444,550,655,781,882"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -15,6 +15,13 @@ var _minigame_instance: Node = null
 var _selected_game_scene: String = ""
 var _instruction_overlay: Node = null
 var _current_exercise_type: String = "flexion"
+var _current_difficulty_name: String = "medio"
+var _current_difficulty_factor: float = 1.0
+var _session_activity_id: String = ""
+var _started_at_iso: String = ""
+var _measurements: Array[Dictionary] = []
+var _sample_timer: float = 0.0
+const SAMPLE_INTERVAL: float = 0.05 # 20Hz (50ms)
 
 @onready var _tap_zone: ColorRect = %TapZone
 @onready var _timer_label: Label = %TimerLabel
@@ -54,10 +61,21 @@ func _ready() -> void:
 	_reset_hud()
 	_start_mascot_idle()
 	
+	_setup_game_selection_menu()
+	if has_node("/root/ApiClient"):
+		var api = get_node("/root/ApiClient")
+		api.treatment_fetched.connect(func(_t): _setup_game_selection_menu())
+		if api.is_authenticated() and api.current_treatment.is_empty():
+			api.get_treatment()
+	
 	var store := get_node_or_null("/root/SessionStore") as PlayerSessionStore
 	if store and store.preselected_exercise != "":
 		var pre := store.preselected_exercise
+		_current_difficulty_name = store.preselected_difficulty
+		_current_difficulty_factor = store.preselected_difficulty_factor
+		_session_activity_id = store.preselected_activity_id
 		store.preselected_exercise = ""
+		store.preselected_activity_id = ""
 		match pre:
 			"pinza":
 				_on_pinch_selected()
@@ -77,6 +95,12 @@ func _process(delta: float) -> void:
 		_time_left = 0.0
 		_finish_session()
 	_update_hud()
+
+	# Muestreo periódico de sensores para el histórico de mediciones
+	_sample_timer += delta
+	if _sample_timer >= SAMPLE_INTERVAL:
+		_sample_timer = 0.0
+		_capture_sensor_measurements()
 
 	# Actualizar barra de flexión en tiempo real
 	var is_thrusting := false
@@ -100,6 +124,60 @@ func _process(delta: float) -> void:
 			_minigame_instance.set_thrust(is_thrusting)
 		if _minigame_instance.has_method("set_flex") and _ble_manager != null:
 			_minigame_instance.set_flex(_ble_manager.last_flex_value)
+
+
+func _capture_sensor_measurements() -> void:
+	if _ble_manager == null:
+		return
+	var now_iso := _get_iso_timestamp_utc()
+	# Dedo Pulgar
+	_measurements.append({
+		"capturedAt": now_iso,
+		"type": "THUMB_FLEXION",
+		"value": roundi(_ble_manager.pulgar)
+	})
+	# Dedo Índice
+	_measurements.append({
+		"capturedAt": now_iso,
+		"type": "INDEX_FLEXION",
+		"value": roundi(_ble_manager.indice)
+	})
+	# Dedo Medio
+	_measurements.append({
+		"capturedAt": now_iso,
+		"type": "MIDDLE_FLEXION",
+		"value": roundi(_ble_manager.medio)
+	})
+	# Dedo Anular
+	_measurements.append({
+		"capturedAt": now_iso,
+		"type": "RING_FLEXION",
+		"value": roundi(_ble_manager.anular)
+	})
+	# Dedo Meñique
+	_measurements.append({
+		"capturedAt": now_iso,
+		"type": "LITTLE_FLEXION",
+		"value": roundi(_ble_manager.menique)
+	})
+	# Sensor de Presión / Fuerza (FSR)
+	if _ble_manager.presion > 0.0 or _ble_manager.last_fsr_value > 0.0:
+		var p_val: float = _ble_manager.presion if _ble_manager.presion > 0.0 else _ble_manager.last_fsr_value
+		_measurements.append({
+			"capturedAt": now_iso,
+			"type": "PRESSURE",
+			"value": roundi(p_val)
+		})
+
+
+func _get_iso_timestamp_utc() -> String:
+	var dt := Time.get_datetime_dict_from_system(true)
+	var ms := Time.get_ticks_msec() % 1000
+	return "%04d-%02d-%02dT%02d:%02d:%02d.%03dZ" % [
+		dt["year"], dt["month"], dt["day"],
+		dt["hour"], dt["minute"], dt["second"],
+		ms
+	]
 
 
 func _on_tap_zone_input(event: InputEvent) -> void:
@@ -148,6 +226,10 @@ func _show_instruction() -> void:
 
 func _start_minigame() -> void:
 	_phase = Phase.PLAYING
+	_started_at_iso = _get_iso_timestamp_utc()
+	_measurements.clear()
+	_sample_timer = 0.0
+
 	if is_instance_valid(_instruction_overlay):
 		_instruction_overlay.queue_free()
 	
@@ -180,22 +262,80 @@ func _start_minigame() -> void:
 		_minigame_instance.size = _tap_zone.size
 	_tap_zone.move_child(_minigame_instance, 0)
 	
+	# Inyectar factor de dificultad al detector y al minijuego
+	if _flex_detector != null:
+		_flex_detector.set_difficulty_factor(_current_difficulty_factor)
+	if is_instance_valid(_minigame_instance) and _minigame_instance.has_method("set_difficulty_factor"):
+		_minigame_instance.set_difficulty_factor(_current_difficulty_factor)
+
 	if _minigame_instance.has_method("start_game"):
 		_minigame_instance.start_game()
+
+	# Notificar al guante por BLE que inició el juego
+	if has_node("/root/BleManager"):
+		var ble = get_node("/root/BleManager")
+		ble.send_data("INICIAR_JUEGO\n")
+		print("[session_game] Enviado al guante: INICIAR_JUEGO")
 
 
 
 func _finish_session() -> void:
 	_phase = Phase.FINISHED
+	var finished_at_iso := _get_iso_timestamp_utc()
+
+	# Notificar al guante por BLE que finalizó el juego
+	if has_node("/root/BleManager"):
+		var ble = get_node("/root/BleManager")
+		ble.send_data("FINALIZAR_JUEGO\n")
+		print("[session_game] Enviado al guante: FINALIZAR_JUEGO")
+	
+	# Guardar localmente
 	var store := get_node("/root/SessionStore") as PlayerSessionStore
-	var session: Dictionary = store.save_session(_taps, int(session_duration), _current_exercise_type)
+	var session: Dictionary = store.save_session(_taps, int(session_duration), _current_exercise_type, _current_difficulty_name, _current_difficulty_factor)
+	
+	# Si tenemos sesión de tratamiento conectada o sessionActivityId, enviar a la API
+	_send_execution_to_api(finished_at_iso)
+
 	_tap_zone.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_show_results(session)
+
+
+func _send_execution_to_api(finished_at_iso: String) -> void:
+	if not has_node("/root/ApiClient"):
+		return
+	var api = get_node("/root/ApiClient")
+	if not api.is_authenticated():
+		return
+	
+	# Determinar sessionActivityId si no estaba precargado
+	var activity_id := _session_activity_id
+	if activity_id.is_empty():
+		var act := _find_active_activity([_current_exercise_type])
+		activity_id = str(act.get("sessionActivityId", act.get("id", "")))
+	
+	if activity_id.is_empty():
+		print("[session_game] No hay sessionActivityId asociado a esta actividad, omitiendo POST a la API.")
+		return
+	
+	var payload := {
+		"sessionActivityId": activity_id,
+		"startedAt": _started_at_iso if not _started_at_iso.is_empty() else finished_at_iso,
+		"finishedAt": finished_at_iso,
+		"gameResult": {
+			"score": _taps
+		},
+		"measurements": _measurements
+	}
+	
+	print("[session_game] Enviando resultados a la API con %d mediciones registradas..." % _measurements.size())
+	api.save_session_activity_execution(payload)
 
 
 func _show_results(session: Dictionary) -> void:
 	var taps: int = int(session.get("taps", 0))
 	var xp: int = int(session.get("xp_earned", 0))
+	var diff_name: String = str(session.get("difficulty", _current_difficulty_name)).capitalize()
+	var diff_factor: float = float(session.get("difficulty_factor", _current_difficulty_factor))
 	var store := get_node("/root/SessionStore") as PlayerSessionStore
 	var best: int = store.get_best_taps()
 	var is_best := taps >= best and taps > 0
@@ -203,9 +343,11 @@ func _show_results(session: Dictionary) -> void:
 
 	var input_mode := "Flexiones" if _glove_connected else "Toques"
 	_results_detail.text = (
-		"%s: %d\nXP ganada: +%d\n%s" % [
+		"%s: %d\nDificultad: %s (x%.1f)\nXP ganada: +%d\n%s" % [
 			input_mode,
 			taps,
+			diff_name,
+			diff_factor,
 			xp,
 			"¡Nuevo récord personal!" if is_best else "Seguí practicando para superarte",
 		]
@@ -347,7 +489,73 @@ func _on_back_pressed() -> void:
 var _is_functional_selected: bool = false
 var _instruction_text: String = ""
 
+func _find_active_activity(game_keys: Array) -> Dictionary:
+	if not has_node("/root/ApiClient"):
+		return {}
+	var api = get_node("/root/ApiClient")
+	for act in api.active_activities:
+		var t: String = str(act.get("type", "")).to_lower()
+		var n: String = str(act.get("name", "")).to_lower()
+		for k in game_keys:
+			var k_lower := str(k).to_lower()
+			if t.contains(k_lower) or n.contains(k_lower):
+				return act
+	return {}
+
+
+func _setup_game_selection_menu() -> void:
+	if not has_node("/root/ApiClient"):
+		return
+	var api = get_node("/root/ApiClient")
+	if api.active_activities.is_empty():
+		return
+	
+	var has_arcade: Dictionary = _find_active_activity(["flappy", "flexion", "arcade", "pajaro", "bird"])
+	var has_func: Dictionary = _find_active_activity(["botella", "flexion_constante", "vaso", "bottle"])
+	var has_pinch: Dictionary = _find_active_activity(["pinza", "piano", "pinch"])
+	var has_basket: Dictionary = _find_active_activity(["basket", "coordinacion", "coordinacion_3d", "aro", "pelota"])
+	
+	var any_matched: bool = not has_arcade.is_empty() or not has_func.is_empty() or not has_pinch.is_empty() or not has_basket.is_empty()
+	if not any_matched:
+		return
+	
+	var arcade_btn = %GameSelectionMenu.find_child("ArcadeButton", true, false)
+	var func_btn = %GameSelectionMenu.find_child("FunctionalButton", true, false)
+	var pinch_btn = %GameSelectionMenu.find_child("PinchButton", true, false)
+	var basket_btn = %GameSelectionMenu.find_child("BasketButton", true, false)
+	
+	if arcade_btn:
+		arcade_btn.visible = not has_arcade.is_empty()
+		if arcade_btn.visible:
+			_apply_diff_label(arcade_btn, has_arcade.get("difficulty", "medio"))
+	if func_btn:
+		func_btn.visible = not has_func.is_empty()
+		if func_btn.visible:
+			_apply_diff_label(func_btn, has_func.get("difficulty", "medio"))
+	if pinch_btn:
+		pinch_btn.visible = not has_pinch.is_empty()
+		if pinch_btn.visible:
+			_apply_diff_label(pinch_btn, has_pinch.get("difficulty", "medio"))
+	if basket_btn:
+		basket_btn.visible = not has_basket.is_empty()
+		if basket_btn.visible:
+			_apply_diff_label(basket_btn, has_basket.get("difficulty", "medio"))
+
+
+func _apply_diff_label(btn: Control, diff_name: String) -> void:
+	var label = btn.find_child("Title*", true, false)
+	if label and label is Label:
+		var badge := " [%s]" % diff_name.capitalize()
+		if not label.text.contains("["):
+			label.text += badge
+
+
 func _on_arcade_selected() -> void:
+	var act := _find_active_activity(["flappy", "flexion", "arcade", "pajaro", "bird"])
+	if not act.is_empty():
+		_current_difficulty_name = act.get("difficulty", "medio")
+		_current_difficulty_factor = float(act.get("difficulty_factor", 1.0))
+		_session_activity_id = str(act.get("sessionActivityId", act.get("id", "")))
 	_selected_game_scene = "res://games/flappy/space_game.tscn"
 	_is_functional_selected = false
 	_current_exercise_type = "flexion"
@@ -356,6 +564,11 @@ func _on_arcade_selected() -> void:
 	_show_instructions_screen()
 
 func _on_functional_selected() -> void:
+	var act := _find_active_activity(["botella", "flexion_constante", "vaso", "bottle"])
+	if not act.is_empty():
+		_current_difficulty_name = act.get("difficulty", "medio")
+		_current_difficulty_factor = float(act.get("difficulty_factor", 1.0))
+		_session_activity_id = str(act.get("sessionActivityId", act.get("id", "")))
 	_selected_game_scene = "res://games/functional/glass_game.tscn"
 	_is_functional_selected = true
 	_current_exercise_type = "flexion_constante"
@@ -364,6 +577,11 @@ func _on_functional_selected() -> void:
 	_show_instructions_screen()
 
 func _on_pinch_selected() -> void:
+	var act := _find_active_activity(["pinza", "piano", "pinch"])
+	if not act.is_empty():
+		_current_difficulty_name = act.get("difficulty", "medio")
+		_current_difficulty_factor = float(act.get("difficulty_factor", 1.0))
+		_session_activity_id = str(act.get("sessionActivityId", act.get("id", "")))
 	_selected_game_scene = "res://games/pinch/pinch_game.tscn"
 	_is_functional_selected = false
 	_current_exercise_type = "pinza"
@@ -372,6 +590,11 @@ func _on_pinch_selected() -> void:
 	_show_instructions_screen()
 
 func _on_basket_selected() -> void:
+	var act := _find_active_activity(["basket", "coordinacion", "coordinacion_3d", "aro", "pelota"])
+	if not act.is_empty():
+		_current_difficulty_name = act.get("difficulty", "medio")
+		_current_difficulty_factor = float(act.get("difficulty_factor", 1.0))
+		_session_activity_id = str(act.get("sessionActivityId", act.get("id", "")))
 	_selected_game_scene = "res://games/basket/basket_game_3d.tscn"
 	_is_functional_selected = true
 	_current_exercise_type = "coordinacion_3d"

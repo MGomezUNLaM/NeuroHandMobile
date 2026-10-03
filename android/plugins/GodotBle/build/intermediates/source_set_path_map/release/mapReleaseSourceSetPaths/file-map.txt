@@ -1,0 +1,10 @@
+com.neuroapp.godotble.GodotBle-lifecycle-runtime-2.3.1-0 C:\Users\MatiasGomez\.gradle\caches\8.11.1\transforms\14c4de5139c53a04b26ede64b8338bc9\transformed\lifecycle-runtime-2.3.1\res
+com.neuroapp.godotble.GodotBle-core-1.10.1-1 C:\Users\MatiasGomez\.gradle\caches\8.11.1\transforms\2ecb0bff8beaa64afec4b666d7c2cc07\transformed\core-1.10.1\res
+com.neuroapp.godotble.GodotBle-jetified-annotation-experimental-1.3.0-2 C:\Users\MatiasGomez\.gradle\caches\8.11.1\transforms\914ade62c66f8c750d1d512eed5fd24e\transformed\jetified-annotation-experimental-1.3.0\res
+com.neuroapp.godotble.GodotBle-pngs-3 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\build\generated\res\pngs\release
+com.neuroapp.godotble.GodotBle-resValues-4 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\build\generated\res\resValues\release
+com.neuroapp.godotble.GodotBle-mergeReleaseResources-5 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.neuroapp.godotble.GodotBle-mergeReleaseResources-6 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.neuroapp.godotble.GodotBle-release-7 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\build\intermediates\merged_res\release\mergeReleaseResources
+com.neuroapp.godotble.GodotBle-main-8 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\res
+com.neuroapp.godotble.GodotBle-release-9 C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\release\res

@@ -300,6 +300,20 @@ func request_permissions() -> void:
 		_plugin.requestPermissions()
 
 
+## Envía un comando o texto al guante por Bluetooth LE.
+## Retorna true si se despachó la escritura correctamente.
+func send_data(text: String) -> bool:
+	if _is_android and _plugin != null:
+		if state != State.CONNECTED:
+			push_warning("[BleManager] No se puede enviar datos: el guante no está conectado.")
+			return false
+		return _plugin.sendData(text)
+	else:
+		print("[BleManager] [SIMULADOR] TX enviado al guante: ", text.strip_edges())
+		return true
+
+
+
 # ── Modo Simulación (PC) ────────────────────────────────────────────────────
 
 ## Activa el modo simulación para testing en PC.

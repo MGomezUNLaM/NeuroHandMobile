@@ -11,6 +11,10 @@ signal patient_fetched(patient_data: Dictionary)
 signal patient_fetch_failed(error_message: String, status_code: int)
 signal patient_updated(patient_data: Dictionary)
 signal patient_update_failed(error_message: String, status_code: int)
+signal treatment_fetched(treatment_data: Dictionary)
+signal treatment_fetch_failed(error_message: String, status_code: int)
+signal execution_saved(data: Dictionary)
+signal execution_save_failed(error_message: String, status_code: int)
 signal user_fetched(user_data: Dictionary)
 signal auth_expired()
 
@@ -26,6 +30,12 @@ var is_remembered: bool = false
 var current_user: Dictionary = {}
 ## Objeto completo de paciente retornado por GET /api/patients/:id
 var current_patient: Dictionary = {}
+## Objeto completo del tratamiento retornado por GET /api/threatments/:id
+var current_treatment: Dictionary = {}
+## Sesiones activas vigentes para la fecha actual
+var active_sessions: Array = []
+## Actividades/juegos asignados en las sesiones vigentes de hoy con su dificultad
+var active_activities: Array = []
 
 ## Atributos individuales de /api/auth/me para acceso directo y tipado
 var user_id: String = ""
@@ -357,10 +367,278 @@ func update_patient_profile(data_to_update: Dictionary, id_to_update: String = "
 		patient_update_failed.emit("No se pudo iniciar la petición de red.", 0)
 
 
+# ── TRATAMIENTOS Y SESIONES ──────────────────────────────────────────────────
+
+## Consulta el tratamiento asignado al paciente en /api/threatments (o /api/threatments/:id si se pasa un ID explícito).
+## Filtra automáticamente las sesiones que están en fecha para hoy y sus actividades.
+func get_treatment(id_to_fetch: String = "") -> void:
+	if not is_authenticated():
+		treatment_fetch_failed.emit("No hay sesión autenticada.", 401)
+		return
+	
+	# Si no se provee id explícito, consultar directamente a la colección /api/threatments
+	var endpoint_path := "/api/threatments"
+	if id_to_fetch != "":
+		endpoint_path = "/api/threatments/" + id_to_fetch
+	
+	_request_treatment_endpoint(endpoint_path, id_to_fetch, true)
+
+
+func _request_treatment_endpoint(endpoint_path: String, id_param: String, allow_fallback: bool) -> void:
+	var http := HTTPRequest.new()
+	add_child(http)
+	
+	http.request_completed.connect(func(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
+		http.queue_free()
+		if result != HTTPRequest.RESULT_SUCCESS:
+			treatment_fetch_failed.emit("Error de conexión al cargar el tratamiento.", 0)
+			return
+		
+		# Si da 404 en threatments y allow_fallback es true, reintentar con treatments
+		if response_code == 404 and allow_fallback and endpoint_path.contains("threatments"):
+			var fallback_path := endpoint_path.replace("threatments", "treatments")
+			print("[ApiClient] 404 en %s, reintentando con %s..." % [endpoint_path, fallback_path])
+			_request_treatment_endpoint(fallback_path, id_param, false)
+			return
+		
+		var body_text := body.get_string_from_utf8()
+		var json_data: Variant = JSON.parse_string(body_text)
+		
+		if response_code >= 200 and response_code < 300:
+			if json_data is Dictionary:
+				current_treatment = json_data
+			elif json_data is Array:
+				current_treatment = {"treatments": json_data}
+				if not json_data.is_empty() and json_data[0] is Dictionary:
+					current_treatment = json_data[0]
+			else:
+				current_treatment = {}
+			
+			active_activities = _process_active_sessions(json_data)
+			treatment_fetched.emit(current_treatment)
+		elif response_code == 401:
+			logout()
+			auth_expired.emit()
+		else:
+			var msg := "Error al obtener el tratamiento (código %d)." % response_code
+			treatment_fetch_failed.emit(msg, response_code)
+	)
+	
+	var endpoint := BASE_URL + endpoint_path
+	var err := http.request(endpoint, get_auth_headers(), HTTPClient.METHOD_GET)
+	if err != OK:
+		http.queue_free()
+		treatment_fetch_failed.emit("No se pudo iniciar la petición de red.", 0)
+
+
+## Procesa el árbol de tratamiento -> sesiones -> actividades, filtrando por el paciente actual y fecha actual.
+func _process_active_sessions(payload: Variant) -> Array:
+	active_sessions.clear()
+	return _extract_active_activities(payload)
+
+
+func _extract_active_activities(payload: Variant) -> Array:
+	var activities_out: Array = []
+	var now_dict := Time.get_date_dict_from_system() # Local date
+	var today_str := "%04d-%02d-%02d" % [now_dict["year"], now_dict["month"], now_dict["day"]]
+	
+	var all_sessions: Array = []
+	if payload is Dictionary:
+		# Si es un tratamiento, verificar si pertenece al paciente actual (si está definido)
+		if patient_id != "" and payload.has("patientId"):
+			var p_id := str(payload.get("patientId", ""))
+			if p_id != "" and p_id != patient_id:
+				return []
+				
+		if payload.has("sessions") and payload["sessions"] is Array:
+			all_sessions = payload["sessions"]
+		elif payload.has("sesiones") and payload["sesiones"] is Array:
+			all_sessions = payload["sesiones"]
+		elif payload.has("data") and payload["data"] is Dictionary:
+			return _extract_active_activities(payload["data"])
+		elif payload.has("data") and payload["data"] is Array:
+			return _extract_active_activities(payload["data"])
+	elif payload is Array:
+		for item in payload:
+			if item is Dictionary:
+				# Si el array trae tratamientos de varios pacientes, filtrar por el del paciente logueado
+				if patient_id != "" and item.has("patientId"):
+					var p_id := str(item.get("patientId", ""))
+					if p_id != "" and p_id != patient_id:
+						continue
+				var subs := _extract_active_activities(item)
+				activities_out.append_array(subs)
+		return activities_out
+	
+	for s_variant in all_sessions:
+		if not (s_variant is Dictionary):
+			continue
+		var session: Dictionary = s_variant
+		
+		if _is_session_active_today(session, today_str):
+			active_sessions.append(session)
+			
+			var s_diff: String = str(session.get("difficulty", session.get("dificultad", "medio"))).to_lower()
+			
+			# Buscar la lista de actividades de la sesión (sessionActivities, activities o actividades)
+			var s_acts: Array = []
+			if session.has("sessionActivities") and session["sessionActivities"] is Array:
+				s_acts = session["sessionActivities"]
+			elif session.has("activities") and session["activities"] is Array:
+				s_acts = session["activities"]
+			elif session.has("actividades") and session["actividades"] is Array:
+				s_acts = session["actividades"]
+			
+			for a_variant in s_acts:
+				if not (a_variant is Dictionary):
+					continue
+				var s_act: Dictionary = a_variant
+				
+				# En el backend, sessionActivities tiene:
+				# id (sessionActivityId), difficulty, order, activity: { id, name, gameId, game: { id, name, ... } }
+				var session_act_id: String = str(s_act.get("id", s_act.get("sessionActivityId", "")))
+				var sess_id: String = str(session.get("id", session.get("sessionId", "")))
+				
+				var a_diff: String = str(s_act.get("difficulty", s_diff)).to_lower()
+				var factor: float = get_difficulty_factor(a_diff)
+				
+				# Extraer datos de la actividad o del juego anidado
+				var act_obj: Dictionary = s_act.get("activity", {}) if s_act.get("activity") is Dictionary else {}
+				var game_obj: Dictionary = act_obj.get("game", {}) if act_obj.get("game") is Dictionary else {}
+				
+				var act_id: String = str(s_act.get("activityId", act_obj.get("id", session_act_id)))
+				
+				# Nombre: juego anidado -> actividad -> sessionActivity
+				var act_name: String = str(game_obj.get("name", act_obj.get("name", s_act.get("name", ""))))
+				
+				# Tipo / GameId / Identificador de juego:
+				var act_type: String = str(game_obj.get("id", act_obj.get("gameId", act_obj.get("type", s_act.get("type", "")))))
+				
+				var act_item := {
+					"id": act_id,
+					"sessionActivityId": session_act_id,
+					"session_activity_id": session_act_id,
+					"name": act_name,
+					"type": act_type,
+					"difficulty": a_diff,
+					"difficulty_factor": factor,
+					"session_id": sess_id,
+					"raw": s_act
+				}
+				activities_out.append(act_item)
+	
+	return activities_out
+
+
+## Verifica si una sesión corresponde mostrarse según availableUntil (menor o igual a la fecha de hoy).
+func _is_session_active_today(session: Dictionary, today_str: String) -> bool:
+	var end_val = session.get("availableUntil", session.get("endDate", session.get("fechaHasta", session.get("to", session.get("end_date", "")))))
+	var start_val = session.get("availableFrom", session.get("startDate", session.get("fechaDesde", session.get("from", session.get("start_date", "")))))
+	
+	var e_str := str(end_val).strip_edges().substr(0, 10)
+	var s_str := str(start_val).strip_edges().substr(0, 10)
+	
+	# Si no define fechas, se asume activa por defecto
+	if e_str == "" and s_str == "":
+		return true
+	
+	# La fecha availableUntil tiene que ser menor o igual a la fecha de hoy (vencimiento/disponibilidad alcanzada)
+	if e_str != "" and e_str.length() == 10:
+		return e_str <= today_str
+	
+	# Fallback por timestamp unix
+	var now_unix := Time.get_unix_time_from_system()
+	var end_unix := parse_date_to_unix(end_val, true)
+	if end_unix > 0:
+		return end_unix <= now_unix
+	
+	return true
+
+
+## Convierte una fecha ISO o timestamp a unix timestamp en segundos.
+func parse_date_to_unix(val: Variant, is_end_of_day: bool = false) -> int:
+	if val is int or val is float:
+		var n := int(val)
+		if n > 1000000000000:
+			n = n / 1000
+		return n
+	
+	var s := str(val).strip_edges()
+	if s == "":
+		return 0
+	
+	if s.length() == 10 and s.count("-") == 2:
+		s += "T23:59:59Z" if is_end_of_day else "T00:00:00Z"
+	elif not s.contains("T") and s.contains(" "):
+		s = s.replace(" ", "T")
+	
+	var has_tz: bool = s.ends_with("Z") or s.contains("+") or (s.length() > 10 and s.substr(10).contains("-"))
+	if not has_tz:
+		s += "Z"
+	
+	var unix_res := Time.get_unix_time_from_datetime_string(s)
+	return maxi(0, unix_res)
+
+
+## Retorna el factor multiplicador X para los umbrales de juego según la dificultad.
+func get_difficulty_factor(difficulty_str: String) -> float:
+	match difficulty_str.strip_edges().to_lower():
+		"bajo", "low", "facil", "fácil", "1":
+			return 0.8
+		"alto", "high", "dificil", "difícil", "3":
+			return 1.3
+		_:
+			return 1.0
+
+
+# ── EJECUCIÓN DE ACTIVIDADES / SESIONES ──────────────────────────────────────
+
+## Envía el resultado y las mediciones de la actividad a /api/session-activity-executions
+func save_session_activity_execution(payload: Dictionary) -> void:
+	if not is_authenticated():
+		execution_save_failed.emit("No hay sesión autenticada para guardar la ejecución.", 401)
+		return
+	
+	var http := HTTPRequest.new()
+	add_child(http)
+	
+	http.request_completed.connect(func(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
+		http.queue_free()
+		if result != HTTPRequest.RESULT_SUCCESS:
+			execution_save_failed.emit("Error de conexión al guardar los resultados.", 0)
+			return
+		
+		var body_text := body.get_string_from_utf8()
+		var json_data: Variant = JSON.parse_string(body_text)
+		
+		if response_code >= 200 and response_code < 300:
+			print("[ApiClient] Ejecución guardada exitosamente en /api/session-activity-executions.")
+			var res_dict: Dictionary = json_data if json_data is Dictionary else {}
+			execution_saved.emit(res_dict)
+		elif response_code == 401:
+			logout()
+			auth_expired.emit()
+		else:
+			var msg := "Error al guardar la ejecución (código %d): %s" % [response_code, body_text]
+			push_warning(msg)
+			execution_save_failed.emit(msg, response_code)
+	)
+	
+	var endpoint := BASE_URL + "/api/session-activity-executions"
+	var json_body := JSON.stringify(payload)
+	var err := http.request(endpoint, get_auth_headers(), HTTPClient.METHOD_POST, json_body)
+	if err != OK:
+		http.queue_free()
+		execution_save_failed.emit("No se pudo iniciar la petición de red.", 0)
+
+
 func logout() -> void:
 	access_token = ""
 	token_type = "Bearer"
 	current_patient.clear()
+	current_treatment.clear()
+	active_sessions.clear()
+	active_activities.clear()
 	_set_current_user({})
 	clear_persisted_auth_file()
 

@@ -34,10 +34,13 @@ const int PIN_BLE_RX = 10;    // RX del SoftwareSerial (conectar a TX del HM-10)
 const int PIN_BLE_TX = 11;    // TX del SoftwareSerial (conectar a RX del HM-10)
 
 // ============================================================
-// CONSTANTES DE CALIBRACIÓN (0% recto, 100% doblado)
+// VALORES DE CALIBRACIÓN (0% recto, 100% doblado)
 // ============================================================
-const int CALIB_MIN[5] = { 200, 200, 200, 200, 200 };
-const int CALIB_MAX[5] = { 800, 800, 800, 800, 800 };
+int CALIB_MIN[5] = { 200, 200, 200, 200, 200 };
+int CALIB_MAX[5] = { 800, 800, 800, 800, 800 };
+
+bool enCalibracion = false;
+int pasoCalibracion = 0; // 0 a 9 (5 dedos x 2 estados: reposo y cerrado)
 
 const int FSR_MIN = 50;
 const int FSR_MAX = 900;
@@ -107,5 +110,49 @@ void loop() {
 
     // Salida serie para depuración en PC
     Serial.println(trama);
+  }
+
+  // 5. Escuchar comandos entrantes enviados desde la App por BLE
+  if (bleSerial.available()) {
+    String comando = bleSerial.readStringUntil('\n');
+    comando.trim();
+    if (comando.length() > 0) {
+      Serial.println("[BLE RX] Comando recibido desde la App: " + comando);
+
+      if (comando.equalsIgnoreCase("INICIAR_JUEGO")) {
+        Serial.println("[JUEGO] Juego iniciado en la App.");
+      }
+      else if (comando.equalsIgnoreCase("FINALIZAR_JUEGO")) {
+        Serial.println("[JUEGO] Juego finalizado en la App.");
+      }
+      else if (comando.equalsIgnoreCase("C")) {
+        enCalibracion = true;
+        pasoCalibracion = 0;
+        Serial.println("[CALIB] Modo calibración iniciado (Paso 0: Pulgar en reposo).");
+      }
+      else if ((comando.startsWith("ENTER:") || comando.startsWith("Enter:")) && enCalibracion) {
+        int valor = comando.substring(6).toInt();
+        int dedoIdx = pasoCalibracion / 2;
+        bool esReposo = (pasoCalibracion % 2 == 0);
+
+        if (dedoIdx >= 0 && dedoIdx < 5) {
+          if (esReposo) {
+            CALIB_MIN[dedoIdx] = valor;
+            Serial.print("[CALIB] Dedo "); Serial.print(dedoIdx);
+            Serial.print(" MIN (reposo) calibrado en: "); Serial.println(valor);
+          } else {
+            CALIB_MAX[dedoIdx] = valor;
+            Serial.print("[CALIB] Dedo "); Serial.print(dedoIdx);
+            Serial.print(" MAX (cerrado) calibrado en: "); Serial.println(valor);
+          }
+        }
+        pasoCalibracion++;
+      }
+      else if ((comando.equalsIgnoreCase("FIN_CALIBRACION") || comando.equalsIgnoreCase("FIN") || comando.equalsIgnoreCase("Fin")) && enCalibracion) {
+        enCalibracion = false;
+        pasoCalibracion = 0;
+        Serial.println("[CALIB] Calibración completada y aplicada con éxito (FIN_CALIBRACION).");
+      }
+    }
   }
 }

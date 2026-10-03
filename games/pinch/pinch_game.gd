@@ -51,6 +51,12 @@ func _spawn_tile() -> void:
 @export var finger_flex_threshold: float = 30.0
 @export var fsr_threshold: float = 15.0  # Mínimo de FSR para contar como pinch
 
+## Ajusta los umbrales del juego según el factor X de dificultad
+func set_difficulty_factor(factor: float) -> void:
+	finger_flex_threshold = clampf(30.0 * factor, 15.0, 90.0)
+	fsr_threshold = clampf(15.0 * factor, 8.0, 70.0)
+
+
 func _on_tile_missed(tile: Node) -> void:
 	if tile in active_tiles:
 		active_tiles.erase(tile)

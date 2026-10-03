@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
@@ -217,6 +218,43 @@ public class GodotBle extends GodotPlugin {
             } else {
                 bluetoothGatt.disconnect();
             }
+        }
+    }
+
+    @UsedByGodot
+    public boolean sendData(String text) {
+        if (bluetoothGatt == null) {
+            Log.w(TAG, "sendData falló: no hay conexión GATT activa");
+            return false;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                Log.e(TAG, "sendData falló: permiso BLUETOOTH_CONNECT no concedido");
+                return false;
+            }
+        }
+
+        try {
+            BluetoothGattService service = bluetoothGatt.getService(SERVICE_UUID);
+            if (service == null) {
+                Log.w(TAG, "sendData falló: servicio no encontrado");
+                return false;
+            }
+
+            BluetoothGattCharacteristic characteristic = service.getCharacteristic(CHAR_UUID);
+            if (characteristic == null) {
+                Log.w(TAG, "sendData falló: característica no encontrada");
+                return false;
+            }
+
+            byte[] bytes = text.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+            characteristic.setValue(bytes);
+            characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+            return bluetoothGatt.writeCharacteristic(characteristic);
+        } catch (Exception e) {
+            Log.e(TAG, "Error enviando datos por BLE", e);
+            return false;
         }
     }
 

@@ -1,0 +1,50 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:2:1-15:12
+	package
+		INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:3:5-68
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:3:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:4:5-74
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:4:22-71
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:5:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:6:5-81
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:6:22-78
+uses-permission#android.permission.BLUETOOTH_SCAN
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:7:5-120
+	android:usesPermissionFlags
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:7:71-117
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:7:22-70
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:8:5-76
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:8:22-73
+application
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:10:5-14:19
+meta-data#org.godotengine.plugin.v2.GodotBle
+ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:11:9-13:62
+	android:value
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:13:13-59
+	android:name
+		ADDED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml:12:13-62
+uses-sdk
+INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml
+INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\MatiasGomez\Documents\juego-de-prueba\NeuroApp\NeuroHandApp\NeuroHandMobile\android\plugins\GodotBle\src\main\AndroidManifest.xml

@@ -18,11 +18,21 @@ func _ready() -> void:
 	btn_guante.pressed.connect(_on_guante_pressed)
 	if btn_profile != null:
 		btn_profile.pressed.connect(_on_profile_pressed)
+	
+	if has_node("/root/ApiClient"):
+		var api = get_node("/root/ApiClient")
+		if api.is_authenticated() and api.current_treatment.is_empty():
+			api.get_treatment()
+	
 	_update_greeting()
 
 
 func on_view_activated() -> void:
 	_update_greeting()
+	if has_node("/root/ApiClient"):
+		var api = get_node("/root/ApiClient")
+		if api.is_authenticated() and api.current_treatment.is_empty():
+			api.get_treatment()
 
 
 func _update_greeting() -> void:
