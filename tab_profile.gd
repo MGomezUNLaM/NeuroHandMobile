@@ -26,6 +26,7 @@ signal request_tab_change(index: int)
 @onready var view_phone: Label = %ViewPhone
 @onready var view_birth_date: Label = %ViewBirthDate
 @onready var btn_edit_profile: Button = %BtnEditProfile
+@onready var btn_logout: Button = %BtnLogout
 
 # Modo Edición
 @onready var input_first_name: LineEdit = %InputFirstName
@@ -51,6 +52,8 @@ func _ready() -> void:
 		btn_back.pressed.connect(_on_back_pressed)
 	if btn_edit_profile != null:
 		btn_edit_profile.pressed.connect(_on_edit_pressed)
+	if btn_logout != null:
+		btn_logout.pressed.connect(_on_logout_pressed)
 	if btn_save != null:
 		btn_save.pressed.connect(_on_save_pressed)
 	if btn_cancel != null:
@@ -295,8 +298,20 @@ func _show_status(message: String, is_error: bool) -> void:
 		status_label.show()
 
 
+func _on_logout_pressed() -> void:
+	if has_node("/root/ApiClient"):
+		get_node("/root/ApiClient").logout()
+	get_tree().change_scene_to_file("res://login.tscn")
+
+
 func _on_back_pressed() -> void:
 	if _is_editing:
 		_on_cancel_pressed()
 	else:
 		navigate_to.emit(0)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_on_back_pressed()
+		get_viewport().set_input_as_handled()

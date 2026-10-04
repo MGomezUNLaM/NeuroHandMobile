@@ -1,18 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://lc2ybdv1ry8m"]
+[gd_scene load_steps=7 format=3 uid="uid://lc2ybdv1ry8m"]
 
 [ext_resource type="Script" uid="uid://dc65d5umsrlr5" path="res://main_shell.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://c5mt0qdf4vt1r" path="res://assets/icons/icon_logout.svg" id="2_logout"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_home_nav.svg" id="2_home"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_real_glove.svg" id="3_glove"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_history.svg" id="4_history"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_profile.svg" id="5_profile"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_nav"]
-content_margin_top = 8.0
-content_margin_bottom = 8.0
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
 bg_color = Color(1, 1, 1, 1)
 border_width_top = 1
-border_color = Color(0.88, 0.88, 0.88, 1)
+border_color = Color(0.88, 0.91, 0.94, 1)
+shadow_color = Color(0, 0, 0, 0.04)
+shadow_size = 8
+shadow_offset = Vector2(0, -2)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
-
-[node name="MainShell" type="Control" unique_id=811940484]
+[node name="MainShell" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,64 +27,174 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="." unique_id=323866434]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 1)
+color = Color(0.973, 0.984, 0.992, 1)
 
-[node name="ContentContainer" type="Control" parent="." unique_id=485929346]
+[node name="ContentContainer" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -72.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NavPanel" type="PanelContainer" parent="." unique_id=375192247]
+[node name="NavPanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -72.0
+offset_top = -68.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBox_nav")
 
-[node name="CenterContainer" type="CenterContainer" parent="NavPanel" unique_id=1482910482]
+[node name="NavHBox" type="HBoxContainer" parent="NavPanel"]
 layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
 
-[node name="BtnNavAction" type="Button" parent="NavPanel/CenterContainer" unique_id=2003367859]
+[node name="BtnTabHome" type="Button" parent="NavPanel/NavHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 52)
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+flat = true
 
-[node name="NavIcon" type="TextureRect" parent="NavPanel/CenterContainer/BtnNavAction" unique_id=1948201948]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
+[node name="VBox" type="VBoxContainer" parent="NavPanel/NavHBox/BtnTabHome"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_logout")
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="IconHome" type="TextureRect" parent="NavPanel/NavHBox/BtnTabHome/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_home")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="LabelHome" type="Label" parent="NavPanel/NavHBox/BtnTabHome/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Inicio"
+horizontal_alignment = 1
+
+[node name="BtnTabGlove" type="Button" parent="NavPanel/NavHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="VBox" type="VBoxContainer" parent="NavPanel/NavHBox/BtnTabGlove"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="IconGlove" type="TextureRect" parent="NavPanel/NavHBox/BtnTabGlove/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_glove")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelGlove" type="Label" parent="NavPanel/NavHBox/BtnTabGlove/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Guante"
+horizontal_alignment = 1
+
+[node name="BtnTabHistory" type="Button" parent="NavPanel/NavHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="VBox" type="VBoxContainer" parent="NavPanel/NavHBox/BtnTabHistory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="IconHistory" type="TextureRect" parent="NavPanel/NavHBox/BtnTabHistory/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_history")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelHistory" type="Label" parent="NavPanel/NavHBox/BtnTabHistory/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Progreso"
+horizontal_alignment = 1
+
+[node name="BtnTabProfile" type="Button" parent="NavPanel/NavHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="VBox" type="VBoxContainer" parent="NavPanel/NavHBox/BtnTabProfile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="IconProfile" type="TextureRect" parent="NavPanel/NavHBox/BtnTabProfile/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_profile")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelProfile" type="Label" parent="NavPanel/NavHBox/BtnTabProfile/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Perfil"
+horizontal_alignment = 1

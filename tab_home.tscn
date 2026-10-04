@@ -1,86 +1,166 @@
-[gd_scene load_steps=13 format=3 uid="uid://cb5xp2yuhoww0"]
+[gd_scene load_steps=19 format=3 uid="uid://cb5xp2yuhoww0"]
 
 [ext_resource type="Script" uid="uid://hfvgta2vgy0o" path="res://dashboard.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://ck839s8d3m8y1" path="res://assets/icons/icon_challenges.svg" id="2_challenges"]
-[ext_resource type="Texture2D" uid="uid://dk940f8s2j1w2" path="res://assets/icons/icon_medal.svg" id="3_medal"]
-[ext_resource type="Texture2D" uid="uid://ek918f7s3m4q3" path="res://assets/icons/icon_cable.svg" id="4_cable"]
-[ext_resource type="Texture2D" uid="uid://ca5du5khlbux8" path="res://assets/icons/icon_profile.svg" id="5_profile_icon"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_profile.svg" id="2_profile_icon"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_challenges.svg" id="3_challenges"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_history.svg" id="4_history"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_cable.svg" id="5_cable"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_fire.svg" id="6_fire"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_clock.svg" id="7_clock"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_check_circle.svg" id="8_check"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_avatar_circle"]
 bg_color = Color(0.118, 0.596, 0.647, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-shadow_color = Color(0.118, 0.596, 0.647, 0.25)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.118, 0.596, 0.647, 0.2)
 shadow_size = 4
 shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_hero"]
-content_margin_left = 28.0
+[sub_resource type="StyleBoxFlat" id="StyleBox_glove_pill"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.93, 0.96, 0.97, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.88, 0.92, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_glove_pill_pressed"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.85, 0.91, 0.94, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.82, 0.86, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hero_card"]
+content_margin_left = 24.0
 content_margin_top = 26.0
-content_margin_right = 28.0
+content_margin_right = 24.0
 content_margin_bottom = 26.0
-bg_color = Color(0.118, 0.596, 0.647, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+bg_color = Color(0.08, 0.48, 0.52, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.08, 0.48, 0.52, 0.25)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_hero_pressed"]
-content_margin_left = 28.0
-content_margin_top = 26.0
-content_margin_right = 28.0
-content_margin_bottom = 26.0
-bg_color = Color(0.09, 0.48, 0.52, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+[sub_resource type="StyleBoxFlat" id="StyleBox_hero_badge"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_gray"]
-content_margin_left = 28.0
-content_margin_top = 24.0
-content_margin_right = 28.0
-content_margin_bottom = 24.0
-bg_color = Color(0.965, 0.969, 0.976, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+[sub_resource type="StyleBoxFlat" id="StyleBox_hero_btn"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.08)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_gray_pressed"]
-content_margin_left = 28.0
-content_margin_top = 24.0
-content_margin_right = 28.0
-content_margin_bottom = 24.0
-bg_color = Color(0.91, 0.92, 0.94, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+[sub_resource type="StyleBoxFlat" id="StyleBox_hero_btn_pressed"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.92, 0.95, 0.96, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_cream"]
-content_margin_left = 28.0
-content_margin_top = 24.0
-content_margin_right = 28.0
-content_margin_bottom = 24.0
-bg_color = Color(0.984, 0.957, 0.957, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+[sub_resource type="StyleBoxFlat" id="StyleBox_stat_card"]
+content_margin_left = 14.0
+content_margin_top = 18.0
+content_margin_right = 14.0
+content_margin_bottom = 18.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.90, 0.93, 0.95, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.03)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_card_cream_pressed"]
-content_margin_left = 28.0
-content_margin_top = 24.0
-content_margin_right = 28.0
-content_margin_bottom = 24.0
-bg_color = Color(0.94, 0.90, 0.90, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
+[sub_resource type="StyleBoxFlat" id="StyleBox_action_card"]
+content_margin_left = 20.0
+content_margin_top = 18.0
+content_margin_right = 20.0
+content_margin_bottom = 18.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.89, 0.92, 0.95, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.03)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_action_card_pressed"]
+content_margin_left = 20.0
+content_margin_top = 18.0
+content_margin_right = 20.0
+content_margin_bottom = 18.0
+bg_color = Color(0.96, 0.98, 0.99, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.88, 0.92, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_icon_badge"]
+bg_color = Color(0.91, 0.965, 0.98, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="Dashboard" type="Control"]
 layout_mode = 3
@@ -102,41 +182,46 @@ theme_override_constants/separation = 0
 
 [node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 12
 
 [node name="HeaderHBox" type="HBoxContainer" parent="RootVBox/HeaderContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 2
+theme_override_constants/separation = 12
 
-[node name="AvatarCircle" type="Panel" parent="RootVBox/HeaderContainer/HeaderHBox"]
-custom_minimum_size = Vector2(48, 48)
+[node name="BtnAvatar" type="Button" parent="RootVBox/HeaderContainer/HeaderHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_avatar_circle")
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_avatar_circle")
+theme_override_styles/hover = SubResource("StyleBox_avatar_circle")
+theme_override_styles/pressed = SubResource("StyleBox_avatar_circle")
 
-[node name="AvatarIcon" type="TextureRect" parent="RootVBox/HeaderContainer/HeaderHBox/AvatarCircle"]
+[node name="AvatarIcon" type="TextureRect" parent="RootVBox/HeaderContainer/HeaderHBox/BtnAvatar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -13.0
-offset_top = -13.0
-offset_right = 13.0
-offset_bottom = 13.0
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_profile_icon")
+mouse_filter = 2
+texture = ExtResource("2_profile_icon")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="WelcomeVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer/HeaderHBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 2
 
@@ -144,184 +229,451 @@ theme_override_constants/separation = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 20
-text = "¡Bienvenido, Victor!"
+theme_override_font_sizes/font_size = 19
+text = "¡Hola, Paciente!"
 
 [node name="SubtitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/WelcomeVBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.45, 0.48, 1)
-theme_override_font_sizes/font_size = 13
-text = "¿Estás listo para tu sesión de hoy?"
+theme_override_colors/font_color = Color(0.40, 0.50, 0.55, 1)
+theme_override_font_sizes/font_size = 12
+text = "Plan de rehabilitación activo"
 
-[node name="BtnProfile" type="Button" parent="RootVBox/HeaderContainer"]
+[node name="BtnGlovePill" type="Button" parent="RootVBox/HeaderContainer/HeaderHBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(148, 34)
 layout_mode = 2
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-flat = true
+theme_override_styles/normal = SubResource("StyleBox_glove_pill")
+theme_override_styles/hover = SubResource("StyleBox_glove_pill")
+theme_override_styles/pressed = SubResource("StyleBox_glove_pill_pressed")
+
+[node name="GloveStatusLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/BtnGlovePill"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.45, 0.50, 0.55, 1)
+theme_override_font_sizes/font_size = 11
+text = "⚪ Conectar Guante"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 
 [node name="HeaderDivider" type="ColorRect" parent="RootVBox"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
-color = Color(0.88, 0.88, 0.88, 1)
+color = Color(0.90, 0.93, 0.95, 1)
 
-[node name="CardsScroll" type="ScrollContainer" parent="RootVBox"]
+[node name="Scroll" type="ScrollContainer" parent="RootVBox"]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="CenterPadding" type="MarginContainer" parent="RootVBox/CardsScroll"]
+[node name="Padding" type="MarginContainer" parent="RootVBox/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 24
 
-[node name="CardsColumn" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding"]
+[node name="ContentVBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_constants/separation = 36
-alignment = 1
-
-[node name="BtnDesafios" type="Button" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 130)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBox_card_hero")
-theme_override_styles/hover = SubResource("StyleBox_card_hero")
-theme_override_styles/pressed = SubResource("StyleBox_card_hero_pressed")
-theme_override_styles/focus = SubResource("StyleBox_card_hero")
-
-[node name="HBox" type="HBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_right = -24.0
-grow_horizontal = 2
-grow_vertical = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 20
-alignment = 1
 
-[node name="Icon" type="TextureRect" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox"]
-custom_minimum_size = Vector2(64, 64)
+[node name="HeroTreatmentCard" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox"]
 layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("2_challenges")
-expand_mode = 1
-stretch_mode = 5
+theme_override_styles/panel = SubResource("StyleBox_hero_card")
 
-[node name="TextVBox" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox"]
+[node name="HeroVBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TopHBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
+layout_mode = 2
+
+[node name="HeroBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/TopHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_hero_badge")
+
+[node name="HeroBadgeLabel" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/TopHBox/HeroBadge"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.70, 0.95, 0.98, 1)
+theme_override_font_sizes/font_size = 11
+text = "MI TRATAMIENTO"
+
+[node name="TherapistTag" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/TopHBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_constants/separation = 4
+theme_override_colors/font_color = Color(0.85, 0.95, 0.96, 1)
+theme_override_font_sizes/font_size = 12
+text = "Terapeuta: Mario Perez"
+horizontal_alignment = 2
 
-[node name="Title" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox/TextVBox"]
+[node name="TreatmentTitle" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-text = "Realizar desafíos"
-
-[node name="Desc" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnDesafios/HBox/TextVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.97, 0.98, 1)
-theme_override_font_sizes/font_size = 15
-text = "Tus ejercicios de hoy"
-
-[node name="BtnLogros" type="Button" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 115)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBox_card_gray")
-theme_override_styles/hover = SubResource("StyleBox_card_gray")
-theme_override_styles/pressed = SubResource("StyleBox_card_gray_pressed")
-theme_override_styles/focus = SubResource("StyleBox_card_gray")
-
-[node name="HBox" type="HBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_right = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox"]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_medal")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextVBox" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_constants/separation = 4
-
-[node name="Title" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox/TextVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 23
-text = "Ver mis logros"
-
-[node name="Desc" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnLogros/HBox/TextVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.16, 0.62, 0.67, 0.85)
-theme_override_font_sizes/font_size = 15
-text = "Tu progreso día a día"
-
-[node name="BtnGuante" type="Button" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 115)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBox_card_cream")
-theme_override_styles/hover = SubResource("StyleBox_card_cream")
-theme_override_styles/pressed = SubResource("StyleBox_card_cream_pressed")
-theme_override_styles/focus = SubResource("StyleBox_card_cream")
-
-[node name="HBox" type="HBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_right = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox"]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("4_cable")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextVBox" type="VBoxContainer" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_constants/separation = 4
-
-[node name="Title" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox/TextVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
 theme_override_font_sizes/font_size = 21
-text = "Conectar y calibrar guante"
+text = "Recuperación por esguince"
 
-[node name="Desc" type="Label" parent="RootVBox/CardsScroll/CenterPadding/CardsColumn/BtnGuante/HBox/TextVBox"]
+[node name="TreatmentObj" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.16, 0.62, 0.67, 0.85)
+theme_override_colors/font_color = Color(0.85, 0.94, 0.96, 1)
+theme_override_font_sizes/font_size = 13
+text = "Recuperar la movilidad de la muñeca y los dedos de la mano derecha."
+autowrap_mode = 2
+
+[node name="HeroBottomHBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SessionStatusPill" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="SessionStatusLabel" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox/SessionStatusPill"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.95, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+text = "● Sesión 1: Habilitada"
+
+[node name="SessionSubLabel" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox/SessionStatusPill"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.80, 0.90, 0.92, 1)
+theme_override_font_sizes/font_size = 11
+text = "2 ejercicios asignados"
+
+[node name="BtnStartSession" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(165, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.06, 0.40, 0.44, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_hero_btn")
+theme_override_styles/hover = SubResource("StyleBox_hero_btn")
+theme_override_styles/pressed = SubResource("StyleBox_hero_btn_pressed")
+text = "Iniciar Sesión ▶"
+
+[node name="MetricsHBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="StatCardStreak" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_stat_card")
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak/VBox"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("6_fire")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatStreakVal" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "15 días"
+horizontal_alignment = 1
+
+[node name="StatStreakDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50, 0.60, 0.65, 1)
+theme_override_font_sizes/font_size = 11
+text = "Racha activa"
+horizontal_alignment = 1
+
+[node name="StatCardTime" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_stat_card")
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime/VBox"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("7_clock")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatTimeVal" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "3h 35m"
+horizontal_alignment = 1
+
+[node name="StatTimeDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50, 0.60, 0.65, 1)
+theme_override_font_sizes/font_size = 11
+text = "En terapia"
+horizontal_alignment = 1
+
+[node name="StatCardScore" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_stat_card")
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore/VBox"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_check")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatAccuracyVal" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "94%"
+horizontal_alignment = 1
+
+[node name="StatAccuracyDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.50, 0.60, 0.65, 1)
+theme_override_font_sizes/font_size = 11
+text = "Precisión"
+horizontal_alignment = 1
+
+[node name="SectionTitle" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 17
+text = "Acciones Terapéuticas"
+
+[node name="BtnDesafios" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 84)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_action_card")
+theme_override_styles/hover = SubResource("StyleBox_action_card")
+theme_override_styles/pressed = SubResource("StyleBox_action_card_pressed")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="IconBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_icon_badge")
+
+[node name="Center" type="CenterContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/IconBadge"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/IconBadge/Center"]
+modulate = Color(0.118, 0.596, 0.647, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_challenges")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 15
-text = "Solo lo hacés una vez"
+text = "Desafíos del Tratamiento"
+
+[node name="DesafiosDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/TextVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
+theme_override_font_sizes/font_size = 12
+text = "Explorar sesiones y ejercicios asignados"
+
+[node name="Arrow" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.60, 0.70, 0.75, 1)
+theme_override_font_sizes/font_size = 16
+text = "→"
+
+[node name="BtnGuante" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 84)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_action_card")
+theme_override_styles/hover = SubResource("StyleBox_action_card")
+theme_override_styles/pressed = SubResource("StyleBox_action_card_pressed")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="IconBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_icon_badge")
+
+[node name="Center" type="CenterContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/IconBadge"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/IconBadge/Center"]
+modulate = Color(0.118, 0.596, 0.647, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_cable")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 15
+text = "Calibración Rápida de Mano"
+
+[node name="Desc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
+theme_override_font_sizes/font_size = 12
+text = "Ajustá tu rango de apertura y cierre en 30s"
+
+[node name="Arrow" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.60, 0.70, 0.75, 1)
+theme_override_font_sizes/font_size = 16
+text = "→"
+
+[node name="BtnLogros" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 84)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBox_action_card")
+theme_override_styles/hover = SubResource("StyleBox_action_card")
+theme_override_styles/pressed = SubResource("StyleBox_action_card_pressed")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="IconBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_icon_badge")
+
+[node name="Center" type="CenterContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/IconBadge"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/IconBadge/Center"]
+modulate = Color(0.118, 0.596, 0.647, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_history")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextVBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 15
+text = "Mi Progreso y Métricas"
+
+[node name="Desc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/TextVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
+theme_override_font_sizes/font_size = 12
+text = "Historial clínico, gráficos y evolución"
+
+[node name="Arrow" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.60, 0.70, 0.75, 1)
+theme_override_font_sizes/font_size = 16
+text = "→"
+
+[node name="BottomElasticSpacer" type="Control" parent="RootVBox/Scroll/Padding/ContentVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+

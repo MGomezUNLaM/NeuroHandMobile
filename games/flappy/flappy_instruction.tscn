@@ -166,7 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=1757486782]
-custom_minimum_size = Vector2(340, 0)
+custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
@@ -177,16 +177,16 @@ theme_override_constants/separation = 24
 [node name="Title" type="Label" parent="CenterContainer/Panel/VBox" unique_id=898492484]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 34
 text = "¿Cómo jugar?"
 horizontal_alignment = 1
 
 [node name="InstructionText" type="Label" parent="CenterContainer/Panel/VBox" unique_id=987654321]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "\"Cada columna representa un dedo. Juntá el pulgar con el dedo correspondiente para tocar la nota antes de que desaparezca.\""
 horizontal_alignment = 1
 autowrap_mode = 3

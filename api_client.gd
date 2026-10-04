@@ -12,6 +12,7 @@ signal patient_fetch_failed(error_message: String, status_code: int)
 signal patient_updated(patient_data: Dictionary)
 signal patient_update_failed(error_message: String, status_code: int)
 signal treatment_fetched(treatment_data: Dictionary)
+signal treatments_fetched(treatments: Array)
 signal treatment_fetch_failed(error_message: String, status_code: int)
 signal execution_saved(data: Dictionary)
 signal execution_save_failed(error_message: String, status_code: int)
@@ -30,8 +31,13 @@ var is_remembered: bool = false
 var current_user: Dictionary = {}
 ## Objeto completo de paciente retornado por GET /api/patients/:id
 var current_patient: Dictionary = {}
-## Objeto completo del tratamiento retornado por GET /api/threatments/:id
+## Objeto completo del tratamiento seleccionado
 var current_treatment: Dictionary = {}
+## Lista de todos los tratamientos asignados al paciente
+var patient_treatments: Array = []
+## Tratamiento y sesión seleccionados actualmente en el árbol de navegación
+var selected_treatment: Dictionary = {}
+var selected_session: Dictionary = {}
 ## Sesiones activas vigentes para la fecha actual
 var active_sessions: Array = []
 ## Actividades/juegos asignados en las sesiones vigentes de hoy con su dificultad
@@ -405,17 +411,25 @@ func _request_treatment_endpoint(endpoint_path: String, id_param: String, allow_
 		var json_data: Variant = JSON.parse_string(body_text)
 		
 		if response_code >= 200 and response_code < 300:
+			patient_treatments.clear()
 			if json_data is Dictionary:
-				current_treatment = json_data
+				if json_data.has("data") and json_data["data"] is Array:
+					_store_patient_treatments(json_data["data"])
+				elif json_data.has("treatments") and json_data["treatments"] is Array:
+					_store_patient_treatments(json_data["treatments"])
+				else:
+					_store_patient_treatments([json_data])
 			elif json_data is Array:
-				current_treatment = {"treatments": json_data}
-				if not json_data.is_empty() and json_data[0] is Dictionary:
-					current_treatment = json_data[0]
+				_store_patient_treatments(json_data)
+			
+			if not patient_treatments.is_empty():
+				current_treatment = patient_treatments[0]
 			else:
 				current_treatment = {}
 			
-			active_activities = _process_active_sessions(json_data)
+			active_activities = _process_active_sessions(current_treatment)
 			treatment_fetched.emit(current_treatment)
+			treatments_fetched.emit(patient_treatments)
 		elif response_code == 401:
 			logout()
 			auth_expired.emit()
@@ -530,29 +544,231 @@ func _extract_active_activities(payload: Variant) -> Array:
 	return activities_out
 
 
-## Verifica si una sesión corresponde mostrarse según availableUntil (menor o igual a la fecha de hoy).
-func _is_session_active_today(session: Dictionary, today_str: String) -> bool:
-	var end_val = session.get("availableUntil", session.get("endDate", session.get("fechaHasta", session.get("to", session.get("end_date", "")))))
-	var start_val = session.get("availableFrom", session.get("startDate", session.get("fechaDesde", session.get("from", session.get("start_date", "")))))
+func _store_patient_treatments(raw_list: Array) -> void:
+	patient_treatments.clear()
+	for item in raw_list:
+		if not (item is Dictionary):
+			continue
+		if patient_id != "" and item.has("patientId"):
+			var p_id := str(item.get("patientId", ""))
+			if p_id != "" and p_id != patient_id:
+				continue
+		patient_treatments.append(item)
+
+
+## Retorna la lista de tratamientos del paciente (o datos de demostración si la API aún no tiene cargados).
+func get_patient_treatments() -> Array:
+	if not patient_treatments.is_empty():
+		return patient_treatments
+	if not current_treatment.is_empty():
+		return [current_treatment]
+	return get_fallback_treatments()
+
+
+## Verifica si una sesión está activa (por estado y fecha en el plan).
+func is_session_active(session: Dictionary, all_sessions: Array = []) -> bool:
+	var info := get_session_timing_info(session, all_sessions)
+	return info.get("is_active", false)
+
+
+## Verifica si una sesión corresponde mostrarse según vigencia actual
+func _is_session_active_today(session: Dictionary, _today_str: String) -> bool:
+	return is_session_active(session)
+
+
+## Retorna información descriptiva del estado temporal de la sesión:
+## { "is_active": bool, "status_label": String, "date_text": String }
+func get_session_timing_info(session: Dictionary, all_sessions: Array = []) -> Dictionary:
+	var start_val = session.get("startDate", session.get("fechaDesde", session.get("availableFrom", session.get("from", session.get("start_date", "")))))
+	var end_val = session.get("endDate", session.get("fechaHasta", session.get("availableUntil", session.get("to", session.get("end_date", "")))))
 	
-	var e_str := str(end_val).strip_edges().substr(0, 10)
-	var s_str := str(start_val).strip_edges().substr(0, 10)
+	var s_str := str(start_val).strip_edges()
+	var e_str := str(end_val).strip_edges()
 	
-	# Si no define fechas, se asume activa por defecto
-	if e_str == "" and s_str == "":
-		return true
+	var s_disp := format_date_display(s_str)
+	var e_disp := format_date_display(e_str)
 	
-	# La fecha availableUntil tiene que ser menor o igual a la fecha de hoy (vencimiento/disponibilidad alcanzada)
-	if e_str != "" and e_str.length() == 10:
-		return e_str <= today_str
+	var date_text := ""
+	if s_disp != "" and e_disp != "":
+		date_text = "Del %s al %s" % [s_disp, e_disp]
+	elif e_disp != "":
+		date_text = "Hasta el %s" % e_disp
+	elif s_disp != "":
+		date_text = "Desde el %s" % s_disp
+	else:
+		date_text = "Siempre disponible"
 	
-	# Fallback por timestamp unix
-	var now_unix := Time.get_unix_time_from_system()
-	var end_unix := parse_date_to_unix(end_val, true)
-	if end_unix > 0:
-		return end_unix <= now_unix
+	var status_raw := str(session.get("status", "")).strip_edges().to_upper()
+	if status_raw in ["COMPLETED", "FINISHED", "DONE", "FINALIZADA"]:
+		return {
+			"is_active": false,
+			"status_label": "FINALIZADA",
+			"date_text": date_text
+		}
+	if status_raw in ["CANCELLED", "CANCELADA"]:
+		return {
+			"is_active": false,
+			"status_label": "CANCELADA",
+			"date_text": date_text
+		}
 	
-	return true
+	var now_dict := Time.get_date_dict_from_system()
+	var today_str := "%04d-%02d-%02d" % [now_dict["year"], now_dict["month"], now_dict["day"]]
+	
+	var s_ymd := s_str.split("T")[0] if s_str.contains("T") else s_str
+	var e_ymd := e_str.split("T")[0] if e_str.contains("T") else e_str
+	
+	# 1. Si la fecha de inicio es estrictamente futura -> PRÓXIMAMENTE
+	if s_ymd != "" and today_str < s_ymd:
+		return {
+			"is_active": false,
+			"status_label": "PRÓXIMAMENTE",
+			"date_text": date_text
+		}
+	
+	# 2. Buscar si hay una sesión posterior en el tratamiento que ya haya comenzado
+	var next_start := ""
+	var curr_order: int = int(session.get("order", 0))
+	
+	if all_sessions.is_empty():
+		if not selected_treatment.is_empty():
+			all_sessions = selected_treatment.get("sessions", selected_treatment.get("sesiones", []))
+		elif not current_treatment.is_empty():
+			all_sessions = current_treatment.get("sessions", current_treatment.get("sesiones", []))
+	
+	for other in all_sessions:
+		if not (other is Dictionary):
+			continue
+		var o_order: int = int(other.get("order", 0))
+		var o_start_val = other.get("startDate", other.get("fechaDesde", other.get("availableFrom", other.get("from", other.get("start_date", "")))))
+		var o_start := str(o_start_val).strip_edges()
+		if o_start.contains("T"):
+			o_start = o_start.split("T")[0]
+		
+		if curr_order > 0 and o_order > curr_order and o_start != "":
+			if next_start == "" or o_start < next_start:
+				next_start = o_start
+		elif curr_order == 0 and o_start != "" and s_ymd != "" and o_start > s_ymd:
+			if next_start == "" or o_start < next_start:
+				next_start = o_start
+	
+	# Si una sesión posterior ya inició hoy o antes, la actual ya cumplió su ventana
+	if next_start != "" and today_str >= next_start:
+		return {
+			"is_active": false,
+			"status_label": "FINALIZADA",
+			"date_text": date_text
+		}
+	
+	# 3. Si no hay sesión posterior, verificar vigencia con margen de fin de semana
+	if e_ymd != "" and next_start == "":
+		var end_unix := parse_date_to_unix(e_ymd, true)
+		var now_unix := Time.get_unix_time_from_system()
+		var weekend_grace_unix: int = end_unix + (2 * 86400)
+		
+		if now_unix > weekend_grace_unix and status_raw not in ["PENDING", "ACTIVE"]:
+			return {
+				"is_active": false,
+				"status_label": "FINALIZADA",
+				"date_text": date_text
+			}
+	
+	return {
+		"is_active": true,
+		"status_label": "DISPONIBLE",
+		"date_text": date_text
+	}
+
+
+func format_date_display(val: String) -> String:
+	var s := val.strip_edges()
+	if s == "":
+		return ""
+	if s.contains("T"):
+		s = s.split("T")[0]
+	var parts := s.split("-")
+	if parts.size() == 3:
+		return "%s/%s/%s" % [parts[2], parts[1], parts[0]]
+	return s
+
+
+## Fallback de demostración con sesiones activas, futuras y vencidas para validar el árbol
+func get_fallback_treatments() -> Array:
+	var now_dict := Time.get_date_dict_from_system()
+	var y: int = now_dict["year"]
+	var m: int = now_dict["month"]
+	var d: int = now_dict["day"]
+	var today_str := "%04d-%02d-%02d" % [y, m, d]
+	
+	var prev_m := m - 1 if m > 1 else 12
+	var prev_y := y if m > 1 else y - 1
+	var next_m := m + 1 if m < 12 else 1
+	var next_y := y if m < 12 else y + 1
+	var past_str := "%04d-%02d-%02d" % [prev_y, prev_m, d]
+	var future_str := "%04d-%02d-%02d" % [next_y, next_m, d]
+	
+	return [
+		{
+			"id": "t-demo-01",
+			"name": "Plan de Rehabilitación Motora",
+			"description": "Tratamiento de movilidad articular, flexión de dedos y fuerza de agarre.",
+			"startDate": today_str,
+			"endDate": future_str,
+			"therapist": { "name": "Lic. Kinesiología" },
+			"sessions": [
+				{
+					"id": "s-demo-01",
+					"name": "Sesión 1: Flexión y Agarre",
+					"difficulty": "medio",
+					"startDate": today_str,
+					"endDate": future_str,
+					"sessionActivities": [
+						{
+							"id": "sa-1",
+							"name": "Flappy Bird",
+							"type": "flexion",
+							"difficulty": "medio"
+						},
+						{
+							"id": "sa-2",
+							"name": "Alcanza la Botella (3D)",
+							"type": "flexion_constante",
+							"difficulty": "medio"
+						}
+					]
+				},
+				{
+					"id": "s-demo-02",
+					"name": "Sesión 2: Coordinación y Pinza",
+					"difficulty": "alto",
+					"startDate": future_str,
+					"endDate": future_str,
+					"sessionActivities": [
+						{
+							"id": "sa-3",
+							"name": "Pinza Fina (Piano)",
+							"type": "pinza",
+							"difficulty": "alto"
+						},
+						{
+							"id": "sa-4",
+							"name": "Básquetbol 3D",
+							"type": "coordinacion_3d",
+							"difficulty": "alto"
+						}
+					]
+				},
+				{
+					"id": "s-demo-03",
+					"name": "Sesión Inicial: Diagnóstico",
+					"difficulty": "bajo",
+					"startDate": past_str,
+					"endDate": past_str,
+					"sessionActivities": []
+				}
+			]
+		}
+	]
 
 
 ## Convierte una fecha ISO o timestamp a unix timestamp en segundos.

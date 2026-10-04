@@ -43,7 +43,7 @@ func _ready() -> void:
 		
 		# Si ya hay una sesión guardada y válida, navegar automáticamente al inicio
 		if api.is_authenticated():
-			_navigate_to_main()
+			call_deferred("_navigate_to_main")
 
 
 func _on_ingresar_pressed() -> void:

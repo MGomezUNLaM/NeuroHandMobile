@@ -13,6 +13,7 @@ signal flex_updated(flex_percent: float)
 signal flex_fingers_updated(fingers: Array[float])
 signal fsr_updated(fsr_percent: float)
 signal imu_updated(pitch: float, roll: float, yaw: float)
+signal battery_updated(percentage: int)
 signal scan_started()
 signal scan_stopped()
 signal error(message: String)
@@ -22,6 +23,10 @@ enum State { IDLE, SCANNING, CONNECTING, CONNECTED }
 
 var state: State = State.IDLE
 var connected_device_name: String = ""
+var battery_level: int = 85
+var is_connected: bool:
+	get:
+		return state == State.CONNECTED
 
 # Sensores individuales (0 a 100%)
 var pulgar: float = 0.0
@@ -135,7 +140,8 @@ func _process(delta: float) -> void:
 			"pitch": _sim_pitch,
 			"roll": _sim_roll,
 			"yaw": 0.0,
-			"presion": _sim_presion
+			"presion": _sim_presion,
+			"bat": battery_level
 		}
 		_process_parsed_data(sim_dict)
 
@@ -250,6 +256,13 @@ func _process_parsed_data(data: Dictionary) -> void:
 	if imu_changed:
 		last_imu_value = Vector3(pitch, roll, yaw)
 		imu_updated.emit(pitch, roll, yaw)
+
+	# Batería (0 a 100%)
+	if data.has("bat") or data.has("bateria") or data.has("battery"):
+		var new_bat: int = clampi(int(data.get("bat", data.get("bateria", data.get("battery", 85)))), 0, 100)
+		if new_bat != battery_level:
+			battery_level = new_bat
+			battery_updated.emit(battery_level)
 
 	data_received.emit(data)
 
@@ -373,8 +386,21 @@ func _connect_plugin_signals() -> void:
 
 # ── Callbacks del Plugin ─────────────────────────────────────────────────────
 
+const TARGET_DEVICE_NAMES: Array[String] = ["BT05", "BT-05", "NEURO", "GLOVE", "KINESIS"]
+var filter_by_name: bool = true
+
 func _on_device_found(name: String, address: String) -> void:
 	print("[BLE] Dispositivo encontrado: %s (%s)" % [name, address])
+	if filter_by_name:
+		var n_upper := name.to_upper().strip_edges()
+		var matches := false
+		for target in TARGET_DEVICE_NAMES:
+			if n_upper.contains(target):
+				matches = true
+				break
+		if not matches:
+			# Ignorar otros dispositivos Bluetooth cercanos que no sean el guante
+			return
 	device_found.emit(name, address)
 
 

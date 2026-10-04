@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" path="res://ble_connect.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/icons/icon_cable.svg" id="2_cable"]
-[ext_resource type="Texture2D" path="res://assets/glove_hardware.png" id="3_glove"]
+[ext_resource type="Script" path="res://hand_visualizer.gd" id="3_hand_visualizer"]
 [ext_resource type="Texture2D" path="res://assets/icons/icon_battery_teal.svg" id="4_battery"]
 [ext_resource type="Texture2D" path="res://assets/icons/icon_check_circle.svg" id="5_check"]
+[ext_resource type="Texture2D" path="res://assets/kinesis_smart_glove_transparent.png" id="6_smart_glove"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_connected_badge"]
 content_margin_left = 20.0
@@ -73,7 +74,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.973, 0.984, 0.992, 1)
+
 [node name="RootVBox" type="VBoxContainer" parent="."]
+
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,6 +104,19 @@ theme_override_constants/margin_bottom = 14
 layout_mode = 2
 theme_override_constants/separation = 4
 
+[node name="TopNav" type="HBoxContainer" parent="RootVBox/HeaderContainer/HeaderVBox"]
+layout_mode = 2
+
+[node name="BtnBack" type="Button" parent="RootVBox/HeaderContainer/HeaderVBox/TopNav"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 16
+text = "← Volver al inicio"
+flat = true
+
 [node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
@@ -104,6 +128,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="CableIcon" type="TextureRect" parent="RootVBox/HeaderContainer/HeaderVBox/TitleHBox"]
+modulate = Color(0.118, 0.596, 0.647, 1)
 custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
 texture = ExtResource("2_cable")
@@ -144,10 +169,16 @@ alignment = 1
 [node name="GloveCenter" type="CenterContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 layout_mode = 2
 
-[node name="GloveTexture" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/GloveCenter"]
-custom_minimum_size = Vector2(220, 240)
+[node name="GloveCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/GloveCenter"]
+custom_minimum_size = Vector2(260, 260)
 layout_mode = 2
-texture = ExtResource("3_glove")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_link")
+
+[node name="GloveImage" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/GloveCenter/GloveCard"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("6_smart_glove")
 expand_mode = 1
 stretch_mode = 5
 
@@ -258,6 +289,13 @@ theme_override_constants/separation = 8
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
+
+[node name="FilterHintLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
+theme_override_font_sizes/font_size = 13
+text = "Buscando exclusivamente: Guante BT05"
+horizontal_alignment = 1
 
 [node name="ScanButton" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 unique_name_in_owner = true

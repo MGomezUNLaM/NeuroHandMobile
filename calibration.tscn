@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://calibration.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/icons/hand_open_calib.png" id="2_hand_open"]
+[ext_resource type="Script" path="res://hand_visualizer.gd" id="2_hand_visualizer"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_progress_bg"]
 bg_color = Color(0.92, 0.95, 0.95, 1)
@@ -16,7 +16,7 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_progress_fill"]
-bg_color = Color(0, 0.55, 0.55, 1)
+bg_color = Color(0.118, 0.596, 0.647, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -27,12 +27,12 @@ content_margin_left = 18.0
 content_margin_top = 12.0
 content_margin_right = 18.0
 content_margin_bottom = 12.0
-bg_color = Color(0.96, 0.98, 0.98, 1)
+bg_color = Color(0.965, 0.98, 0.985, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.82, 0.91, 0.9, 1)
+border_color = Color(0.85, 0.91, 0.92, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -41,20 +41,39 @@ corner_radius_bottom_left = 16
 [sub_resource type="StyleBoxFlat" id="StyleBox_btn_teal"]
 content_margin_top = 14.0
 content_margin_bottom = 14.0
-bg_color = Color(0, 0.36, 0.37, 1)
-corner_radius_top_left = 22
-corner_radius_top_right = 22
-corner_radius_bottom_right = 22
-corner_radius_bottom_left = 22
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0.118, 0.596, 0.647, 0.2)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_btn_teal_pressed"]
 content_margin_top = 14.0
 content_margin_bottom = 14.0
-bg_color = Color(0, 0.28, 0.29, 1)
-corner_radius_top_left = 22
-corner_radius_top_right = 22
-corner_radius_bottom_right = 22
-corner_radius_bottom_left = 22
+bg_color = Color(0.09, 0.48, 0.52, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_hand_card"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.92, 0.955, 0.97, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.88, 0.92, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="Calibration" type="Control"]
 layout_mode = 3
@@ -65,7 +84,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.965, 0.976, 0.988, 1)
+
 [node name="RootVBox" type="VBoxContainer" parent="."]
+
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -103,10 +132,11 @@ text = "Calibrar sensores del guante"
 
 [node name="BtnBack" type="Button" parent="RootVBox/HeaderContainer/HeaderHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 36)
+custom_minimum_size = Vector2(90, 48)
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
 theme_override_font_sizes/font_size = 15
 text = "← Volver"
 flat = true
@@ -120,94 +150,175 @@ color = Color(0.88, 0.88, 0.88, 1)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_top = 14
 theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 16
 
-[node name="Column" type="VBoxContainer" parent="RootVBox/ContentContainer"]
+[node name="Scroll" type="ScrollContainer" parent="RootVBox/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Column" type="VBoxContainer" parent="RootVBox/ContentContainer/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 18
+theme_override_constants/separation = 14
 alignment = 1
 
-[node name="StepLabel" type="Label" parent="RootVBox/ContentContainer/Column"]
+[node name="StepLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 16
-text = "Paso 1 de 10"
+theme_override_font_sizes/font_size = 17
+text = "Paso 1 de 10 — Pulgar"
 horizontal_alignment = 1
 
-[node name="HandCenter" type="CenterContainer" parent="RootVBox/ContentContainer/Column"]
+[node name="FingerStepperRow" type="HBoxContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
 layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="HandGraphic" type="TextureRect" parent="RootVBox/ContentContainer/Column/HandCenter"]
+[node name="ChipPulgar" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(170, 200)
 layout_mode = 2
-texture = ExtResource("2_hand_open")
-expand_mode = 1
-stretch_mode = 5
 
-[node name="InstructionsVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Column"]
+[node name="LabelPulgar" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipPulgar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "▶ Pulgar"
+
+[node name="ChipIndice" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelIndice" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipIndice"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "• Índice"
+
+[node name="ChipMedio" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelMedio" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipMedio"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "• Medio"
+
+[node name="ChipAnular" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelAnular" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipAnular"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "• Anular"
+
+[node name="ChipMenique" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LabelMenique" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipMenique"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "• Meñique"
+
+[node name="HandCenter" type="CenterContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
+layout_mode = 2
+
+[node name="HandCard" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/HandCenter"]
+custom_minimum_size = Vector2(340, 310)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_hand_card")
+
+[node name="HandVisualizer" type="SubViewportContainer" parent="RootVBox/ContentContainer/Scroll/Column/HandCenter/HandCard"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 310)
+layout_mode = 2
+stretch = true
+script = ExtResource("2_hand_visualizer")
+
+[node name="ActionBadgeCenter" type="CenterContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
+layout_mode = 2
+
+[node name="ActionBadgePanel" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/ActionBadgeCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ActionBadgeLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/ActionBadgeCenter/ActionBadgePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "🖐 GESTO: REPOSO (EXTENDIDO)"
+horizontal_alignment = 1
+
+[node name="InstructionsVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="InstructionTitle" type="Label" parent="RootVBox/ContentContainer/Column/InstructionsVBox"]
+[node name="InstructionTitle" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/InstructionsVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "Pulgar: Reposo (abierto)"
 horizontal_alignment = 1
 
-[node name="InstructionSubtitle" type="Label" parent="RootVBox/ContentContainer/Column/InstructionsVBox"]
+[node name="InstructionSubtitle" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/InstructionsVBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.5, 0.5, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.35, 0.45, 0.48, 1)
+theme_override_font_sizes/font_size = 16
 text = "Mantené el pulgar completamente extendido y relajado."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="LivePanel" type="PanelContainer" parent="RootVBox/ContentContainer/Column"]
+[node name="LivePanel" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_live_panel")
 
-[node name="LiveVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Column/LivePanel"]
+[node name="LiveVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Scroll/Column/LivePanel"]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 8
 
-[node name="LiveValueLabel" type="Label" parent="RootVBox/ContentContainer/Column/LivePanel/LiveVBox"]
+[node name="LiveValueLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/LivePanel/LiveVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 15
-text = "Lectura del sensor (Pulgar): 0"
+theme_override_font_sizes/font_size = 16
+text = "Lectura del sensor (Pulgar): 0 %"
 horizontal_alignment = 1
 
-[node name="LiveProgressBar" type="ProgressBar" parent="RootVBox/ContentContainer/Column/LivePanel/LiveVBox"]
+[node name="LiveProgressBar" type="ProgressBar" parent="RootVBox/ContentContainer/Scroll/Column/LivePanel/LiveVBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBox_progress_bg")
 theme_override_styles/fill = SubResource("StyleBox_progress_fill")
 max_value = 100.0
 show_percentage = false
 
-[node name="ProgressVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Column"]
+[node name="TargetQualityLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/LivePanel/LiveVBox"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_colors/font_color = Color(0.1, 0.55, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "Esperando lectura del sensor..."
+horizontal_alignment = 1
 
-[node name="ProgLabel" type="Label" parent="RootVBox/ContentContainer/Column/ProgressVBox"]
+[node name="ProgressVBox" type="VBoxContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ProgLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/ProgressVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.6, 0.6, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 13
 text = "Progreso total de calibración"
 horizontal_alignment = 1
 
-[node name="CalibProgress" type="ProgressBar" parent="RootVBox/ContentContainer/Column/ProgressVBox"]
+[node name="CalibProgress" type="ProgressBar" parent="RootVBox/ContentContainer/Scroll/Column/ProgressVBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
@@ -218,9 +329,9 @@ step = 1.0
 value = 0.0
 show_percentage = false
 
-[node name="BtnNext" type="Button" parent="RootVBox/ContentContainer/Column"]
+[node name="BtnNext" type="Button" parent="RootVBox/ContentContainer/Scroll/Column"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 48)
+custom_minimum_size = Vector2(280, 52)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
@@ -229,11 +340,11 @@ theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_btn_teal")
 theme_override_styles/hover = SubResource("StyleBox_btn_teal")
 theme_override_styles/pressed = SubResource("StyleBox_btn_teal_pressed")
-text = "Siguiente"
+text = "Confirmar y Siguiente"
 
-[node name="FooterNote" type="Label" parent="RootVBox/ContentContainer/Column"]
+[node name="FooterNote" type="Label" parent="RootVBox/ContentContainer/Scroll/Column"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.65, 0.65, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 13
 text = "Asegurate de que el guante esté conectado y bien colocado"
 horizontal_alignment = 1

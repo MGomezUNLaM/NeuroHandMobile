@@ -19,6 +19,10 @@ var is_calibrated: bool = true
 @onready var sim_button: Button = %SimButton
 @onready var device_list: VBoxContainer = %DeviceList
 @onready var connection_controls: VBoxContainer = %ConnectionControls
+@onready var btn_back: Button = %BtnBack
+@onready var glove_image: TextureRect = %GloveImage if has_node("%GloveImage") else null
+@onready var hand_schematic = %HandVisualizer if has_node("%HandVisualizer") else (%HandSchematic if has_node("%HandSchematic") else null)
+@onready var hand_visualizer = hand_schematic
 
 
 func _ready() -> void:
@@ -30,6 +34,10 @@ func _ready() -> void:
 		_ble_manager.scan_started.connect(_on_scan_started)
 		_ble_manager.scan_stopped.connect(_on_scan_stopped)
 		_ble_manager.error.connect(_on_error)
+		_ble_manager.battery_updated.connect(_on_battery_updated)
+
+	if btn_back != null:
+		btn_back.pressed.connect(_on_back_pressed)
 
 	btn_calibrar_nuevamente.pressed.connect(_on_calibrar_pressed)
 	scan_button.pressed.connect(_on_scan_pressed)
@@ -37,6 +45,16 @@ func _ready() -> void:
 
 	sim_button.visible = not OS.has_feature("android")
 	_update_ui()
+
+
+func _on_back_pressed() -> void:
+	navigate_to.emit(0)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_on_back_pressed()
+		get_viewport().set_input_as_handled()
 
 
 func on_view_activated() -> void:
@@ -66,9 +84,25 @@ func _on_sim_pressed() -> void:
 func _on_device_found(device_name: String, address: String) -> void:
 	if _device_buttons.has(address):
 		return
+	var display_name := device_name if device_name.strip_edges() != "" else "Guante BT05"
 	var btn := Button.new()
-	btn.text = "%s (%s)" % [device_name if device_name != "" else "Guante", address]
-	btn.custom_minimum_size = Vector2(0, 48)
+	btn.text = "🧤 %s (%s)" % [display_name, address]
+	btn.custom_minimum_size = Vector2(0, 52)
+	btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	
+	var style_normal := StyleBoxFlat.new()
+	style_normal.bg_color = Color(0.94, 0.97, 0.98, 1.0)
+	style_normal.border_color = Color(0.118, 0.596, 0.647, 0.6)
+	style_normal.set_border_width_all(2)
+	style_normal.set_corner_radius_all(14)
+	style_normal.content_margin_left = 16.0
+	style_normal.content_margin_right = 16.0
+	
+	btn.add_theme_stylebox_override("normal", style_normal)
+	btn.add_theme_stylebox_override("hover", style_normal)
+	btn.add_theme_color_override("font_color", Color(0.067, 0.157, 0.235, 1.0))
+	btn.add_theme_font_size_override("font_size", 16)
+	
 	btn.pressed.connect(func(): _on_device_selected(address))
 	device_list.add_child(btn)
 	_device_buttons[address] = btn
@@ -103,6 +137,11 @@ func _on_error(msg: String) -> void:
 	status_text.text = "Error: %s" % msg
 
 
+func _on_battery_updated(percentage: int) -> void:
+	if battery_label != null:
+		battery_label.text = "%d%%" % percentage
+
+
 func _clear_devices() -> void:
 	for child in device_list.get_children():
 		child.queue_free()
@@ -115,6 +154,13 @@ func _update_ui() -> void:
 		connected = _ble_manager.is_connected_to_glove()
 	
 	if connected:
+		if glove_image:
+			glove_image.modulate = Color.WHITE
+		if hand_schematic:
+			hand_schematic.active_finger = ""
+			hand_schematic.completed_fingers = ["pulgar", "indice", "medio", "anular", "menique"]
+			hand_schematic.is_open = true
+			hand_schematic.flex_progress = 0.0
 		dot_color.color = Color(0.18, 0.8, 0.25, 1.0)
 		status_text.text = "Conectado"
 		var badge_style := StyleBoxFlat.new()
@@ -126,11 +172,18 @@ func _update_ui() -> void:
 		badge_style.content_margin_bottom = 6.0
 		status_badge.add_theme_stylebox_override("panel", badge_style)
 		
-		battery_label.text = "80%"
+		battery_label.text = "%d%%" % (_ble_manager.battery_level if _ble_manager != null else 85)
 		calib_label.text = "Calibrado"
 		check_icon.visible = true
 		connection_controls.visible = false
 	else:
+		if glove_image:
+			glove_image.modulate = Color(0.75, 0.8, 0.85, 0.85)
+		if hand_schematic:
+			hand_schematic.active_finger = ""
+			hand_schematic.completed_fingers = []
+			hand_schematic.is_open = true
+			hand_schematic.flex_progress = 0.0
 		dot_color.color = Color(0.6, 0.6, 0.6, 1.0)
 		status_text.text = "Desconectado"
 		var badge_style := StyleBoxFlat.new()

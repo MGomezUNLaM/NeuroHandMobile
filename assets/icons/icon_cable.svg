@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#1E98A6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
   <!-- Top connector head -->
-  <rect x="18" y="18" width="16" height="12" rx="3" fill="none" stroke="#1E98A6" stroke-width="5" />
+  <rect x="18" y="18" width="16" height="12" rx="3" fill="none" stroke="white" stroke-width="5" />
   <!-- Coiled serpentine path -->
   <path d="M34 24 H70 C76 24 80 28 80 34 C80 40 76 44 70 44 H30 C24 44 20 48 20 54 C20 60 24 64 30 64 H70 C76 64 80 68 80 74 C80 80 76 84 70 84 H48" />
   <!-- Bottom connector head -->
-  <rect x="52" y="78" width="16" height="12" rx="3" fill="none" stroke="#1E98A6" stroke-width="5" />
+  <rect x="52" y="78" width="16" height="12" rx="3" fill="none" stroke="white" stroke-width="5" />
 </svg>

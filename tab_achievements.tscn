@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://tab_achievements.gd" id="1_script"]
 
@@ -7,24 +7,22 @@ content_margin_left = 16.0
 content_margin_top = 8.0
 content_margin_right = 16.0
 content_margin_bottom = 8.0
-bg_color = Color(0.04, 0.45, 0.42, 0.5)
-border_width_bottom = 2
-border_color = Color(0.15, 0.9, 0.8, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_filter"]
 content_margin_left = 16.0
 content_margin_top = 8.0
 content_margin_right = 16.0
 content_margin_bottom = 8.0
-bg_color = Color(0.03, 0.07, 0.15, 0.8)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+bg_color = Color(0.92, 0.95, 0.97, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
 
 [node name="TabAchievements" type="Control"]
 layout_mode = 3
@@ -35,54 +33,81 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.973, 0.984, 0.992, 1)
+
 [node name="MainVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = -24.0
-offset_bottom = -10.0
+offset_left = 20.0
+offset_top = 18.0
+offset_right = -20.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="MainVBox"]
+[node name="HeaderVBox" type="VBoxContainer" parent="MainVBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 32
-text = "Logros"
+theme_override_constants/separation = 2
+
+[node name="Category" type="Label" parent="MainVBox/HeaderVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 12
+text = "PROGRESO Y RECOMPENSAS"
+
+[node name="Title" type="Label" parent="MainVBox/HeaderVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "Logros y Medallas"
 
 [node name="FilterRow" type="HBoxContainer" parent="MainVBox"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="FilterAll" type="Button" parent="MainVBox/FilterRow"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.15, 0.9, 0.8, 1)
-theme_override_font_sizes/font_size = 16
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBox_filter_active")
 text = "Todos"
 
 [node name="FilterBronce" type="Button" parent="MainVBox/FilterRow"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
-theme_override_font_sizes/font_size = 16
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.40, 0.50, 0.55, 1)
+theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBox_filter")
 text = "Bronce"
 
 [node name="FilterPlata" type="Button" parent="MainVBox/FilterRow"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
-theme_override_font_sizes/font_size = 16
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.40, 0.50, 0.55, 1)
+theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBox_filter")
 text = "Plata"
 
 [node name="FilterOro" type="Button" parent="MainVBox/FilterRow"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.67, 0.76, 1)
-theme_override_font_sizes/font_size = 16
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.40, 0.50, 0.55, 1)
+theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBox_filter")
 text = "Oro"
 

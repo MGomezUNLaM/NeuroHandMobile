@@ -19,9 +19,9 @@ func _ready() -> void:
 
 
 func _check_achievement(ach: Dictionary, store: PlayerSessionStore) -> Dictionary:
-	var total_sessions: int = store.get_total_sessions()
-	var level: int = store.data.get("level", 1)
-	var streak: int = store.data.get("streak_days", 0)
+	var total_sessions: int = store.get_total_sessions() if store else 0
+	var level: int = store.data.get("level", 1) if store else 1
+	var streak: int = store.data.get("streak_days", 0) if store else 0
 
 	match ach.key:
 		"first_session":
@@ -39,11 +39,10 @@ func _check_achievement(ach: Dictionary, store: PlayerSessionStore) -> Dictionar
 
 
 func _refresh_achievements() -> void:
-	# Limpiar lista
 	for child in _list.get_children():
 		child.queue_free()
 
-	var store := get_node("/root/SessionStore") as PlayerSessionStore
+	var store := get_node_or_null("/root/SessionStore") as PlayerSessionStore
 
 	for ach in ACHIEVEMENTS:
 		if _current_filter != "Todos" and ach.tier != _current_filter:
@@ -56,9 +55,9 @@ func _refresh_achievements() -> void:
 func _create_achievement_card(ach: Dictionary, status: Dictionary) -> PanelContainer:
 	var card := PanelContainer.new()
 	var style := StyleBoxFlat.new()
-	style.content_margin_left = 16.0
+	style.content_margin_left = 18.0
 	style.content_margin_top = 14.0
-	style.content_margin_right = 16.0
+	style.content_margin_right = 18.0
 	style.content_margin_bottom = 14.0
 	style.corner_radius_top_left = 18
 	style.corner_radius_top_right = 18
@@ -66,62 +65,73 @@ func _create_achievement_card(ach: Dictionary, status: Dictionary) -> PanelConta
 	style.corner_radius_bottom_left = 18
 
 	if status.done:
-		style.bg_color = Color(0.03, 0.12, 0.15, 0.95)
-		style.border_width_left = 2
-		style.border_width_top = 2
-		style.border_width_right = 2
-		style.border_width_bottom = 2
-		style.border_color = Color(0.1, 0.6, 0.5, 0.5)
-	else:
-		style.bg_color = Color(0.028, 0.075, 0.17, 0.95)
+		style.bg_color = Color(1, 1, 1, 1)
 		style.border_width_left = 1
 		style.border_width_top = 1
 		style.border_width_right = 1
 		style.border_width_bottom = 1
-		style.border_color = Color(0.08, 0.25, 0.38, 0.35)
+		style.border_color = Color(0.12, 0.70, 0.65, 0.6)
+		style.shadow_color = Color(0.12, 0.70, 0.65, 0.12)
+		style.shadow_size = 4
+	else:
+		style.bg_color = Color(0.97, 0.98, 0.99, 1)
+		style.border_width_left = 1
+		style.border_width_top = 1
+		style.border_width_right = 1
+		style.border_width_bottom = 1
+		style.border_color = Color(0.90, 0.92, 0.94, 1)
+
 	card.add_theme_stylebox_override(&"panel", style)
 
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override(&"separation", 14)
 	card.add_child(row)
 
-	# Icono (Trophy SVG)
+	# Icono (Trophy SVG) en círculo pastel
+	var icon_circle := Panel.new()
+	icon_circle.custom_minimum_size = Vector2(44, 44)
+	var circle_style := StyleBoxFlat.new()
+	circle_style.corner_radius_top_left = 22
+	circle_style.corner_radius_top_right = 22
+	circle_style.corner_radius_bottom_right = 22
+	circle_style.corner_radius_bottom_left = 22
+
+	var tier_color := Color(0.80, 0.50, 0.25) # Bronce
+	if ach.tier == "Plata":
+		tier_color = Color(0.45, 0.60, 0.75)
+	elif ach.tier == "Oro":
+		tier_color = Color(0.92, 0.68, 0.15)
+
+	circle_style.bg_color = Color(tier_color.r, tier_color.g, tier_color.b, 0.15)
+	icon_circle.add_theme_stylebox_override(&"panel", circle_style)
+	row.add_child(icon_circle)
+
 	var rect := TextureRect.new()
-	rect.custom_minimum_size = Vector2(40, 40)
+	rect.custom_minimum_size = Vector2(24, 24)
 	rect.texture = load("res://assets/icons/icon_trophy_white.svg") as Texture2D
 	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	rect.self_modulate = tier_color
+	icon_circle.add_child(rect)
 
-	# Modulación de color por Tier y Estado
-	var tier_color := Color(0.8, 0.5, 0.3) # Bronce por defecto
-	if ach.tier == "Plata":
-		tier_color = Color(0.75, 0.79, 0.85)
-	elif ach.tier == "Oro":
-		tier_color = Color(1.0, 0.78, 0.1)
-
-	if status.done:
-		rect.self_modulate = tier_color
-	else:
-		rect.self_modulate = tier_color * Color(0.45, 0.45, 0.5, 0.4) # Dimmed / locked
-	row.add_child(rect)
 
 	# Info
 	var info := VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	info.add_theme_constant_override(&"separation", 4)
+	info.add_theme_constant_override(&"separation", 2)
 	row.add_child(info)
 
 	var name_label := Label.new()
 	name_label.text = ach.name
-	name_label.add_theme_font_size_override(&"font_size", 20)
-	name_label.add_theme_color_override(&"font_color", Color(1, 1, 1) if not status.done else Color(0.2, 0.92, 0.84))
+	name_label.add_theme_font_size_override(&"font_size", 16)
+	name_label.add_theme_color_override(&"font_color", Color(0.067, 0.157, 0.235, 1))
 	info.add_child(name_label)
 
 	var desc_label := Label.new()
 	desc_label.text = ach.desc
-	desc_label.add_theme_font_size_override(&"font_size", 15)
-	desc_label.add_theme_color_override(&"font_color", Color(0.55, 0.62, 0.72))
+	desc_label.add_theme_font_size_override(&"font_size", 12)
+	desc_label.add_theme_color_override(&"font_color", Color(0.45, 0.55, 0.60, 1))
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	info.add_child(desc_label)
 
@@ -129,23 +139,18 @@ func _create_achievement_card(ach: Dictionary, status: Dictionary) -> PanelConta
 	if status.done:
 		var check_lbl := Label.new()
 		check_lbl.text = "✓"
-		check_lbl.add_theme_font_size_override(&"font_size", 22)
-		check_lbl.add_theme_color_override(&"font_color", Color(0.15, 0.9, 0.6))
+		check_lbl.add_theme_font_size_override(&"font_size", 20)
+		check_lbl.add_theme_color_override(&"font_color", Color(0.12, 0.70, 0.40, 1))
 		check_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		check_lbl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(check_lbl)
 	elif status.max > 0:
 		var prog_label := Label.new()
 		prog_label.text = "%d / %d" % [status.progress, status.max]
-		prog_label.add_theme_font_size_override(&"font_size", 16)
-		prog_label.add_theme_color_override(&"font_color", Color(0.45, 0.52, 0.62))
+		prog_label.add_theme_font_size_override(&"font_size", 13)
+		prog_label.add_theme_color_override(&"font_color", Color(0.50, 0.60, 0.65, 1))
 		prog_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(prog_label)
-
-	if status.done:
-		card.modulate = Color(1, 1, 1, 1)
-	elif ach.key == "master":
-		card.modulate = Color(1, 1, 1, 0.45)
 
 	return card
 

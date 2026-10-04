@@ -85,7 +85,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.973, 0.984, 0.992, 1)
+
 [node name="RootVBox" type="VBoxContainer" parent="." unique_id=1373969182]
+
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,6 +114,19 @@ theme_override_constants/margin_bottom = 14
 [node name="HeaderVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer" unique_id=1383184606]
 layout_mode = 2
 theme_override_constants/separation = 4
+
+[node name="TopNav" type="HBoxContainer" parent="RootVBox/HeaderContainer/HeaderVBox"]
+layout_mode = 2
+
+[node name="BtnBack" type="Button" parent="RootVBox/HeaderContainer/HeaderVBox/TopNav"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
+theme_override_font_sizes/font_size = 16
+text = "← Volver al inicio"
+flat = true
 
 [node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox" unique_id=1008370725]
 layout_mode = 2
@@ -134,6 +157,7 @@ theme_override_constants/margin_bottom = 24
 [node name="Column" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding" unique_id=1415069935]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 18
 
 [node name="ChartCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=2000973537]
@@ -145,7 +169,8 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="BarsHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox" unique_id=1156809718]
-custom_minimum_size = Vector2(0, 140)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 alignment = 1
 
@@ -462,3 +487,7 @@ theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
 theme_override_font_sizes/font_size = 15
 text = "Observo una clara mejoría en la capacidad de flexión de cada dedo."
 autowrap_mode = 3
+
+[node name="BottomElasticSpacer" type="Control" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+size_flags_vertical = 3
