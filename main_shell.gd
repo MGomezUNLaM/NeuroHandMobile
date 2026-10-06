@@ -73,17 +73,18 @@ func _apply_safe_area() -> void:
 		var bottom_inset := (screen_size.y - (safe_area.position.y + safe_area.size.y)) * scale_y
 		var top_inset := safe_area.position.y * scale_y
 		
+		var base_nav_height: float = 96.0
 		# Ajustar márgenes para que la muesca de cámara y la barra de gestos no tapen nada
 		if _nav_panel != null:
 			_nav_panel.offset_bottom = -max(0.0, bottom_inset)
 		if _content != null and _nav_panel != null and _nav_panel.visible:
-			_content.offset_bottom = - (72.0 + max(0.0, bottom_inset))
+			_content.offset_bottom = - (base_nav_height + max(0.0, bottom_inset))
 			_content.offset_top = max(0.0, top_inset)
 	else:
 		if _nav_panel != null:
 			_nav_panel.offset_bottom = 0.0
 		if _content != null and _nav_panel != null and _nav_panel.visible:
-			_content.offset_bottom = -72.0
+			_content.offset_bottom = -96.0
 			_content.offset_top = 0.0
 
 

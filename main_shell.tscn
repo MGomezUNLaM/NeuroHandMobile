@@ -8,9 +8,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_nav"]
 content_margin_left = 12.0
-content_margin_top = 6.0
+content_margin_top = 8.0
 content_margin_right = 12.0
-content_margin_bottom = 6.0
+content_margin_bottom = 8.0
 bg_color = Color(1, 1, 1, 1)
 border_width_top = 1
 border_color = Color(0.88, 0.91, 0.94, 1)
@@ -42,7 +42,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -68.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -53,7 +53,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -68.0
+offset_top = -96.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBox_nav")
@@ -65,7 +65,7 @@ alignment = 1
 
 [node name="BtnTabHome" type="Button" parent="NavPanel/NavHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 52)
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -78,12 +78,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 alignment = 1
 
 [node name="IconHome" type="TextureRect" parent="NavPanel/NavHBox/BtnTabHome/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_home")
@@ -93,13 +93,13 @@ stretch_mode = 5
 [node name="LabelHome" type="Label" parent="NavPanel/NavHBox/BtnTabHome/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Inicio"
 horizontal_alignment = 1
 
 [node name="BtnTabGlove" type="Button" parent="NavPanel/NavHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 52)
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -112,12 +112,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 alignment = 1
 
 [node name="IconGlove" type="TextureRect" parent="NavPanel/NavHBox/BtnTabGlove/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_glove")
@@ -127,13 +127,13 @@ stretch_mode = 5
 [node name="LabelGlove" type="Label" parent="NavPanel/NavHBox/BtnTabGlove/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Guante"
 horizontal_alignment = 1
 
 [node name="BtnTabHistory" type="Button" parent="NavPanel/NavHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 52)
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -146,12 +146,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 alignment = 1
 
 [node name="IconHistory" type="TextureRect" parent="NavPanel/NavHBox/BtnTabHistory/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_history")
@@ -161,13 +161,13 @@ stretch_mode = 5
 [node name="LabelHistory" type="Label" parent="NavPanel/NavHBox/BtnTabHistory/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Progreso"
 horizontal_alignment = 1
 
 [node name="BtnTabProfile" type="Button" parent="NavPanel/NavHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 52)
+custom_minimum_size = Vector2(0, 76)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -180,12 +180,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 alignment = 1
 
 [node name="IconProfile" type="TextureRect" parent="NavPanel/NavHBox/BtnTabProfile/VBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("5_profile")
@@ -195,6 +195,6 @@ stretch_mode = 5
 [node name="LabelProfile" type="Label" parent="NavPanel/NavHBox/BtnTabProfile/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 16
 text = "Perfil"
 horizontal_alignment = 1

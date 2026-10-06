@@ -87,21 +87,23 @@ func _on_device_found(device_name: String, address: String) -> void:
 	var display_name := device_name if device_name.strip_edges() != "" else "Guante BT05"
 	var btn := Button.new()
 	btn.text = "🧤 %s (%s)" % [display_name, address]
-	btn.custom_minimum_size = Vector2(0, 52)
+	btn.custom_minimum_size = Vector2(0, 68)
 	btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	
 	var style_normal := StyleBoxFlat.new()
 	style_normal.bg_color = Color(0.94, 0.97, 0.98, 1.0)
 	style_normal.border_color = Color(0.118, 0.596, 0.647, 0.6)
 	style_normal.set_border_width_all(2)
-	style_normal.set_corner_radius_all(14)
-	style_normal.content_margin_left = 16.0
-	style_normal.content_margin_right = 16.0
+	style_normal.set_corner_radius_all(18)
+	style_normal.content_margin_left = 18.0
+	style_normal.content_margin_top = 12.0
+	style_normal.content_margin_right = 18.0
+	style_normal.content_margin_bottom = 12.0
 	
 	btn.add_theme_stylebox_override("normal", style_normal)
 	btn.add_theme_stylebox_override("hover", style_normal)
 	btn.add_theme_color_override("font_color", Color(0.067, 0.157, 0.235, 1.0))
-	btn.add_theme_font_size_override("font_size", 16)
+	btn.add_theme_font_size_override("font_size", 22)
 	
 	btn.pressed.connect(func(): _on_device_selected(address))
 	device_list.add_child(btn)

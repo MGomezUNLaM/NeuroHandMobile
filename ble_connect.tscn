@@ -109,18 +109,18 @@ layout_mode = 2
 
 [node name="BtnBack" type="Button" parent="RootVBox/HeaderContainer/HeaderVBox/TopNav"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "← Volver al inicio"
 flat = true
 
 [node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 text = "SOLO UNA VEZ"
 
 [node name="TitleHBox" type="HBoxContainer" parent="RootVBox/HeaderContainer/HeaderVBox"]
@@ -129,7 +129,7 @@ theme_override_constants/separation = 12
 
 [node name="CableIcon" type="TextureRect" parent="RootVBox/HeaderContainer/HeaderVBox/TitleHBox"]
 modulate = Color(0.118, 0.596, 0.647, 1)
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 texture = ExtResource("2_cable")
 expand_mode = 1
@@ -138,7 +138,7 @@ stretch_mode = 5
 [node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox/TitleHBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 28
 text = "Conectar guante"
 
 [node name="HeaderDivider" type="ColorRect" parent="RootVBox"]
@@ -192,12 +192,12 @@ theme_override_styles/panel = SubResource("StyleBox_connected_badge")
 
 [node name="BadgeHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgeCenter/StatusBadge"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="DotColor" type="ColorRect" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgeCenter/StatusBadge/BadgeHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(10, 10)
+custom_minimum_size = Vector2(14, 14)
 layout_mode = 2
 size_flags_vertical = 4
 color = Color(0.18, 0.8, 0.25, 1)
@@ -206,7 +206,7 @@ color = Color(0.18, 0.8, 0.25, 1)
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 22
 text = "Conectado"
 
 [node name="Space1" type="Control" parent="RootVBox/ContentScroll/ContentPadding/Column"]
@@ -222,7 +222,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Icon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/BatteryCard/HBox"]
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("4_battery")
@@ -233,14 +233,14 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Batería"
 
 [node name="BatteryLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BatteryCard/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 text = "80%"
 
 [node name="CalibCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
@@ -253,7 +253,7 @@ theme_override_constants/separation = 16
 
 [node name="CheckIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/CalibCard/HBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(34, 34)
+custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("5_check")
@@ -264,16 +264,17 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Calibrado"
 
 [node name="BtnCalibrarNuevamente" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
 theme_override_colors/font_hover_color = Color(0.09, 0.48, 0.52, 1)
 theme_override_colors/font_pressed_color = Color(0.06, 0.38, 0.42, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 19
 theme_override_styles/normal = SubResource("StyleBoxEmpty_link")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_link")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_link")
@@ -283,26 +284,26 @@ text = "Para calibrarlo nuevamente, presione aquí"
 [node name="ConnectionControls" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 12
 
 [node name="DeviceList" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 8
 
 [node name="FilterHintLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 17
 text = "Buscando exclusivamente: Guante BT05"
 horizontal_alignment = 1
 
 [node name="ScanButton" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBox_btn_teal")
 theme_override_styles/hover = SubResource("StyleBox_btn_teal")
 theme_override_styles/pressed = SubResource("StyleBox_btn_teal")
@@ -310,9 +311,10 @@ text = "Buscar Guante"
 
 [node name="SimButton" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/ConnectionControls"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_btn_sim")
 theme_override_styles/hover = SubResource("StyleBox_btn_sim")
 theme_override_styles/pressed = SubResource("StyleBox_btn_sim")
