@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="ribbonLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+    <linearGradient id="ribbonRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="medalDisk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="40%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="medalShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#4C1D95" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Ribbons -->
+  <!-- Left Ribbon -->
+  <path d="M 22 8 L 32 28 L 22 28 L 14 8 Z" fill="url(#ribbonLeft)"/>
+  <!-- Right Ribbon -->
+  <path d="M 42 8 L 32 28 L 42 28 L 50 8 Z" fill="url(#ribbonRight)"/>
+  <!-- Ribbon Fold Accents -->
+  <path d="M 22 8 L 26 8 L 32 24 L 28 24 Z" fill="#4C1D95" opacity="0.3"/>
+  <path d="M 42 8 L 38 8 L 32 24 L 36 24 Z" fill="#4C1D95" opacity="0.3"/>
+  <!-- Medal Disk Ring -->
+  <circle cx="32" cy="40" r="18" fill="url(#medalDisk)" filter="url(#medalShadow)"/>
+  <circle cx="32" cy="40" r="14" fill="#D97706"/>
+  <circle cx="32" cy="40" r="13" fill="url(#medalDisk)"/>
+  <!-- Star on Medal -->
+  <path d="M 32 30 L 34.5 36.5 L 41.5 36.5 L 36 41 L 38.5 48 L 32 44 L 25.5 48 L 28 41 L 22.5 36.5 L 29.5 36.5 Z" fill="#FEF08A"/>
+</svg>

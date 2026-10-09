@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://c8k7p3m6q2w1v"]
 
-[ext_resource type="Script" uid="uid://bdg09km21k8sl" path="res://tab_profile.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://b8uhtc6lvactf" path="res://tab_profile.gd" id="1_script"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_bg"]
 bg_color = Color(0.976, 0.976, 0.965, 1)
@@ -39,9 +39,9 @@ shadow_offset = Vector2(0, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_input"]
 content_margin_left = 18.0
-content_margin_top = 14.0
+content_margin_top = 16.0
 content_margin_right = 18.0
-content_margin_bottom = 14.0
+content_margin_bottom = 16.0
 bg_color = Color(0.975, 0.98, 0.985, 1)
 border_width_left = 1
 border_width_top = 1
@@ -55,9 +55,9 @@ corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_input_focus"]
 content_margin_left = 18.0
-content_margin_top = 14.0
+content_margin_top = 16.0
 content_margin_right = 18.0
-content_margin_bottom = 14.0
+content_margin_bottom = 16.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
@@ -221,7 +221,7 @@ text = "Mi Perfil"
 [node name="Subtitle" type="Label" parent="Scroll/Margin/VBox/TitleBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.45, 0.48, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Consultá y actualizá tus datos personales de paciente"
 
 [node name="HeaderCard" type="PanelContainer" parent="Scroll/Margin/VBox"]
@@ -272,7 +272,7 @@ text = "Cargando paciente..."
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "paciente@ejemplo.com"
 
 [node name="StatusPill" type="PanelContainer" parent="Scroll/Margin/VBox/HeaderCard/HeaderContent/InfoBox"]
@@ -285,7 +285,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.06, 0.5, 0.32, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "Estado: ACTIVO"
 
 [node name="ViewContainer" type="VBoxContainer" parent="Scroll/Margin/VBox"]
@@ -308,7 +308,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "INFORMACIÓN DEL PACIENTE"
 
 [node name="Sep0" type="HSeparator" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox"]
@@ -324,7 +324,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "NOMBRE"
 
 [node name="ViewFirstName" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockFirstName"]
@@ -332,7 +332,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "-"
 autowrap_mode = 3
 
@@ -349,7 +349,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "APELLIDO"
 
 [node name="ViewLastName" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockLastName"]
@@ -357,7 +357,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "-"
 autowrap_mode = 3
 
@@ -374,7 +374,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "CORREO ELECTRÓNICO"
 
 [node name="ViewEmail" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockEmail"]
@@ -382,7 +382,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "-"
 autowrap_mode = 3
 
@@ -399,7 +399,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "DOCUMENTO DE IDENTIDAD"
 
 [node name="ViewDoc" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockDoc"]
@@ -407,7 +407,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "-"
 autowrap_mode = 3
 
@@ -424,7 +424,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "TELÉFONO DE CONTACTO"
 
 [node name="ViewPhone" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockPhone"]
@@ -432,7 +432,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "-"
 autowrap_mode = 3
 
@@ -449,7 +449,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.42, 0.5, 0.55, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "FECHA DE NACIMIENTO"
 
 [node name="ViewBirthDate" type="Label" parent="Scroll/Margin/VBox/ViewContainer/ViewCard/ViewVBox/BlockBirthDate"]
@@ -457,7 +457,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "-"
 autowrap_mode = 3
 
@@ -504,7 +504,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "MODIFICAR DATOS"
 
 [node name="RowFirstName" type="VBoxContainer" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox"]
@@ -515,7 +515,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Nombre"
 
 [node name="InputFirstName" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowFirstName"]
@@ -523,7 +523,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 placeholder_text = "Ingresá tu nombre"
@@ -536,7 +536,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Apellido"
 
 [node name="InputLastName" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowLastName"]
@@ -544,7 +544,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 placeholder_text = "Ingresá tu apellido"
@@ -557,7 +557,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Correo electrónico"
 
 [node name="InputEmail" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowEmail"]
@@ -565,7 +565,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 placeholder_text = "correo@ejemplo.com"
@@ -578,7 +578,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Tipo de documento"
 
 [node name="OptionDocType" type="OptionButton" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowDocType"]
@@ -586,7 +586,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 
@@ -598,7 +598,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Número de documento"
 
 [node name="InputDocNumber" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowDocNumber"]
@@ -606,7 +606,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 placeholder_text = "Ej: 12345678"
@@ -619,7 +619,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Teléfono de contacto"
 
 [node name="InputPhone" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowPhone"]
@@ -627,7 +627,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 placeholder_text = "+54 11 1234-5678"
@@ -640,7 +640,7 @@ theme_override_constants/separation = 6
 layout_mode = 2
 theme_override_colors/font_color = Color(0.15, 0.25, 0.27, 1)
 theme_override_fonts/font = SubResource("SystemFont_bold")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 16
 text = "Fecha de nacimiento (AAAA-MM-DD)"
 
 [node name="InputBirthDate" type="LineEdit" parent="Scroll/Margin/VBox/EditContainer/FormCard/FormVBox/RowBirthDate"]
@@ -648,7 +648,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.02, 0.02, 0.02, 1)
 theme_override_fonts/font = SubResource("SystemFont_semibold")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBox_input")
 theme_override_styles/focus = SubResource("StyleBox_input_focus")
 placeholder_text = "1990-05-20"

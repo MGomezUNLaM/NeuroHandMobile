@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="ballGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="60%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#9A3412"/>
+    </radialGradient>
+    <filter id="bShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#7C2D12" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Ball Sphere -->
+  <circle cx="32" cy="32" r="22" fill="url(#ballGrad)" filter="url(#bShadow)"/>
+  <!-- Ball Seams -->
+  <line x1="10" y1="32" x2="54" y2="32" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="32" y1="10" x2="32" y2="54" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 16 16 C 26 24, 26 40, 16 48" fill="none" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 48 16 C 38 24, 38 40, 48 48" fill="none" stroke="#1E293B" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

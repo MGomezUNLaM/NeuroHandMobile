@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dex4hngabrset" path="res://login.gd" id="1_script"]
 
-[sub_resource type="SystemFont" id="SystemFont_bold"]
-font_weight = 700
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
 content_margin_top = 18.0
 content_margin_bottom = 18.0
@@ -55,7 +52,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.82, 0.88, 0.90, 1)
+border_color = Color(0.82, 0.88, 0.9, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -68,16 +65,16 @@ Button/styles/hover = SubResource("StyleBoxFlat_btn")
 Button/styles/normal = SubResource("StyleBoxFlat_btn")
 Button/styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
 LineEdit/colors/font_color = Color(0.067, 0.157, 0.235, 1)
-LineEdit/colors/font_placeholder_color = Color(0.48, 0.56, 0.60, 1)
+LineEdit/colors/font_placeholder_color = Color(0.48, 0.56, 0.6, 1)
 LineEdit/font_sizes/font_size = 22
 LineEdit/styles/focus = SubResource("StyleBoxFlat_input_focus")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_input")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
-bg_color = Color(0.965, 0.976, 0.988, 1)
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cau7c"]
 load_path = "res://.godot/imported/logo_kinesis_transparent_full.png-f5f5cc8370c98c18eb5e543302fe17ab.ctex"
+
+[sub_resource type="SystemFont" id="SystemFont_bold"]
+font_weight = 700
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_link"]
 
@@ -117,7 +114,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.965, 0.976, 0.988, 1)
 
-[node name="Scroll" type="ScrollContainer" parent="."]
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=7668981]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,7 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="Margin" type="MarginContainer" parent="Scroll"]
+[node name="Margin" type="MarginContainer" parent="Scroll" unique_id=37462749]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -209,7 +206,7 @@ button_pressed = true
 
 [node name="Label" type="Label" parent="Scroll/Margin/VBoxContainer/Form/HBoxContainer" unique_id=1048074290]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.20, 0.30, 0.35, 1)
+theme_override_colors/font_color = Color(0.2, 0.3, 0.35, 1)
 theme_override_font_sizes/font_size = 19
 text = "Mantener sesión"
 
@@ -263,7 +260,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_modal_overlay")
 
-[node name="Margin" type="MarginContainer" parent="ForgotModal"]
+[node name="Margin" type="MarginContainer" parent="ForgotModal" unique_id=971523344]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,26 +270,26 @@ grow_vertical = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_right = 28
 
-[node name="Center" type="CenterContainer" parent="ForgotModal/Margin"]
+[node name="Center" type="CenterContainer" parent="ForgotModal/Margin" unique_id=1219222851]
 layout_mode = 2
 
-[node name="Card" type="PanelContainer" parent="ForgotModal/Margin/Center"]
+[node name="Card" type="PanelContainer" parent="ForgotModal/Margin/Center" unique_id=110436737]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_modal_card")
 
-[node name="VBox" type="VBoxContainer" parent="ForgotModal/Margin/Center/Card"]
+[node name="VBox" type="VBoxContainer" parent="ForgotModal/Margin/Center/Card" unique_id=468750149]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="Title" type="Label" parent="ForgotModal/Margin/Center/Card/VBox"]
+[node name="Title" type="Label" parent="ForgotModal/Margin/Center/Card/VBox" unique_id=324327367]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.28, 0.29, 1)
 theme_override_font_sizes/font_size = 24
 text = "Recuperar contraseña"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="ForgotModal/Margin/Center/Card/VBox"]
+[node name="Description" type="Label" parent="ForgotModal/Margin/Center/Card/VBox" unique_id=1794125123]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.25, 0.35, 0.35, 1)
 theme_override_font_sizes/font_size = 16
@@ -300,22 +297,22 @@ text = "Ingresá el correo electrónico asociado a tu cuenta de paciente. Te env
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="EmailField" type="VBoxContainer" parent="ForgotModal/Margin/Center/Card/VBox"]
+[node name="EmailField" type="VBoxContainer" parent="ForgotModal/Margin/Center/Card/VBox" unique_id=157622824]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="EmailLabel" type="Label" parent="ForgotModal/Margin/Center/Card/VBox/EmailField"]
+[node name="EmailLabel" type="Label" parent="ForgotModal/Margin/Center/Card/VBox/EmailField" unique_id=209743281]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.17, 0.17, 1)
 theme_override_font_sizes/font_size = 16
 text = "Correo electrónico"
 
-[node name="InputForgotEmail" type="LineEdit" parent="ForgotModal/Margin/Center/Card/VBox/EmailField"]
+[node name="InputForgotEmail" type="LineEdit" parent="ForgotModal/Margin/Center/Card/VBox/EmailField" unique_id=1545232784]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "correo@ejemplo.com"
 
-[node name="ForgotStatusLabel" type="Label" parent="ForgotModal/Margin/Center/Card/VBox"]
+[node name="ForgotStatusLabel" type="Label" parent="ForgotModal/Margin/Center/Card/VBox" unique_id=2046503402]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -325,12 +322,12 @@ text = "Estado"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="BtnSendForgot" type="Button" parent="ForgotModal/Margin/Center/Card/VBox"]
+[node name="BtnSendForgot" type="Button" parent="ForgotModal/Margin/Center/Card/VBox" unique_id=398361686]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Enviar correo"
 
-[node name="BtnCancelForgot" type="Button" parent="ForgotModal/Margin/Center/Card/VBox"]
+[node name="BtnCancelForgot" type="Button" parent="ForgotModal/Margin/Center/Card/VBox" unique_id=53829063]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.361, 0.369, 1)

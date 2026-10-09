@@ -127,7 +127,7 @@ text = "CALIBRACIÓN SECUENCIAL"
 [node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/HeaderVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Calibrar sensores del guante"
 
 [node name="BtnBack" type="Button" parent="RootVBox/HeaderContainer/HeaderHBox"]
@@ -137,7 +137,7 @@ layout_mode = 2
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "← Volver"
 flat = true
 
@@ -169,7 +169,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 20
 text = "Paso 1 de 10 — Pulgar"
 horizontal_alignment = 1
 
@@ -184,7 +184,7 @@ layout_mode = 2
 
 [node name="LabelPulgar" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipPulgar"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "▶ Pulgar"
 
 [node name="ChipIndice" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
@@ -193,7 +193,7 @@ layout_mode = 2
 
 [node name="LabelIndice" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipIndice"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "• Índice"
 
 [node name="ChipMedio" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
@@ -202,7 +202,7 @@ layout_mode = 2
 
 [node name="LabelMedio" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipMedio"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "• Medio"
 
 [node name="ChipAnular" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
@@ -211,7 +211,7 @@ layout_mode = 2
 
 [node name="LabelAnular" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipAnular"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "• Anular"
 
 [node name="ChipMenique" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow"]
@@ -220,20 +220,20 @@ layout_mode = 2
 
 [node name="LabelMenique" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/FingerStepperRow/ChipMenique"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "• Meñique"
 
 [node name="HandCenter" type="CenterContainer" parent="RootVBox/ContentContainer/Scroll/Column"]
 layout_mode = 2
 
 [node name="HandCard" type="PanelContainer" parent="RootVBox/ContentContainer/Scroll/Column/HandCenter"]
-custom_minimum_size = Vector2(340, 310)
+custom_minimum_size = Vector2(360, 330)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBox_hand_card")
 
 [node name="HandVisualizer" type="SubViewportContainer" parent="RootVBox/ContentContainer/Scroll/Column/HandCenter/HandCard"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(340, 310)
+custom_minimum_size = Vector2(360, 330)
 layout_mode = 2
 stretch = true
 script = ExtResource("2_hand_visualizer")
@@ -248,7 +248,7 @@ layout_mode = 2
 [node name="ActionBadgeLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/ActionBadgeCenter/ActionBadgePanel"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "🖐 GESTO: REPOSO (EXTENDIDO)"
 horizontal_alignment = 1
 
@@ -260,7 +260,7 @@ theme_override_constants/separation = 4
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 28
 text = "Pulgar: Reposo (abierto)"
 horizontal_alignment = 1
 
@@ -269,7 +269,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.45, 0.48, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "Mantené el pulgar completamente extendido y relajado."
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -286,7 +286,7 @@ theme_override_constants/separation = 8
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0.36, 0.37, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 19
 text = "Lectura del sensor (Pulgar): 0 %"
 horizontal_alignment = 1
 
@@ -303,7 +303,7 @@ show_percentage = false
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.55, 0.35, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 15
 text = "Esperando lectura del sensor..."
 horizontal_alignment = 1
 
@@ -314,7 +314,7 @@ theme_override_constants/separation = 4
 [node name="ProgLabel" type="Label" parent="RootVBox/ContentContainer/Scroll/Column/ProgressVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.6, 0.6, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 15
 text = "Progreso total de calibración"
 horizontal_alignment = 1
 
@@ -331,12 +331,12 @@ show_percentage = false
 
 [node name="BtnNext" type="Button" parent="RootVBox/ContentContainer/Scroll/Column"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 52)
+custom_minimum_size = Vector2(300, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBox_btn_teal")
 theme_override_styles/hover = SubResource("StyleBox_btn_teal")
 theme_override_styles/pressed = SubResource("StyleBox_btn_teal_pressed")
@@ -345,6 +345,6 @@ text = "Confirmar y Siguiente"
 [node name="FooterNote" type="Label" parent="RootVBox/ContentContainer/Scroll/Column"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.65, 0.65, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 15
 text = "Asegurate de que el guante esté conectado y bien colocado"
 horizontal_alignment = 1

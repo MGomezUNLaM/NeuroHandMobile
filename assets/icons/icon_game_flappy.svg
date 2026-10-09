@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <filter id="fShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#78350F" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Bird Body -->
+  <circle cx="30" cy="34" r="18" fill="#FBBF24" filter="url(#fShadow)"/>
+  <!-- Belly -->
+  <circle cx="28" cy="38" r="12" fill="#FEF08A"/>
+  <!-- Wing -->
+  <ellipse cx="22" cy="34" rx="8" ry="6" fill="#F59E0B"/>
+  <!-- Eye -->
+  <circle cx="38" cy="28" r="5" fill="#FFFFFF"/>
+  <circle cx="39.5" cy="28" r="2.5" fill="#0F172A"/>
+  <circle cx="40.5" cy="27" r="1" fill="#FFFFFF"/>
+  <!-- Beak -->
+  <polygon points="44,30 56,34 44,38" fill="#F97316"/>
+  <!-- Tail Feathers -->
+  <polygon points="12,32 6,28 12,36" fill="#D97706"/>
+</svg>

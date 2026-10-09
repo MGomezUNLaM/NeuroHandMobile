@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="flagPole" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+    <linearGradient id="flagFinial" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+    <linearGradient id="flagCloth" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+    <linearGradient id="flagWave" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BE123C"/>
+      <stop offset="100%" stop-color="#9F1239"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Finial Ball -->
+  <circle cx="16" cy="10" r="5" fill="url(#flagFinial)" filter="url(#shadow)"/>
+  <!-- Pole -->
+  <rect x="14" y="10" width="4" height="46" rx="2" fill="url(#flagPole)"/>
+  <!-- Base Stand -->
+  <ellipse cx="16" cy="56" rx="7" ry="2.5" fill="#64748B"/>
+  <!-- Flag Cloth -->
+  <path d="M17 12 C 26 8, 34 16, 44 11 C 49 8.5, 53 10, 54 11 L 54 33 C 48 31, 41 36, 32 31 C 24 26.5, 19 32, 17 32 Z" fill="url(#flagCloth)" filter="url(#shadow)"/>
+  <!-- Flag Fold / Wave Shadow -->
+  <path d="M30 14 C 36 17, 43 14, 48 12 L 48 32 C 43 34, 36 36, 30 30 Z" fill="url(#flagWave)" opacity="0.35"/>
+  <!-- Highlight -->
+  <path d="M18 13 C 23 11, 28 14, 32 13.5 L 32 17 C 28 17.5, 23 14.5, 18 16.5 Z" fill="#FFE4E6" opacity="0.6"/>
+</svg>

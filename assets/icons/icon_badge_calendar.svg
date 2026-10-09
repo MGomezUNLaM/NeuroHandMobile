@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="calHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <filter id="calShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Calendar Page Base -->
+  <rect x="10" y="14" width="44" height="42" rx="10" fill="#FFFFFF" filter="url(#calShadow)"/>
+  <!-- Base Shadow Line -->
+  <rect x="10" y="52" width="44" height="4" rx="2" fill="#E2E8F0"/>
+  <!-- Header Bar -->
+  <path d="M 10 24 L 10 22 C 10 17.5 13.5 14 18 14 L 46 14 C 50.5 14 54 17.5 54 22 L 54 24 Z" fill="url(#calHeader)"/>
+  <!-- Binding Rings -->
+  <rect x="18" y="9" width="4" height="10" rx="2" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+  <rect x="30" y="9" width="4" height="10" rx="2" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+  <rect x="42" y="9" width="4" height="10" rx="2" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+  <!-- Date Dots Grid -->
+  <circle cx="19" cy="32" r="2.5" fill="#93C5FD"/>
+  <circle cx="27" cy="32" r="2.5" fill="#93C5FD"/>
+  <circle cx="35" cy="32" r="2.5" fill="#93C5FD"/>
+  <circle cx="43" cy="32" r="2.5" fill="#93C5FD"/>
+
+  <circle cx="19" cy="40" r="2.5" fill="#93C5FD"/>
+  <circle cx="27" cy="40" r="2.5" fill="#93C5FD"/>
+  <circle cx="35" cy="40" r="3.2" fill="#F43F5E"/> <!-- Active Checked Day -->
+  <circle cx="43" cy="40" r="2.5" fill="#93C5FD"/>
+
+  <circle cx="19" cy="48" r="2.5" fill="#93C5FD"/>
+  <circle cx="27" cy="48" r="2.5" fill="#93C5FD"/>
+  <circle cx="35" cy="48" r="2.5" fill="#93C5FD"/>
+  <circle cx="43" cy="48" r="2.5" fill="#93C5FD"/>
+</svg>

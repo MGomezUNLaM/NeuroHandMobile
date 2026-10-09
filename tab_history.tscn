@@ -1,82 +1,100 @@
-[gd_scene format=3 uid="uid://dgy7rhies8c77"]
+[gd_scene load_steps=12 format=3 uid="uid://dgy7rhies8c77"]
 
 [ext_resource type="Script" uid="uid://bjb3gr5k2vvxg" path="res://tab_history.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://mqoj6qsr1k5h" path="res://assets/icons/icon_fire.svg" id="2_fire"]
-[ext_resource type="Texture2D" uid="uid://dt061gkcy7hy7" path="res://assets/icons/icon_clock.svg" id="3_clock"]
-[ext_resource type="Texture2D" uid="uid://dmg33n51n5ohw" path="res://assets/icons/icon_speech.svg" id="4_speech"]
-[ext_resource type="Texture2D" uid="uid://bhfwuew4uqsq7" path="res://assets/icons/icon_check_circle.svg" id="5_check"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_stat_target.svg" id="2_target"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_stat_timer.svg" id="3_timer"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_badge_trophy.svg" id="4_trophy"]
+[ext_resource type="Texture2D" path="res://assets/icons/icon_badge_gamepad.svg" id="5_gamepad"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_chart_card"]
+[sub_resource type="StyleBoxFlat" id="StyleBox_card"]
 content_margin_left = 20.0
-content_margin_top = 24.0
+content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.88, 0.94, 0.94, 1)
-corner_radius_top_left = 28
-corner_radius_top_right = 28
-corner_radius_bottom_right = 28
-corner_radius_bottom_left = 28
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_bar_light"]
-bg_color = Color(0.81, 0.94, 0.93, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_bar_dark"]
-bg_color = Color(0.04, 0.42, 0.46, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_pill_pink"]
-content_margin_left = 24.0
-content_margin_top = 16.0
-content_margin_right = 24.0
-content_margin_bottom = 16.0
-bg_color = Color(0.984, 0.957, 0.957, 1)
-corner_radius_top_left = 36
-corner_radius_top_right = 36
-corner_radius_bottom_right = 36
-corner_radius_bottom_left = 36
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_pill_gray"]
-content_margin_left = 24.0
-content_margin_top = 16.0
-content_margin_right = 24.0
-content_margin_bottom = 16.0
-bg_color = Color(0.84, 0.85, 0.86, 1)
-corner_radius_top_left = 36
-corner_radius_top_right = 36
-corner_radius_bottom_right = 36
-corner_radius_bottom_left = 36
-
-[sub_resource type="StyleBoxFlat" id="StyleBox_therapist_avatar"]
-bg_color = Color(0.118, 0.596, 0.647, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.88, 0.92, 0.95, 1)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.03)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBox_speech_card"]
-content_margin_left = 20.0
-content_margin_top = 18.0
-content_margin_right = 20.0
-content_margin_bottom = 18.0
-bg_color = Color(0.984, 0.957, 0.957, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+[sub_resource type="StyleBoxFlat" id="StyleBox_metric_card"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.965, 0.98, 0.99, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.89, 0.93, 0.95, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[node name="History" type="Control" unique_id=1232706]
+[sub_resource type="StyleBoxFlat" id="StyleBox_prog_bg"]
+bg_color = Color(0.91, 0.94, 0.96, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_prog_fill"]
+bg_color = Color(0.118, 0.596, 0.647, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_therapist"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+bg_color = Color(0.925, 0.98, 0.96, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78, 0.92, 0.88, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_pill_teal"]
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.88, 0.96, 0.96, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.74, 0.90, 0.90, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_avatar_teal"]
+bg_color = Color(0.08, 0.55, 0.55, 1)
+corner_radius_top_left = 29
+corner_radius_top_right = 29
+corner_radius_bottom_right = 29
+corner_radius_bottom_left = 29
+
+[node name="History" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,8 +112,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.973, 0.984, 0.992, 1)
 
-[node name="RootVBox" type="VBoxContainer" parent="." unique_id=1373969182]
-
+[node name="RootVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,16 +121,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="HeaderContainer" type="MarginContainer" parent="RootVBox" unique_id=1406754921]
+[node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 14
+theme_override_constants/margin_bottom = 12
 
-[node name="HeaderVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer" unique_id=1383184606]
+[node name="HeaderVBox" type="VBoxContainer" parent="RootVBox/HeaderContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 
 [node name="TopNav" type="HBoxContainer" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
@@ -122,372 +139,330 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "← Volver al inicio"
 flat = true
+alignment = 0
 
-[node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox" unique_id=1008370725]
+[node name="ActivePill" type="PanelContainer" parent="RootVBox/HeaderContainer/HeaderVBox/TopNav"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_pill_teal")
+
+[node name="ActivePillLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox/TopNav/ActivePill"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.48, 0.52, 1)
+theme_override_font_sizes/font_size = 14
+text = "Tratamiento Activo"
+
+[node name="CategoryLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.118, 0.596, 0.647, 1)
 theme_override_font_sizes/font_size = 14
-text = "VER MIS LOGROS"
+text = "MI EVOLUCIÓN"
 
-[node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox" unique_id=358556038]
+[node name="TitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 24
-text = "Tu progreso"
+theme_override_font_sizes/font_size = 32
+text = "Tu Progreso"
 
-[node name="ContentScroll" type="ScrollContainer" parent="RootVBox" unique_id=496043261]
+[node name="ContentScroll" type="ScrollContainer" parent="RootVBox"]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="ContentPadding" type="MarginContainer" parent="RootVBox/ContentScroll" unique_id=1313997561]
+[node name="ContentPadding" type="MarginContainer" parent="RootVBox/ContentScroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 24
+theme_override_constants/margin_left = 22
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 28
 
-[node name="Column" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding" unique_id=1415069935]
+[node name="Column" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 18
+theme_override_constants/separation = 20
 
-[node name="ChartCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=2000973537]
+[node name="SummaryCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_chart_card")
+theme_override_styles/panel = SubResource("StyleBox_card")
 
-[node name="ChartVBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard" unique_id=1894439100]
+[node name="SummaryVBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HeaderHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox"]
+layout_mode = 2
+
+[node name="CardTitle" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 20
+text = "Progreso del Tratamiento"
+
+[node name="SessionCountPill" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/HeaderHBox"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_pill_teal")
+
+[node name="SessionCountLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/HeaderHBox/SessionCountPill"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.48, 0.52, 1)
+theme_override_font_sizes/font_size = 14
+text = "0 de 0 sesiones"
+
+[node name="SessionProgressBar" type="ProgressBar" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBox_prog_bg")
+theme_override_styles/fill = SubResource("StyleBox_prog_fill")
+show_percentage = false
+
+[node name="MetricsHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="BarsHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox" unique_id=1156809718]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 180)
+[node name="MetricActs" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_metric_card")
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricActs"]
+layout_mode = 2
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="ColL" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=352407043]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColL" unique_id=1643470016]
-custom_minimum_size = Vector2(28, 60)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_light")
-
-[node name="ColM" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=853264708]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColM" unique_id=1608611664]
-custom_minimum_size = Vector2(28, 85)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_light")
-
-[node name="ColX" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=1818944555]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColX" unique_id=2000186462]
-custom_minimum_size = Vector2(28, 70)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_light")
-
-[node name="ColJ" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=1285017176]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColJ" unique_id=1622663625]
-custom_minimum_size = Vector2(28, 105)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_light")
-
-[node name="ColV" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=700881330]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColV" unique_id=1660718084]
-custom_minimum_size = Vector2(28, 95)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_light")
-
-[node name="ColS" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=2079507636]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColS" unique_id=347955050]
-custom_minimum_size = Vector2(28, 120)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_light")
-
-[node name="ColD" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox" unique_id=1928999736]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Bar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/BarsHBox/ColD" unique_id=346822159]
-custom_minimum_size = Vector2(28, 135)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBox_bar_dark")
-
-[node name="DaysHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox" unique_id=413361800]
-layout_mode = 2
-alignment = 1
-
-[node name="LblL" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=1602271688]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "L"
-horizontal_alignment = 1
-
-[node name="LblM" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=1142869841]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "M"
-horizontal_alignment = 1
-
-[node name="LblX" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=360353738]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "X"
-horizontal_alignment = 1
-
-[node name="LblJ" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=903438414]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "J"
-horizontal_alignment = 1
-
-[node name="LblV" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=321267620]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "V"
-horizontal_alignment = 1
-
-[node name="LblS" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=1644700354]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "S"
-horizontal_alignment = 1
-
-[node name="LblD" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/DaysHBox" unique_id=192443186]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.25, 0.3, 1)
-theme_override_font_sizes/font_size = 14
-text = "D"
-horizontal_alignment = 1
-
-[node name="ChecksHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox" unique_id=401168110]
-layout_mode = 2
-alignment = 1
-
-[node name="Chk1" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=1367479241]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Chk2" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=2141816848]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Chk3" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=1005589406]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Chk4" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=1240011836]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Chk5" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=1194804836]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Chk6" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=1804379987]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Chk7" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/ChartCard/ChartVBox/ChecksHBox" unique_id=229236320]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("5_check")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="CongratsLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=1116349652]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 22
-text = "¡Felicitaciones!"
-
-[node name="StreakCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=1092989887]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_pill_pink")
-
-[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/StreakCard" unique_id=548466226]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="FireIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/StreakCard/HBox" unique_id=334626539]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("2_fire")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="StreakLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/StreakCard/HBox" unique_id=1636877533]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 20
-text = "7 días seguidos"
-
-[node name="TimeCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=2108822951]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_pill_gray")
-
-[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard" unique_id=224421254]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="ClockIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox" unique_id=937484197]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_clock")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="VBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox" unique_id=363319122]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="TimeLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox/VBox" unique_id=603410433]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 20
-text = "3 horas y 35 minutos"
-
-[node name="TimeDesc" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TimeCard/HBox/VBox" unique_id=51123969]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.4, 0.45, 1)
-theme_override_font_sizes/font_size = 14
-text = "en sesiones"
-
-[node name="SectionDivider" type="ColorRect" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=1732766044]
-custom_minimum_size = Vector2(0, 1)
-layout_mode = 2
-color = Color(0.88, 0.88, 0.88, 1)
-
-[node name="TherapistHeaderHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=1904434639]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="TherapistAvatar" type="Panel" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox" unique_id=1430094581]
+[node name="Icon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricActs/VBox"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_therapist_avatar")
+size_flags_horizontal = 4
+texture = ExtResource("2_target")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TherapistVBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox" unique_id=903352006]
+[node name="CompletedActivitiesVal" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricActs/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 28
+text = "0"
+horizontal_alignment = 1
 
-[node name="TherapistName" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox/TherapistVBox" unique_id=206654039]
+[node name="Desc" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricActs/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.55, 0.62, 1)
+theme_override_font_sizes/font_size = 14
+text = "Actividades"
+horizontal_alignment = 1
+
+[node name="MetricTime" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBox_metric_card")
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricTime"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricTime/VBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_timer")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TotalTimeVal" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricTime/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 28
+text = "0m"
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SummaryCard/SummaryVBox/MetricsHBox/MetricTime/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.55, 0.62, 1)
+theme_override_font_sizes/font_size = 14
+text = "Tiempo de juego"
+horizontal_alignment = 1
+
+[node name="BadgesCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="BadgesSection" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BadgesHeaderHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TrophyIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/BadgesHeaderHBox"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_trophy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/BadgesHeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "Insignias y Logros"
+
+[node name="BadgesCountPill" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/BadgesHeaderHBox"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_pill_teal")
+
+[node name="BadgesUnlockedCount" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/BadgesHeaderHBox/BadgesCountPill"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.08, 0.48, 0.52, 1)
+theme_override_font_sizes/font_size = 14
+text = "0 de 0"
+
+[node name="FilterHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FilterAllBtn" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/FilterHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 15
+text = "Todas"
+
+[node name="FilterUnlockedBtn" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/FilterHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 15
+text = "Desbloqueadas"
+
+[node name="FilterLockedBtn" type="Button" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection/FilterHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 15
+text = "Por conseguir"
+
+[node name="BadgesContainer" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BadgesEmptyLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/BadgesCard/BadgesSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.68, 1)
+theme_override_font_sizes/font_size = 15
+text = "Cargando insignias..."
+horizontal_alignment = 1
+
+[node name="GamesCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_card")
+
+[node name="GamesSection" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HeaderHBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard/GamesSection"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GamepadIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard/GamesSection/HeaderHBox"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_gamepad")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard/GamesSection/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
+theme_override_font_sizes/font_size = 22
+text = "Récords en Minijuegos"
+
+[node name="GamesContainer" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard/GamesSection"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="GamesEmptyCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard/GamesSection/GamesContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_metric_card")
+
+[node name="Label" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/GamesCard/GamesSection/GamesContainer/GamesEmptyCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.68, 1)
+theme_override_font_sizes/font_size = 15
+text = "Completá sesiones para registrar tus mejores marcas en los minijuegos."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TherapistCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_therapist")
+
+[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistCard"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="AvatarCircle" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistCard/HBox"]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_avatar_teal")
+
+[node name="AvatarLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistCard/HBox/AvatarCircle"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "MP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistCard/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="TherapistNameLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistCard/HBox/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 18
-text = "Juan Pedro"
+text = "Terapeuta asignado"
 
-[node name="TherapistRole" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistHeaderHBox/TherapistVBox" unique_id=2038923685]
+[node name="TherapistObjectiveLabel" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/TherapistCard/HBox/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.45, 0.5, 1)
-theme_override_font_sizes/font_size = 13
-text = "Terapeuta"
-
-[node name="SpeechCard" type="PanelContainer" parent="RootVBox/ContentScroll/ContentPadding/Column" unique_id=182871548]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBox_speech_card")
-
-[node name="HBox" type="HBoxContainer" parent="RootVBox/ContentScroll/ContentPadding/Column/SpeechCard" unique_id=2041093786]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="SpeechIcon" type="TextureRect" parent="RootVBox/ContentScroll/ContentPadding/Column/SpeechCard/HBox" unique_id=1346830534]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("4_speech")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="SpeechText" type="Label" parent="RootVBox/ContentScroll/ContentPadding/Column/SpeechCard/HBox" unique_id=234351556]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.15, 0.2, 0.25, 1)
+theme_override_colors/font_color = Color(0.25, 0.40, 0.45, 1)
 theme_override_font_sizes/font_size = 15
-text = "Observo una clara mejoría en la capacidad de flexión de cada dedo."
+text = "Seguimiento y evolución motriz del tratamiento."
 autowrap_mode = 3
-
-[node name="BottomElasticSpacer" type="Control" parent="RootVBox/ContentScroll/ContentPadding/Column"]
-layout_mode = 2
-size_flags_vertical = 3

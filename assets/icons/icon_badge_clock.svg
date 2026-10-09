@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="clockCase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="clockFace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+    <filter id="clockShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#0F172A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Top Bell / Button -->
+  <rect x="29" y="5" width="6" height="5" rx="1.5" fill="#0284C7"/>
+  <rect x="27" y="3" width="10" height="3" rx="1.5" fill="#38BDF8"/>
+  <!-- Clock Outer Ring -->
+  <circle cx="32" cy="35" r="24" fill="url(#clockCase)" filter="url(#clockShadow)"/>
+  <!-- Clock Inner Face -->
+  <circle cx="32" cy="35" r="19" fill="url(#clockFace)"/>
+  <!-- Hour Markers -->
+  <circle cx="32" cy="19" r="1.5" fill="#64748B"/>
+  <circle cx="48" cy="35" r="1.5" fill="#64748B"/>
+  <circle cx="32" cy="51" r="1.5" fill="#64748B"/>
+  <circle cx="16" cy="35" r="1.5" fill="#64748B"/>
+  <!-- Hands -->
+  <!-- Hour hand -->
+  <line x1="32" y1="35" x2="32" y2="24" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Minute hand -->
+  <line x1="32" y1="35" x2="42" y2="35" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Second hand (red) -->
+  <line x1="32" y1="38" x2="32" y2="21" stroke="#F43F5E" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Center Pin -->
+  <circle cx="32" cy="35" r="2.5" fill="#F43F5E"/>
+</svg>
