@@ -65,6 +65,16 @@ func _ready() -> void:
 
 
 func _apply_safe_area() -> void:
+	if _current_view == View.CALIBRATION or _current_view == View.CHALLENGES:
+		if _nav_panel != null:
+			_nav_panel.visible = false
+		if _content != null:
+			_content.offset_top = 0.0
+			_content.offset_bottom = 0.0
+			_content.offset_left = 0.0
+			_content.offset_right = 0.0
+		return
+
 	var safe_area: Rect2i = DisplayServer.get_display_safe_area()
 	var screen_size: Vector2i = DisplayServer.screen_get_size()
 	if screen_size.y > 0 and safe_area.size.y > 0 and safe_area.size.y < screen_size.y:
@@ -73,18 +83,17 @@ func _apply_safe_area() -> void:
 		var bottom_inset := (screen_size.y - (safe_area.position.y + safe_area.size.y)) * scale_y
 		var top_inset := safe_area.position.y * scale_y
 		
-		var base_nav_height: float = 96.0
 		# Ajustar márgenes para que la muesca de cámara y la barra de gestos no tapen nada
 		if _nav_panel != null:
 			_nav_panel.offset_bottom = -max(0.0, bottom_inset)
 		if _content != null and _nav_panel != null and _nav_panel.visible:
-			_content.offset_bottom = - (base_nav_height + max(0.0, bottom_inset))
+			_content.offset_bottom = - (80.0 + max(0.0, bottom_inset))
 			_content.offset_top = max(0.0, top_inset)
 	else:
 		if _nav_panel != null:
 			_nav_panel.offset_bottom = 0.0
 		if _content != null and _nav_panel != null and _nav_panel.visible:
-			_content.offset_bottom = -96.0
+			_content.offset_bottom = -80.0
 			_content.offset_top = 0.0
 
 
@@ -97,6 +106,9 @@ func switch_to_view(view_index: int) -> void:
 	if not VIEW_SCENES.has(view_index):
 		push_warning("[MainShell] Vista desconocida: %d" % view_index)
 		return
+
+	if has_node("Background"):
+		$Background.show()
 
 	var prev_view: Control = null
 	if _current_view >= 0 and _view_cache.has(_current_view) and _view_cache[_current_view] != null:
@@ -120,6 +132,8 @@ func switch_to_view(view_index: int) -> void:
 			instance.connect("navigate_to", Callable(self, "switch_to_view"))
 		elif instance.has_signal("request_tab_change"):
 			instance.connect("request_tab_change", Callable(self, "switch_to_view"))
+		if instance.has_signal("game_fullscreen_requested"):
+			instance.connect("game_fullscreen_requested", Callable(self, "set_fullscreen_game_mode"))
 		next_view = instance
 	else:
 		next_view = _view_cache[view_index]
@@ -139,11 +153,31 @@ func switch_to_view(view_index: int) -> void:
 	_update_nav_bar()
 
 
+func set_fullscreen_game_mode(is_fullscreen: bool) -> void:
+	if is_fullscreen:
+		if _nav_panel != null:
+			_nav_panel.visible = false
+		if _content != null:
+			_content.offset_top = 0.0
+			_content.offset_bottom = 0.0
+			_content.offset_left = 0.0
+			_content.offset_right = 0.0
+		if has_node("Background"):
+			$Background.hide()
+	else:
+		if has_node("Background"):
+			$Background.show()
+		_update_nav_bar()
+
+
 func _update_nav_bar() -> void:
-	# En vistas secundarias que tienen su propio flujo (Calibración), ocultar la barra inferior
-	if _current_view == View.CALIBRATION:
+	# En vistas secundarias que tienen su propio flujo (Calibración o Desafíos/Juegos), ocultar la barra inferior
+	if _current_view == View.CALIBRATION or _current_view == View.CHALLENGES:
 		_nav_panel.visible = false
+		_content.offset_top = 0.0
 		_content.offset_bottom = 0.0
+		_content.offset_left = 0.0
+		_content.offset_right = 0.0
 	else:
 		_nav_panel.visible = true
 		_apply_safe_area()

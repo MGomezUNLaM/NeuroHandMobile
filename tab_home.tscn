@@ -11,45 +11,45 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_avatar_circle"]
 bg_color = Color(0.118, 0.596, 0.647, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
 shadow_color = Color(0.118, 0.596, 0.647, 0.2)
 shadow_size = 4
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_glove_pill"]
-content_margin_left = 12.0
-content_margin_top = 6.0
-content_margin_right = 12.0
-content_margin_bottom = 6.0
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
 bg_color = Color(0.93, 0.96, 0.97, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.82, 0.88, 0.92, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_glove_pill_pressed"]
-content_margin_left = 12.0
-content_margin_top = 6.0
-content_margin_right = 12.0
-content_margin_bottom = 6.0
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
 bg_color = Color(0.85, 0.91, 0.94, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.75, 0.82, 0.86, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_hero_card"]
 content_margin_left = 24.0
@@ -66,10 +66,10 @@ shadow_size = 10
 shadow_offset = Vector2(0, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_hero_badge"]
-content_margin_left = 10.0
-content_margin_top = 4.0
-content_margin_right = 10.0
-content_margin_bottom = 4.0
+content_margin_left = 12.0
+content_margin_top = 5.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
 bg_color = Color(1, 1, 1, 0.18)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -77,29 +77,29 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_hero_btn"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
 shadow_color = Color(0, 0, 0, 0.08)
 shadow_size = 4
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_hero_btn_pressed"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
 bg_color = Color(0.92, 0.95, 0.96, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_stat_card"]
 content_margin_left = 14.0
@@ -121,9 +121,9 @@ shadow_size = 6
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_action_card"]
-content_margin_left = 22.0
+content_margin_left = 20.0
 content_margin_top = 20.0
-content_margin_right = 22.0
+content_margin_right = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 1
@@ -136,13 +136,13 @@ corner_radius_top_right = 22
 corner_radius_bottom_right = 22
 corner_radius_bottom_left = 22
 shadow_color = Color(0, 0, 0, 0.03)
-shadow_size = 8
-shadow_offset = Vector2(0, 3)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_action_card_pressed"]
-content_margin_left = 22.0
+content_margin_left = 20.0
 content_margin_top = 20.0
-content_margin_right = 22.0
+content_margin_right = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(0.96, 0.98, 0.99, 1)
 border_width_left = 1
@@ -183,9 +183,9 @@ theme_override_constants/separation = 0
 [node name="HeaderContainer" type="MarginContainer" parent="RootVBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 16
+theme_override_constants/margin_top = 18
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_bottom = 14
 
 [node name="HeaderHBox" type="HBoxContainer" parent="RootVBox/HeaderContainer"]
 layout_mode = 2
@@ -223,24 +223,25 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/separation = 4
+theme_override_constants/separation = 3
 
 [node name="GreetingLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/WelcomeVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 25
 text = "¡Hola, Paciente!"
 
 [node name="SubtitleLabel" type="Label" parent="RootVBox/HeaderContainer/HeaderHBox/WelcomeVBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.40, 0.50, 0.55, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 text = "Plan de rehabilitación activo"
 
 [node name="BtnGlovePill" type="Button" parent="RootVBox/HeaderContainer/HeaderHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(175, 46)
+custom_minimum_size = Vector2(164, 42)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
@@ -257,11 +258,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.45, 0.50, 0.55, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "⚪ Conectar Guante"
 horizontal_alignment = 1
 vertical_alignment = 1
-
 
 [node name="HeaderDivider" type="ColorRect" parent="RootVBox"]
 custom_minimum_size = Vector2(0, 1)
@@ -286,7 +286,7 @@ theme_override_constants/margin_bottom = 24
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 22
 
 [node name="HeroTreatmentCard" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox"]
 layout_mode = 2
@@ -294,7 +294,7 @@ theme_override_styles/panel = SubResource("StyleBox_hero_card")
 
 [node name="HeroVBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 14
 
 [node name="TopHBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
 layout_mode = 2
@@ -306,7 +306,7 @@ theme_override_styles/panel = SubResource("StyleBox_hero_badge")
 [node name="HeroBadgeLabel" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/TopHBox/HeroBadge"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.70, 0.95, 0.98, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "MI TRATAMIENTO"
 
 [node name="TherapistTag" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/TopHBox"]
@@ -314,7 +314,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.85, 0.95, 0.96, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 14
 text = "Terapeuta: Mario Perez"
 horizontal_alignment = 2
 
@@ -322,20 +322,20 @@ horizontal_alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "Recuperación por esguince"
 
 [node name="TreatmentObj" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.94, 0.96, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 15
 text = "Recuperar la movilidad de la muñeca y los dedos de la mano derecha."
 autowrap_mode = 2
 
 [node name="HeroBottomHBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 14
 
 [node name="SessionStatusPill" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox"]
 layout_mode = 2
@@ -346,23 +346,23 @@ theme_override_constants/separation = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.95, 0.85, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 14
 text = "● Sesión 1: Habilitada"
 
 [node name="SessionSubLabel" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox/SessionStatusPill"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.80, 0.90, 0.92, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 13
 text = "2 ejercicios asignados"
 
 [node name="BtnStartSession" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox/HeroTreatmentCard/HeroVBox/HeroBottomHBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(185, 58)
+custom_minimum_size = Vector2(180, 52)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.06, 0.40, 0.44, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBox_hero_btn")
 theme_override_styles/hover = SubResource("StyleBox_hero_btn")
 theme_override_styles/pressed = SubResource("StyleBox_hero_btn_pressed")
@@ -370,7 +370,7 @@ text = "Iniciar Sesión ▶"
 
 [node name="MetricsHBox" type="HBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="StatCardStreak" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox"]
 layout_mode = 2
@@ -379,11 +379,11 @@ theme_override_styles/panel = SubResource("StyleBox_stat_card")
 
 [node name="VBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak/VBox"]
-custom_minimum_size = Vector2(26, 26)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("6_fire")
@@ -395,14 +395,15 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 26
-text = "15 días"
+text = "0 / 0"
 horizontal_alignment = 1
 
 [node name="StatStreakDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardStreak/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.50, 0.60, 0.65, 1)
-theme_override_font_sizes/font_size = 15
-text = "Racha activa"
+theme_override_font_sizes/font_size = 13
+text = "Sesiones"
 horizontal_alignment = 1
 
 [node name="StatCardTime" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox"]
@@ -412,11 +413,11 @@ theme_override_styles/panel = SubResource("StyleBox_stat_card")
 
 [node name="VBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime/VBox"]
-custom_minimum_size = Vector2(26, 26)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_clock")
@@ -428,14 +429,15 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 26
-text = "3h 35m"
+text = "0m"
 horizontal_alignment = 1
 
 [node name="StatTimeDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardTime/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.50, 0.60, 0.65, 1)
-theme_override_font_sizes/font_size = 15
-text = "En terapia"
+theme_override_font_sizes/font_size = 13
+text = "Tiempo total"
 horizontal_alignment = 1
 
 [node name="StatCardScore" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox"]
@@ -445,11 +447,11 @@ theme_override_styles/panel = SubResource("StyleBox_stat_card")
 
 [node name="VBox" type="VBoxContainer" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore"]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 6
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore/VBox"]
-custom_minimum_size = Vector2(26, 26)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("8_check")
@@ -461,25 +463,26 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
 theme_override_font_sizes/font_size = 26
-text = "94%"
+text = "0"
 horizontal_alignment = 1
 
 [node name="StatAccuracyDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/MetricsHBox/StatCardScore/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.50, 0.60, 0.65, 1)
-theme_override_font_sizes/font_size = 15
-text = "Precisión"
+theme_override_font_sizes/font_size = 13
+text = "Actividades"
 horizontal_alignment = 1
 
 [node name="SectionTitle" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 21
 text = "Acciones Terapéuticas"
 
 [node name="BtnDesafios" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 118)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBox_action_card")
@@ -495,11 +498,11 @@ offset_left = 18.0
 offset_right = -18.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="IconBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -511,7 +514,7 @@ mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/IconBadge/Center"]
 modulate = Color(0.118, 0.596, 0.647, 1)
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_challenges")
@@ -522,30 +525,30 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="Title" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/TextVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 18
 text = "Desafíos del Tratamiento"
 
 [node name="DesafiosDesc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox/TextVBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 14
 text = "Explorar sesiones y ejercicios asignados"
 
 [node name="Arrow" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnDesafios/HBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.60, 0.70, 0.75, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 20
 text = "→"
 
 [node name="BtnGuante" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 118)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBox_action_card")
@@ -561,11 +564,11 @@ offset_left = 18.0
 offset_right = -18.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="IconBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -577,7 +580,7 @@ mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/IconBadge/Center"]
 modulate = Color(0.118, 0.596, 0.647, 1)
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_cable")
@@ -588,29 +591,29 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="Title" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/TextVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 18
 text = "Calibración Rápida de Mano"
 
 [node name="Desc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox/TextVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 14
 text = "Ajustá tu rango de apertura y cierre en 30s"
 
 [node name="Arrow" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnGuante/HBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.60, 0.70, 0.75, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 20
 text = "→"
 
 [node name="BtnLogros" type="Button" parent="RootVBox/Scroll/Padding/ContentVBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 118)
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBox_action_card")
@@ -626,11 +629,11 @@ offset_left = 18.0
 offset_right = -18.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="IconBadge" type="PanelContainer" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -642,7 +645,7 @@ mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/IconBadge/Center"]
 modulate = Color(0.118, 0.596, 0.647, 1)
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_history")
@@ -653,27 +656,26 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="Title" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/TextVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.067, 0.157, 0.235, 1)
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 18
 text = "Mi Progreso y Métricas"
 
 [node name="Desc" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox/TextVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.55, 0.60, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 14
 text = "Historial clínico, gráficos y evolución"
 
 [node name="Arrow" type="Label" parent="RootVBox/Scroll/Padding/ContentVBox/BtnLogros/HBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.60, 0.70, 0.75, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 20
 text = "→"
 
 [node name="BottomElasticSpacer" type="Control" parent="RootVBox/Scroll/Padding/ContentVBox"]
 layout_mode = 2
 size_flags_vertical = 3
-

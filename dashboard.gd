@@ -23,6 +23,9 @@ signal navigate_to(view_index: int)
 @onready var stat_streak_val: Label = %StatStreakVal
 @onready var stat_time_val: Label = %StatTimeVal
 @onready var stat_accuracy_val: Label = %StatAccuracyVal
+@onready var stat_streak_desc: Label = %StatStreakDesc if has_node("%StatStreakDesc") else null
+@onready var stat_time_desc: Label = %StatTimeDesc if has_node("%StatTimeDesc") else null
+@onready var stat_accuracy_desc: Label = %StatAccuracyDesc if has_node("%StatAccuracyDesc") else null
 
 # Accesos directos
 @onready var btn_desafios: Button = %BtnDesafios
@@ -127,17 +130,71 @@ func _update_treatment_info() -> void:
 
 
 func _update_metrics() -> void:
-	stat_streak_val.text = "15 días"
-	stat_time_val.text = "3h 35m"
-	stat_accuracy_val.text = "94%"
+	var total_sessions: int = 0
+	var completed_sessions: int = 0
+	var completed_activities: int = 0
+	var total_play_time_sec: int = 0
+
+	if has_node("/root/ApiClient"):
+		var api = get_node("/root/ApiClient")
+		var t: Dictionary = api.current_treatment
+		var p_status: Variant = t.get("progressStatus", t.get("progress_status", t.get("ProgressStatus", {})))
+		if p_status is String:
+			p_status = JSON.parse_string(p_status)
+		if p_status is Dictionary and not p_status.is_empty():
+			var summary: Dictionary = p_status.get("summary", {})
+			if summary is Dictionary and not summary.is_empty():
+				total_sessions = int(summary.get("totalSessions", 0))
+				completed_sessions = int(summary.get("completedSessions", 0))
+				completed_activities = int(summary.get("completedActivities", 0))
+				total_play_time_sec = int(summary.get("totalPlayTimeSeconds", 0))
+		elif t.has("sessions") and t["sessions"] is Array:
+			total_sessions = t["sessions"].size()
+			for s in t["sessions"]:
+				if s is Dictionary:
+					var is_comp: bool = str(s.get("status", "")).to_lower() in ["completed", "completada"]
+					if is_comp:
+						completed_sessions += 1
+					var s_acts: Array = s.get("sessionActivities", [])
+					for act_obj in s_acts:
+						if act_obj is Dictionary:
+							var exec_dict = act_obj.get("execution", null)
+							if exec_dict is Dictionary and not exec_dict.is_empty():
+								completed_activities += 1
+
+	# 1. Sesiones completadas vs totales
+	stat_streak_val.text = "%d / %d" % [completed_sessions, total_sessions]
+	if stat_streak_desc != null:
+		stat_streak_desc.text = "Sesiones"
+
+	# 2. Tiempo total de juego/terapia
+	var hours := total_play_time_sec / 3600
+	var mins := (total_play_time_sec % 3600) / 60
+	if hours > 0:
+		stat_time_val.text = "%dh %dm" % [hours, mins]
+	elif mins > 0:
+		stat_time_val.text = "%dm" % mins
+	elif total_play_time_sec > 0:
+		stat_time_val.text = "%ds" % total_play_time_sec
+	else:
+		stat_time_val.text = "0m"
+	if stat_time_desc != null:
+		stat_time_desc.text = "Tiempo total"
+
+	# 3. Actividades completadas
+	stat_accuracy_val.text = "%d" % completed_activities
+	if stat_accuracy_desc != null:
+		stat_accuracy_desc.text = "Actividades"
 
 
 func _on_treatment_fetched(_treatment: Dictionary) -> void:
 	_update_treatment_info()
+	_update_metrics()
 
 
 func _on_treatments_fetched(_treatments: Array) -> void:
 	_update_treatment_info()
+	_update_metrics()
 
 
 func _update_glove_status() -> void:

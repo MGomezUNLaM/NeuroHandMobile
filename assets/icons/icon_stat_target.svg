@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <!-- Outer Red Ring -->
+  <circle cx="30" cy="34" r="22" fill="#F43F5E" filter="url(#shadow)"/>
+  <!-- White Ring -->
+  <circle cx="30" cy="34" r="16.5" fill="#FFFFFF"/>
+  <!-- Middle Red Ring -->
+  <circle cx="30" cy="34" r="11" fill="#F43F5E"/>
+  <!-- White Ring -->
+  <circle cx="30" cy="34" r="6" fill="#FFFFFF"/>
+  <!-- Center Bullseye -->
+  <circle cx="30" cy="34" r="3" fill="#E11D48"/>
+  
+  <!-- Dart Hitting Bullseye -->
+  <!-- Dart Shaft -->
+  <line x1="49" y1="15" x2="31" y2="33" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+  <!-- Dart Tip -->
+  <polygon points="31,33 34,30 30,34" fill="#64748B"/>
+  <!-- Dart Flights (Feathers) -->
+  <polygon points="49,15 54,12 51,19" fill="#38BDF8"/>
+  <polygon points="49,15 45,10 52,13" fill="#0EA5E9"/>
+</svg>

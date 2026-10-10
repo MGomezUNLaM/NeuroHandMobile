@@ -382,10 +382,10 @@ func get_treatment(id_to_fetch: String = "") -> void:
 		treatment_fetch_failed.emit("No hay sesión autenticada.", 401)
 		return
 	
-	# Si no se provee id explícito, consultar directamente a la colección /api/threatments
-	var endpoint_path := "/api/threatments"
+	# Si no se provee id explícito, consultar directamente a la colección /api/treatments
+	var endpoint_path := "/api/treatments"
 	if id_to_fetch != "":
-		endpoint_path = "/api/threatments/" + id_to_fetch
+		endpoint_path = "/api/treatments/" + id_to_fetch
 	
 	_request_treatment_endpoint(endpoint_path, id_to_fetch, true)
 
@@ -400,9 +400,9 @@ func _request_treatment_endpoint(endpoint_path: String, id_param: String, allow_
 			treatment_fetch_failed.emit("Error de conexión al cargar el tratamiento.", 0)
 			return
 		
-		# Si da 404 en threatments y allow_fallback es true, reintentar con treatments
-		if response_code == 404 and allow_fallback and endpoint_path.contains("threatments"):
-			var fallback_path := endpoint_path.replace("threatments", "treatments")
+		# Si da 404 en treatments y allow_fallback es true, reintentar con threatments (compatibilidad)
+		if response_code == 404 and allow_fallback and endpoint_path.contains("/api/treatments"):
+			var fallback_path := endpoint_path.replace("/api/treatments", "/api/threatments")
 			print("[ApiClient] 404 en %s, reintentando con %s..." % [endpoint_path, fallback_path])
 			_request_treatment_endpoint(fallback_path, id_param, false)
 			return
@@ -424,6 +424,9 @@ func _request_treatment_endpoint(endpoint_path: String, id_param: String, allow_
 			
 			if not patient_treatments.is_empty():
 				current_treatment = patient_treatments[0]
+				var t_id: String = str(current_treatment.get("id", "")).strip_edges()
+				if t_id != "" and (not current_treatment.has("progressStatus") or current_treatment.get("progressStatus", {}).is_empty()):
+					_fetch_progress_status_if_needed(t_id)
 			else:
 				current_treatment = {}
 			
@@ -445,6 +448,34 @@ func _request_treatment_endpoint(endpoint_path: String, id_param: String, allow_
 		treatment_fetch_failed.emit("No se pudo iniciar la petición de red.", 0)
 
 
+func _fetch_progress_status_if_needed(t_id: String) -> void:
+	if t_id == "" or not is_authenticated():
+		return
+	
+	var http := HTTPRequest.new()
+	add_child(http)
+	
+	http.request_completed.connect(func(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray):
+		http.queue_free()
+		if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
+			return
+		
+		var json_data: Variant = JSON.parse_string(body.get_string_from_utf8())
+		if json_data is Dictionary and json_data.has("progressStatus"):
+			var p_status = json_data.get("progressStatus", null)
+			if p_status != null:
+				current_treatment["progressStatus"] = p_status
+				if not patient_treatments.is_empty() and patient_treatments[0] is Dictionary:
+					patient_treatments[0]["progressStatus"] = p_status
+				treatment_fetched.emit(current_treatment)
+	)
+	
+	var endpoint := BASE_URL + "/api/treatments/" + t_id
+	var err := http.request(endpoint, get_auth_headers(), HTTPClient.METHOD_GET)
+	if err != OK:
+		http.queue_free()
+
+
 ## Procesa el árbol de tratamiento -> sesiones -> actividades, filtrando por el paciente actual y fecha actual.
 func _process_active_sessions(payload: Variant) -> Array:
 	active_sessions.clear()
@@ -458,12 +489,6 @@ func _extract_active_activities(payload: Variant) -> Array:
 	
 	var all_sessions: Array = []
 	if payload is Dictionary:
-		# Si es un tratamiento, verificar si pertenece al paciente actual (si está definido)
-		if patient_id != "" and payload.has("patientId"):
-			var p_id := str(payload.get("patientId", ""))
-			if p_id != "" and p_id != patient_id:
-				return []
-				
 		if payload.has("sessions") and payload["sessions"] is Array:
 			all_sessions = payload["sessions"]
 		elif payload.has("sesiones") and payload["sesiones"] is Array:
@@ -475,11 +500,6 @@ func _extract_active_activities(payload: Variant) -> Array:
 	elif payload is Array:
 		for item in payload:
 			if item is Dictionary:
-				# Si el array trae tratamientos de varios pacientes, filtrar por el del paciente logueado
-				if patient_id != "" and item.has("patientId"):
-					var p_id := str(item.get("patientId", ""))
-					if p_id != "" and p_id != patient_id:
-						continue
 				var subs := _extract_active_activities(item)
 				activities_out.append_array(subs)
 		return activities_out
@@ -549,11 +569,16 @@ func _store_patient_treatments(raw_list: Array) -> void:
 	for item in raw_list:
 		if not (item is Dictionary):
 			continue
-		if patient_id != "" and item.has("patientId"):
-			var p_id := str(item.get("patientId", ""))
-			if p_id != "" and p_id != patient_id:
-				continue
 		patient_treatments.append(item)
+	
+	# Si hay varios tratamientos y alguno coincide con patient_id, priorizarlo primero
+	if patient_treatments.size() > 1 and patient_id != "":
+		for i in range(patient_treatments.size()):
+			var p_id := str(patient_treatments[i].get("patientId", "")).strip_edges()
+			if p_id == patient_id:
+				var matched = patient_treatments.pop_at(i)
+				patient_treatments.push_front(matched)
+				break
 
 
 ## Retorna la lista de tratamientos del paciente (o datos de demostración si la API aún no tiene cargados).

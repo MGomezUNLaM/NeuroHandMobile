@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="goldCup" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="30%" stop-color="#F59E0B"/>
+      <stop offset="70%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+    <linearGradient id="trophyPedestal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <filter id="trophyShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#78350F" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Left Handle -->
+  <path d="M 20 18 C 11 18, 10 32, 21 34 L 22 30 C 15 28, 15 22, 20 22 Z" fill="url(#goldCup)" filter="url(#trophyShadow)"/>
+  <!-- Right Handle -->
+  <path d="M 44 18 C 53 18, 54 32, 43 34 L 42 30 C 49 28, 49 22, 44 22 Z" fill="url(#goldCup)" filter="url(#trophyShadow)"/>
+  <!-- Main Cup Body -->
+  <path d="M 18 14 L 46 14 C 46 28, 42 38, 32 38 C 22 38, 18 28, 18 14 Z" fill="url(#goldCup)" filter="url(#trophyShadow)"/>
+  <!-- Top Rim -->
+  <ellipse cx="32" cy="14" rx="14" ry="3.5" fill="url(#goldRim)"/>
+  <!-- Stem -->
+  <path d="M 28 37 L 36 37 L 35 46 L 29 46 Z" fill="url(#goldCup)"/>
+  <ellipse cx="32" cy="46" rx="8" ry="2.5" fill="url(#goldRim)"/>
+  <!-- Base Pedestal -->
+  <rect x="22" y="47" width="20" height="9" rx="3" fill="url(#trophyPedestal)"/>
+  <rect x="25" y="49" width="14" height="4" rx="1" fill="#E2E8F0" opacity="0.3"/>
+  <!-- Star on Cup -->
+  <path d="M 32 20 L 33.5 24.5 L 38 24.5 L 34.5 27.2 L 36 31.5 L 32 29 L 28 31.5 L 29.5 27.2 L 26 24.5 L 30.5 24.5 Z" fill="#FEF08A"/>
+</svg>

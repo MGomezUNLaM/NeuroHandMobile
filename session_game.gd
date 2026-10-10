@@ -1,6 +1,13 @@
 extends Control
 
 signal navigate_to(view_index: int)
+signal game_fullscreen_requested(is_fullscreen: bool)
+
+func _set_shell_fullscreen(is_fullscreen: bool) -> void:
+	game_fullscreen_requested.emit(is_fullscreen)
+	var shell = find_parent("MainShell")
+	if shell != null and shell.has_method("set_fullscreen_game_mode"):
+		shell.set_fullscreen_game_mode(is_fullscreen)
 
 var session_duration := 30.0
 const GAME_SCENE := "res://session_game.tscn"
@@ -251,6 +258,7 @@ func _show_menu_screen(screen: MenuScreen) -> void:
 
 
 func _on_back_to_dashboard() -> void:
+	_set_shell_fullscreen(false)
 	if navigate_to.get_connections().size() > 0:
 		navigate_to.emit(0)
 	else:
@@ -440,19 +448,19 @@ func _create_treatment_support_card() -> Control:
 	
 	var icon_lbl := Label.new()
 	icon_lbl.text = "💡"
-	icon_lbl.add_theme_font_size_override("font_size", 20)
+	icon_lbl.add_theme_font_size_override("font_size", 24)
 	header_hbox.add_child(icon_lbl)
 	
 	var title_lbl := Label.new()
 	title_lbl.text = "Recomendaciones de Terapia"
-	title_lbl.add_theme_font_size_override("font_size", 16)
+	title_lbl.add_theme_font_size_override("font_size", 19)
 	title_lbl.add_theme_color_override("font_color", Color(0.067, 0.157, 0.235, 1.0))
 	title_lbl.add_theme_font_override("font", _font_bold)
 	header_hbox.add_child(title_lbl)
 	
 	var tip_text := Label.new()
 	tip_text.text = "Completá al menos una sesión por día para mantener la racha activa y mejorar la movilidad de tu mano. Asegurate de calibrar el guante antes de comenzar los desafíos."
-	tip_text.add_theme_font_size_override("font_size", 13)
+	tip_text.add_theme_font_size_override("font_size", 15)
 	tip_text.add_theme_color_override("font_color", Color(0.40, 0.50, 0.55, 1.0))
 	tip_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(tip_text)
@@ -462,7 +470,7 @@ func _create_treatment_support_card() -> Control:
 
 func _create_treatment_card(treatment: Dictionary) -> Control:
 	var btn := Button.new()
-	btn.custom_minimum_size = Vector2(0, 180)
+	btn.custom_minimum_size = Vector2(0, 155)
 	btn.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	btn.add_theme_stylebox_override("normal", _style_card)
 	btn.add_theme_stylebox_override("hover", _style_card_hover)
@@ -480,7 +488,7 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	
 	var vbox_card := VBoxContainer.new()
 	vbox_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	vbox_card.add_theme_constant_override("separation", 14)
+	vbox_card.add_theme_constant_override("separation", 12)
 	margin.add_child(vbox_card)
 	
 	var hbox_top := HBoxContainer.new()
@@ -491,12 +499,12 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	
 	# Icono decorativo de tratamiento
 	var icon_box := PanelContainer.new()
-	icon_box.custom_minimum_size = Vector2(64, 64)
+	icon_box.custom_minimum_size = Vector2(52, 52)
 	icon_box.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	icon_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var icon_style := StyleBoxFlat.new()
 	icon_style.bg_color = Color(0.88, 0.95, 0.96, 1.0)
-	icon_style.set_corner_radius_all(32)
+	icon_style.set_corner_radius_all(26)
 	icon_box.add_theme_stylebox_override("panel", icon_style)
 	
 	var icon_lbl := Label.new()
@@ -504,7 +512,7 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	icon_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	icon_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	icon_lbl.add_theme_font_size_override("font_size", 30)
+	icon_lbl.add_theme_font_size_override("font_size", 24)
 	icon_box.add_child(icon_lbl)
 	hbox_top.add_child(icon_box)
 	
@@ -520,7 +528,7 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	var title_lbl := Label.new()
 	title_lbl.text = name_str
 	title_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	title_lbl.add_theme_font_size_override("font_size", 24)
+	title_lbl.add_theme_font_size_override("font_size", 21)
 	title_lbl.add_theme_color_override("font_color", Color(0.067, 0.157, 0.235, 1.0))
 	title_lbl.add_theme_font_override("font", _font_bold)
 	title_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -537,7 +545,7 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	var desc_lbl := Label.new()
 	desc_lbl.text = desc_str
 	desc_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	desc_lbl.add_theme_font_size_override("font_size", 17)
+	desc_lbl.add_theme_font_size_override("font_size", 15)
 	desc_lbl.add_theme_color_override("font_color", Color(0.35, 0.45, 0.48, 1.0))
 	desc_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	desc_lbl.max_lines_visible = 2
@@ -547,7 +555,7 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	var arrow_lbl := Label.new()
 	arrow_lbl.text = "›"
 	arrow_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	arrow_lbl.add_theme_font_size_override("font_size", 36)
+	arrow_lbl.add_theme_font_size_override("font_size", 34)
 	arrow_lbl.add_theme_color_override("font_color", Color(0.118, 0.596, 0.647, 1.0))
 	arrow_lbl.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	hbox_top.add_child(arrow_lbl)
@@ -556,12 +564,12 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	var sessions_list: Array = _get_treatment_sessions(treatment)
 	var bottom_row := HBoxContainer.new()
 	bottom_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	bottom_row.add_theme_constant_override("separation", 12)
+	bottom_row.add_theme_constant_override("separation", 10)
 	vbox_card.add_child(bottom_row)
 	
 	var progress_bar := ProgressBar.new()
 	progress_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	progress_bar.custom_minimum_size = Vector2(0, 14)
+	progress_bar.custom_minimum_size = Vector2(0, 10)
 	progress_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	progress_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	progress_bar.min_value = 0.0
@@ -570,10 +578,10 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	progress_bar.show_percentage = false
 	var pb_bg := StyleBoxFlat.new()
 	pb_bg.bg_color = Color(0.92, 0.94, 0.96, 1.0)
-	pb_bg.set_corner_radius_all(7)
+	pb_bg.set_corner_radius_all(5)
 	var pb_fill := StyleBoxFlat.new()
 	pb_fill.bg_color = Color(0.118, 0.596, 0.647, 1.0)
-	pb_fill.set_corner_radius_all(7)
+	pb_fill.set_corner_radius_all(5)
 	progress_bar.add_theme_stylebox_override("background", pb_bg)
 	progress_bar.add_theme_stylebox_override("fill", pb_fill)
 	bottom_row.add_child(progress_bar)
@@ -581,7 +589,7 @@ func _create_treatment_card(treatment: Dictionary) -> Control:
 	var sess_count_lbl := Label.new()
 	sess_count_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	sess_count_lbl.text = "%d %s disponibles" % [sessions_list.size(), "sesión" if sessions_list.size() == 1 else "sesiones"]
-	sess_count_lbl.add_theme_font_size_override("font_size", 16)
+	sess_count_lbl.add_theme_font_size_override("font_size", 14)
 	sess_count_lbl.add_theme_font_override("font", _font_semibold)
 	sess_count_lbl.add_theme_color_override("font_color", Color(0.118, 0.596, 0.647, 1.0))
 	bottom_row.add_child(sess_count_lbl)
@@ -661,7 +669,7 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 		date_text = timing.get("date_text", "")
 	
 	var btn := Button.new()
-	btn.custom_minimum_size = Vector2(0, 160)
+	btn.custom_minimum_size = Vector2(0, 130)
 	
 	if is_active:
 		btn.disabled = false
@@ -679,15 +687,15 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	margin.add_theme_constant_override("margin_left", 20)
-	margin.add_theme_constant_override("margin_top", 18)
+	margin.add_theme_constant_override("margin_top", 16)
 	margin.add_theme_constant_override("margin_right", 20)
-	margin.add_theme_constant_override("margin_bottom", 18)
+	margin.add_theme_constant_override("margin_bottom", 16)
 	btn.add_child(margin)
 	
 	var vbox := VBoxContainer.new()
 	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.add_theme_constant_override("separation", 8)
+	vbox.add_theme_constant_override("separation", 6)
 	margin.add_child(vbox)
 	
 	# Fila superior: Badge de estado (DISPONIBLE o NO DISPONIBLE) y Flecha/Candado
@@ -701,7 +709,7 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 	
 	var pill_lbl := Label.new()
 	pill_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	pill_lbl.add_theme_font_size_override("font_size", 16)
+	pill_lbl.add_theme_font_size_override("font_size", 13)
 	pill_lbl.add_theme_font_override("font", _font_bold)
 	if is_active:
 		pill_lbl.text = "🟢 DISPONIBLE"
@@ -721,11 +729,11 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 	indicator_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if is_active:
 		indicator_lbl.text = "›"
-		indicator_lbl.add_theme_font_size_override("font_size", 32)
+		indicator_lbl.add_theme_font_size_override("font_size", 26)
 		indicator_lbl.add_theme_color_override("font_color", Color(0.118, 0.596, 0.647, 1.0))
 	else:
 		indicator_lbl.text = "🔒"
-		indicator_lbl.add_theme_font_size_override("font_size", 22)
+		indicator_lbl.add_theme_font_size_override("font_size", 18)
 		indicator_lbl.add_theme_color_override("font_color", Color(0.6, 0.65, 0.68, 1.0))
 	top_row.add_child(indicator_lbl)
 	
@@ -734,7 +742,7 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 	var title_lbl := Label.new()
 	title_lbl.text = s_name
 	title_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	title_lbl.add_theme_font_size_override("font_size", 24)
+	title_lbl.add_theme_font_size_override("font_size", 21)
 	title_lbl.add_theme_font_override("font", _font_bold)
 	if is_active:
 		title_lbl.add_theme_color_override("font_color", Color(0.067, 0.157, 0.235, 1.0))
@@ -745,13 +753,13 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 	# Fila de detalles: Fecha y Dificultad
 	var details_row := HBoxContainer.new()
 	details_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	details_row.add_theme_constant_override("separation", 14)
+	details_row.add_theme_constant_override("separation", 10)
 	vbox.add_child(details_row)
 	
 	var date_lbl := Label.new()
 	date_lbl.text = "📅 " + (date_text if date_text != "" else "Fecha libre")
 	date_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	date_lbl.add_theme_font_size_override("font_size", 17)
+	date_lbl.add_theme_font_size_override("font_size", 15)
 	if is_active:
 		date_lbl.add_theme_color_override("font_color", Color(0.35, 0.45, 0.48, 1.0))
 	else:
@@ -762,7 +770,7 @@ func _create_session_card(session: Dictionary, api, all_sessions: Array = []) ->
 	var diff_lbl := Label.new()
 	diff_lbl.text = "• Dificultad: %s" % diff_str
 	diff_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	diff_lbl.add_theme_font_size_override("font_size", 17)
+	diff_lbl.add_theme_font_size_override("font_size", 15)
 	if is_active:
 		diff_lbl.add_theme_color_override("font_color", Color(0.118, 0.596, 0.647, 1.0))
 		diff_lbl.add_theme_font_override("font", _font_semibold)
@@ -1047,7 +1055,7 @@ func _apply_diff_label(btn: Control, diff_name: String) -> void:
 		var b_label = Label.new()
 		b_label.name = "DiffLabel"
 		b_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		b_label.add_theme_font_size_override("font_size", 11)
+		b_label.add_theme_font_size_override("font_size", 13)
 		b_label.add_theme_font_override("font", _font_bold)
 		b_margin.add_child(b_label)
 		
@@ -1191,6 +1199,18 @@ func _show_instructions_screen() -> void:
 	_show_menu_screen(MenuScreen.NONE)
 	_phase = Phase.INSTRUCTION
 	_time_left = session_duration
+	_set_shell_fullscreen(true)
+	
+	if has_node("Background"):
+		$Background.hide()
+	if has_node("GlowTop"):
+		$GlowTop.hide()
+	if has_node("%MainUI"):
+		%MainUI.hide()
+	if has_node("%TopLeftHUD"):
+		%TopLeftHUD.hide()
+	if has_node("%TopRightHUD"):
+		%TopRightHUD.hide()
 	
 	if is_instance_valid(_instruction_overlay):
 		_instruction_overlay.queue_free()
@@ -1342,6 +1362,8 @@ func _start_minigame() -> void:
 	_measurements.clear()
 	_sample_timer = 0.0
 
+	_set_shell_fullscreen(true)
+
 	if is_instance_valid(_instruction_overlay):
 		_instruction_overlay.queue_free()
 	
@@ -1353,8 +1375,15 @@ func _start_minigame() -> void:
 	if is_instance_valid(_mascot):
 		_mascot.queue_free()
 		
-	# Ocultar fondos locales y del shell contenedor para que se vean juegos 3D y fondos propios
-	_set_shell_background_visible(false)
+	# Ocultar completamente fondos y UI de shell para fullscreen total
+	if has_node("Background"):
+		$Background.hide()
+	if has_node("GlowTop"):
+		$GlowTop.hide()
+	if has_node("%MainUI"):
+		%MainUI.hide()
+	if has_node("%TopRightHUD"):
+		%TopRightHUD.hide()
 	
 	var game_scene := load(_selected_game_scene)
 	_minigame_instance = game_scene.instantiate()
@@ -1362,12 +1391,15 @@ func _start_minigame() -> void:
 		_taps = s
 		_update_hud()
 	)
+	if _minigame_instance.has_signal("game_over"):
+		_minigame_instance.game_over.connect(_abort_current_game)
 	
-	# Configurar el fondo transparente para que se vea el juego
+	# Configurar el contenedor en pantalla completa absoluta sin barras
+	_tap_zone.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_tap_zone.color = Color(0, 0, 0, 0)
 	_tap_zone.add_child(_minigame_instance)
 	if _minigame_instance is Control:
-		_minigame_instance.set_anchors_preset(Control.PRESET_FULL_RECT)
+		_minigame_instance.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		_minigame_instance.size = _tap_zone.size
 	_tap_zone.move_child(_minigame_instance, 0)
 	
@@ -1386,34 +1418,34 @@ func _start_minigame() -> void:
 		ble.send_data("INICIAR_JUEGO\n")
 		print("[session_game] Enviado al guante: INICIAR_JUEGO")
 
+	if has_node("%TopLeftHUD"):
+		%TopLeftHUD.show()
 	if has_node("%BtnExitGame"):
-		get_node("%BtnExitGame").show()
-
-
-func _set_shell_background_visible(p_visible: bool) -> void:
-	if has_node("Background"):
-		$Background.visible = p_visible
-	if has_node("GlowTop"):
-		$GlowTop.visible = p_visible
-	var p = get_parent()
-	while p != null:
-		if p.has_node("Background") and p.get_node("Background") is ColorRect:
-			p.get_node("Background").visible = p_visible
-		p = p.get_parent()
+		var exit_btn = get_node("%BtnExitGame") as Button
+		exit_btn.show()
+		exit_btn.text = "✕"
 
 
 func _abort_current_game() -> void:
 	_phase = Phase.READY
 	_time_left = session_duration
+	_set_shell_fullscreen(false)
 	if is_instance_valid(_minigame_instance):
 		_minigame_instance.queue_free()
 	if _get_ble_manager() != null:
 		var ble = _get_ble_manager()
 		ble.send_data("FINALIZAR_JUEGO\n")
-	_set_shell_background_visible(true)
-	_reset_hud()
+	if has_node("Background"):
+		$Background.show()
+	if has_node("GlowTop"):
+		$GlowTop.show()
+	if has_node("%TopLeftHUD"):
+		%TopLeftHUD.hide()
+	if has_node("%TopRightHUD"):
+		%TopRightHUD.hide()
 	if has_node("%BtnExitGame"):
 		get_node("%BtnExitGame").hide()
+	_reset_hud()
 	_show_menu_screen(MenuScreen.GAMES)
 
 
@@ -1440,6 +1472,16 @@ func _finish_session() -> void:
 	_phase = Phase.FINISHED
 	var finished_at_iso := _get_iso_timestamp_utc()
 
+	_set_shell_fullscreen(false)
+
+	if has_node("Background"):
+		$Background.show()
+	if has_node("GlowTop"):
+		$GlowTop.show()
+	if has_node("%TopLeftHUD"):
+		%TopLeftHUD.hide()
+	if has_node("%TopRightHUD"):
+		%TopRightHUD.hide()
 	if has_node("%BtnExitGame"):
 		get_node("%BtnExitGame").hide()
 
@@ -1648,16 +1690,10 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_back_pressed() -> void:
-	_set_shell_background_visible(true)
 	_on_back_to_dashboard()
 
 
 func _on_retry_pressed() -> void:
-	_set_shell_background_visible(true)
-	var store = _get_session_store()
-	if store:
-		store.preselected_exercise = _current_exercise_type
-		store.preselected_difficulty = _current_difficulty_name
-		store.preselected_difficulty_factor = _current_difficulty_factor
-		store.preselected_activity_id = _session_activity_id
-	get_tree().change_scene_to_file(GAME_SCENE)
+	if _results_panel != null:
+		_results_panel.hide()
+	_show_instructions_screen()
